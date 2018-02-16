@@ -12,5 +12,4 @@ I think we should have several long lived branches for each user story and from 
 
 ![alt text](https://raw.githubusercontent.com/WinstonRuan/RevProject2/master/Images/branchproposal.png)
 
-
-asdf
+asdfasdfsdafdsfdsfs
