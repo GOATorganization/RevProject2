@@ -11,3 +11,6 @@ Would you guys think this flow is ok?
 I think we should have several long lived branches for each user story and from each user story, the person responsible for that is in charge of their branch and create feature branches and merge into their own long lived branches as fit. 
 
 ![alt text](https://raw.githubusercontent.com/WinstonRuan/RevProject2/master/Images/branchproposal.png)
+
+
+asdf
