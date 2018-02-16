@@ -12,4 +12,8 @@ I think we should have several long lived branches for each user story and from 
 
 ![alt text](https://raw.githubusercontent.com/WinstonRuan/RevProject2/master/Images/branchproposal.png)
 
-asdfasdfsdafdsfdsfs
+Useful git commands
+
+Git clone (directory)			: for pulling a branch
+
+git checkout -b (branch name)  : For creation of a new branch
