@@ -3,14 +3,21 @@ package com.villains.model;
 import java.util.List;
 
 import javax.persistence.Column;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+/**
+ * 
+ * @author Chaos
+ *
+ */
+
 @Entity
-@Table
+@Table(name="villain_user")
 public class User {
 	
 	@Id
@@ -37,33 +44,33 @@ public class User {
 	private String lairCountry;
 
 	@Column
-	private List<User> alliesList;
-
-	@Column
-	private List<String> archEnemyList;
-
-	@Column
 	private String profilePic;
 	
 	public User() {
 		
 	}
 
-	public User( String firstName, String lastName, String email,String password, String lairCity, String lairCountry,
-			List<User> alliesList, List<String> archEnemyList, String profilePic) {
+	/**
+	 * 
+	 * @param firstName
+	 * @param lastName
+	 * @param email
+	 * @param password
+	 * @param lairCity
+	 * @param lairCountry
+	 * @param profilePic
+	 */
+	public User( String firstName, String lastName, String email,String password, String lairCity, String lairCountry, String profilePic) {
 		super();
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.email = email;
 		this.lairCity = lairCity;
 		this.lairCountry = lairCountry;
-		this.alliesList = alliesList;
-		this.archEnemyList = archEnemyList;
 		this.profilePic = profilePic;
 	}
 
-	public User(int userId, String firstName, String lastName, String email,String password, String lairCity, String lairCountry,
-			List<User> alliesList, List<String> archEnemyList, String profilePic) {
+	public User(int userId, String firstName, String lastName, String email,String password, String lairCity, String lairCountry,String profilePic) {
 		super();
 		this.userId = userId;
 		this.firstName = firstName;
@@ -71,8 +78,6 @@ public class User {
 		this.email = email;
 		this.lairCity = lairCity;
 		this.lairCountry = lairCountry;
-		this.alliesList = alliesList;
-		this.archEnemyList = archEnemyList;
 		this.profilePic = profilePic;
 	}
 
@@ -132,22 +137,6 @@ public class User {
 		this.lairCountry = lairCountry;
 	}
 
-	public List<User> getAlliesList() {
-		return alliesList;
-	}
-
-	public void setAlliesList(List<User> alliesList) {
-		this.alliesList = alliesList;
-	}
-
-	public List<String> getArchEnemyList() {
-		return archEnemyList;
-	}
-
-	public void setArchEnemyList(List<String> archEnemyList) {
-		this.archEnemyList = archEnemyList;
-	}
-
 	public String getProfilePic() {
 		return profilePic;
 	}
@@ -159,9 +148,8 @@ public class User {
 	@Override
 	public String toString() {
 		return "User [userId=" + userId + ", firstName=" + firstName + ", lastName=" + lastName + ", email=" + email
-				+ ", password=" + password + ", lairCity=" + lairCity + ", lairCountry=" + lairCountry + ", alliesList="
-				+ alliesList + ", archEnemyList=" + archEnemyList + ", profilePic=" + profilePic + "]";
-	}\
+				+ ", password=" + password + ", lairCity=" + lairCity + ", lairCountry=" + lairCountry +", profilePic=" + profilePic + "]";
+	}
 	
 	
 

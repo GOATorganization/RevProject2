@@ -3,50 +3,60 @@ package com.villains.model;
 import java.util.List;
 
 import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
+import javax.persistence.Table;
 
+@Entity
+@Table(name="post")
 public class Post {
 
 	@Id
 	@Column(name="post_id")
+	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int postId;
 	
-	@OneToOne
-	@JoinColumn(name="user_id")
-	private int userId;
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name="user_id",nullable = false)
+	private User userId;
 	
 	@Column(name="contents_txt")
 	private String contentsText;
 	
-	@Column(name="contents_pics")
-	private List<String> contentsPic;
 	
-	@OneToMany
-	@JoinColumn(name="list_list")
-	private List<Integer> likeList;
+	@Column(name="contents_pics")
+	@OneToMany(fetch = FetchType.EAGER)
+	private List<Picture> contentsPic;
+	
+	/*@ManyToMany
+	@JoinColumn(name="like_list")
+	private List<Integer> likeList;*/
 	
 	public Post() {
 		
 	}
 
-	public Post(int userId, String contentsText, List<String> contentsPic, List<Integer> likeList) {
+	public Post(User userId, String contentsText, List<Picture> contentsPic/*, List<Integer> likeList*/) {
 		super();
 		this.userId = userId;
 		this.contentsText = contentsText;
 		this.contentsPic = contentsPic;
-		this.likeList = likeList;
+		//this.likeList = likeList;
 	}
 
-	public Post(int postId, int userId, String contentsText, List<String> contentsPic, List<Integer> likeList) {
+	public Post(int postId, User userId, String contentsText, List<Picture> contentsPic/*, List<Integer> likeList*/) {
 		super();
 		this.postId = postId;
 		this.userId = userId;
 		this.contentsText = contentsText;
 		this.contentsPic = contentsPic;
-		this.likeList = likeList;
+		//this.likeList = likeList;
 	}
 
 	public int getPostId() {
@@ -57,11 +67,11 @@ public class Post {
 		this.postId = postId;
 	}
 
-	public int getUserId() {
+	public User getUserId() {
 		return userId;
 	}
 
-	public void setUserId(int userId) {
+	public void setUserId(User userId) {
 		this.userId = userId;
 	}
 
@@ -73,26 +83,26 @@ public class Post {
 		this.contentsText = contentsText;
 	}
 
-	public List<String> getContentsPic() {
+	public List<Picture> getContentsPic() {
 		return contentsPic;
 	}
 
-	public void setContentsPic(List<String> contentsPic) {
+	public void setContentsPic(List<Picture> contentsPic) {
 		this.contentsPic = contentsPic;
 	}
 
-	public List<Integer> getLikeList() {
+	/*public List<Integer> getLikeList() {
 		return likeList;
 	}
 
 	public void setLikeList(List<Integer> likeList) {
 		this.likeList = likeList;
-	}
+	}*/
 
 	@Override
 	public String toString() {
-		return "Post [postId=" + postId + ", userId=" + userId + ", contentsText=" + contentsText + ", contentsPic="
-				+ contentsPic + ", likeList=" + likeList + "]";
+		return "Post [postId=" + postId + ", userId=" + userId.getUserId() + ", contentsText=" + contentsText + ", contentsPic="
+				+ contentsPic + /*", likeList=" + likeList +*/ "]";
 	}
 	
 	

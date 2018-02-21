@@ -12,9 +12,9 @@
 	<!-- The main object of Hibernate: SessionFactory -->
 	<session-factory>
 		<!-- JDBC API stuff -->
-		<property name="hibernate.connection.username">meta</property>
-		<property name="hibernate.connection.password">pass</property>
-		<property name="hibernate.connection.url">jdbc:oracle:thin:@usfdatabase.ce8kjc9sibiz.us-east-2.rds.amazonaws.com:1521:ORCL</property>
+		<property name="hibernate.connection.username">villainhangout</property>
+		<property name="hibernate.connection.password">p4ssw0rd</property>
+		<property name="hibernate.connection.url">jdbc:oracle:thin:@usfdatabase.cjttz1oee0hs.us-east-1.rds.amazonaws.com:1521:orcl</property>
 		<property name="hibernate.connection.driver_class">oracle.jdbc.driver.OracleDriver</property>
 
 		<!-- Additional Hibernate awesomeness -->
@@ -27,11 +27,8 @@
 		<!-- Tell SessionFactory where to find the POJO mappings -->
 		<!-- POJO Mappings can also be configured using XML or @s -->
 		<!-- <mapping file="this would location of HBM.xml" -->
- 		<mapping class="com.model.Type" />
- 		<mapping class="com.model.Abilities" />
-		<mapping class="com.model.MetaHuman" />
-		<mapping class="com.model.MetaHumanPrison" />
-		<mapping class="com.model.SecretIdentity" />
-		<mapping class="com.model.SuperVillains" />
+ 		<mapping class="com.villains.model.User" />
+ 		<mapping class="com.villains.model.Post" />
+ 		<mapping class="com.villains.model.Picture" />
 </session-factory>
 </hibernate-configuration>
