@@ -1,0 +1,92 @@
+.profileImage{
+    width: 100%;
+    margin-top: 45px;
+}
+.bg{
+    width: 100%;
+    background-color:   #0e0b16;
+}
+
+  .cardtextpad{
+      margin-bottom: 10px;
+      
+  }
+
+  .cardTitle{
+      margin-bottom: 15px;
+  }
+
+.cardpad{
+    margin-bottom: 15px;
+    background-color: rgba(71, 23, 246, 0.11);
+    color: #e7dfdd;
+}
+
+.cardtextpad{
+    padding: 10px;
+    margin-right: 5px;
+}
+
+.cardContent{
+    margin-left: 20px;
+}
+
+#postColumn{
+    padding: 10px;
+    padding-top: 60px;
+}
+
+.userColumn{
+    margin-top: 20px;
+    margin-right: 20px;
+
+    color: #e7dfdd;
+}
+
+.thumbs{
+    fill: white;
+    margin-right: 5px;
+    margin-bottom: 5px;
+}
+
+.thumbsup{
+    color: #e7dfdd;
+    margin-bottom: 25px;
+    float: right;
+    margin-right: 30px;
+    background-color: #A239ca;
+}
+
+.userInfo{
+    
+    position: sticky;
+    top:0;
+}
+
+.buttonPurple{
+    margin-left: 30px;
+    margin-bottom: 25px;
+    background-color: #A239ca;
+    color: #e7dfdd;
+}
+
+.commentBack{
+    background-color: rgba(102, 63, 243, 0.11);
+    margin-left: 10px;
+    margin-right: 10px;
+    margin-bottom: 10px;
+}
+
+.commentBody{
+    padding-bottom: 10px;
+}
+
+.commentTitle{
+    padding-top: 10px;
+}
+
+.commentContent{
+    margin-top: 15px;
+    margin-left: 15px;
+    margin-right: 15px;
+}
