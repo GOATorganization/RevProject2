@@ -7,6 +7,7 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { HomepageComponent } from './homepage/homepage.component';
 import { AppRoutingModule } from './/app-routing.module';
 import { UserviewComponent } from './userview/userview.component';
+import { ProfileComponent } from './profile/profile.component';
 
 
 @NgModule({
@@ -14,7 +15,8 @@ import { UserviewComponent } from './userview/userview.component';
     AppComponent,
     NavbarComponent,
     HomepageComponent,
-    UserviewComponent
+    UserviewComponent,
+    ProfileComponent
   ],
   imports: [
     BrowserModule,
