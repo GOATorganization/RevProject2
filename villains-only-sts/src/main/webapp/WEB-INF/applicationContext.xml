@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+		http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
+	<!-- MVC annotation driven -->
+	<mvc:annotation-driven />
+	
+	<!-- Transaction annotation driven -->
+	<tx:annotation-driven/>
+	
+	<!-- Spring package scanning -->
+	<context:component-scan base-package="com.villains" />
+	
+		<!-- Data Source -->
+	<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<property name="driverClassName" value="oracle.jdbc.driver.OracleDriver" />
+		<property name="url" value="jdbc:oracle:thin:@usfdatabase.cjttz1oee0hs.us-east-1.rds.amazonaws.com:1521:orcl" />
+		<property name="username" value="villainhangout" />
+		<property name="password" value="p4ssw0rd" />
+	</bean>
+	
+		<!-- Session Factory -->
+	<bean id="sessionFactory" class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">  
+        <property name="dataSource" ref="dataSource" />
+        <property name="packagesToScan" value="com.villains.model"/>
+        <property name="hibernateProperties">  
+            <props>  
+                <prop key="hibernate.dialect">org.hibernate.dialect.Oracle10gDialect</prop>  
+                <prop key="hibernate.show_sql">true</prop> 
+                <prop key="hibernate.hbm2ddl.auto">update</prop> 
+            </props>  
+        </property>  
+    </bean>
+    
+    <!-- Transaction Manager -->
+    <bean id = "transactionManager" class="org.springframework.orm.hibernate4.HibernateTransactionManager">
+    	<property name = "sessionFactory" ref = "sessionFactory"></property>
+    </bean>
+</beans>
