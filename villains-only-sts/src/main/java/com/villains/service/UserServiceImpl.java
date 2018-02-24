@@ -7,24 +7,34 @@ import org.springframework.stereotype.Service;
 
 import com.villains.model.User;
 import com.villains.repository.UserRepository;
+import com.villains.util.UserValidator;
+import com.villains.util.UserValidatorImpl;
 
 @Service("villainUserService")
 public class UserServiceImpl implements UserService {
 	
 	@Autowired
 	private UserRepository userRepository;
+	//TODO: Inject this, and remove it from unnecessary ctors
+	private UserValidator userValidator;
 
 	public UserServiceImpl() {
 		super();
+		userValidator = new UserValidatorImpl();
 	}
 
 	public UserServiceImpl(UserRepository userRepository) {
+		this();
 		this.userRepository = userRepository;
+	}
+	
+	public UserServiceImpl(UserRepository userRepository, UserValidator userValidator) {
+		this.userRepository = userRepository;
+		this.userValidator = userValidator;
 	}
 	
 	@Override
 	public List<User> getAllUser() {
-		// TODO Auto-generated method stub
 		return userRepository.selectAll();
 	}
 
@@ -33,7 +43,7 @@ public class UserServiceImpl implements UserService {
 		// 1. Check if email already exists in DB
 		User conflictingUser = userRepository.findByEmail(user.getEmail());
 		
-		if (conflictingUser == null && validateUser(user)) { 
+		if (conflictingUser == null && userValidator.validateUser(user)) { 
 		// 2. If email doesn't exist & input is valid, register user
 			userRepository.create(user);
 			return true;
@@ -42,17 +52,6 @@ public class UserServiceImpl implements UserService {
 		// 3. If email exists or input invalid, return false.
 			return false;
 		}
-	}
-
-	private boolean validateUser(User user) {
-		// Lower bounds
-		if (user.getFirstName().length() == 0 || user.getLastName().length() == 0 ||
-			user.getEmail().length() == 0 || user.getPassword().length() == 0 ||
-			user.getFirstName().length() > 64 || user.getLastName().length() > 64 ||
-			user.getEmail().length() > 64 || user.getPassword().length() > 64)
-			return false;
-		else 
-			return true;
 	}
 
 	@Override

@@ -61,7 +61,6 @@ public class UserRepositoryImpl implements UserRepository {
 	@Override
 	public void update(User user) {
 		sessionFactory.getCurrentSession().update(user);
-
 	}
 
 }
