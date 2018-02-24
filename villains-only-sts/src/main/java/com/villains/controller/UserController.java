@@ -11,18 +11,19 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.villains.model.User;
 import com.villains.pojo.Message;
-import com.villains.service.UserService;
+import com.villains.service.VillainUserService;
+
 //MArk as a class
 @Controller("userController")
 @CrossOrigin(origins = "http://localhost:4200")
 public class UserController {
 	
 	@Autowired
-	private UserService userService;
+	private VillainUserService villainUserService;
 	
 	@PostMapping("/registerUser.app")
 	public @ResponseBody ResponseEntity<Message> registerHero(@RequestBody User user){
-		userService.registerUser(user);
+		villainUserService.registerUser(user);
 		return new ResponseEntity<>(new Message("HERO REGISTERED SUCCESSFULLY"), HttpStatus.OK);
 	}
 
