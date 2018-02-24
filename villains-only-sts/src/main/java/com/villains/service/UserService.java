@@ -5,9 +5,9 @@ import java.util.List;
 import com.villains.model.User;
 
 
-public interface VillainUserService {
+public interface UserService {
 	List<User> getAllUser();
-	void registerUser(User user);
+	Boolean registerUser(User user);
 	User findHeroEmail(String email);
 	void editUser(User user);
 

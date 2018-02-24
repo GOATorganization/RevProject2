@@ -49,7 +49,7 @@ public class UserRepositoryImpl implements UserRepository {
 	@Override
 	public User findByEmail(String email) {
 		try {
-			return (User) sessionFactory.getCurrentSession().createCriteria(email)
+			return (User) sessionFactory.getCurrentSession().createCriteria(User.class)
 					.add(Restrictions.like("email", email))
 					.list()
 					.get(0);
@@ -61,7 +61,6 @@ public class UserRepositoryImpl implements UserRepository {
 	@Override
 	public void update(User user) {
 		sessionFactory.getCurrentSession().update(user);
-
 	}
 
 }
