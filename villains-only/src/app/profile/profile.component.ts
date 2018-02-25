@@ -9,7 +9,7 @@ import { UserService } from '../services/user.service';
 })
 export class ProfileComponent implements OnInit {
   user: User;
-  isEditMode = false;
+  isInEditMode = false;
 
   constructor(private userService: UserService) { }
 
@@ -19,5 +19,14 @@ export class ProfileComponent implements OnInit {
 
   getUser(): void {
     this.userService.getUser().subscribe(user => this.user = user);
+  }
+
+  editProfile(): void {
+    this.isInEditMode = true;
+  }
+
+  submitProfileChanges(): void {
+    this.userService.editProfile(this.user);
+    this.isInEditMode = false;
   }
 }
