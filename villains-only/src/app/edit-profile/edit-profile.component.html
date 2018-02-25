@@ -1,6 +1,7 @@
 <form>
+  <img src='{{user.profilePic}}' alt="profile pic">
+
   <div class="form-group">
-    <img src='{{user.profilePic}}' alt="profile pic">
     <label for='profilePicInput'>New profile pic:</label>
     <input #profilePic id='profilePicInput' type="file" class="form-control-file">
     <p *ngIf='profilePic.value'>{{profilePic.value}}</p>
@@ -28,7 +29,7 @@
 
   <div class="form-group">
     <label for="lair">Lair Location:</label>
-    <input id="lair" class="form-control" name='country' [(ngModel)]='user.liarCountry'>
+    <input id="lair" class="form-control" name='country' [(ngModel)]='user.lairCountry'>
   </div>
 
   <button type='button' class='btn' routerLink='/userprofile' (click)='editProfile()'>Submit changes</button>

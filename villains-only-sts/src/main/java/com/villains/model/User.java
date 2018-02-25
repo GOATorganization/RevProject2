@@ -25,16 +25,16 @@ public class User {
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int userId;
 
-	@Column(name="f_name")
+	@Column(name="f_name", nullable = false)
 	private String firstName;
 
-	@Column(name="l_name")
+	@Column(name="l_name", nullable = false)
 	private String lastName;
 
-	@Column(name="user_email")
+	@Column(name="user_email", nullable = false, unique = true)
 	private String email;
 	
-	@Column(name="user_password")
+	@Column(name="user_password", nullable = false)
 	private String password;
 
 	@Column(name="lair_city")
