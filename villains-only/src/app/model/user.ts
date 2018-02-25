@@ -1,15 +1,23 @@
 export class User {
-    profilePic: string;
+    id: number;
     firstName: string;
     lastName: string;
     email: string;
-    lair: string;
+    password: string;
+    lairCity: string;
+    liarCountry: string;
+    profilePic: string;
 
-    constructor(profilePic: string, firstName: string, lastName: string, email: string, lair: string) {
-        this.profilePic = profilePic;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.email = email;
-        this.lair = lair;
-    }
+    constructor(id: number, firstName: string, lastName: string, email: string, 
+        password:string, lairCity:string, lairCountry:string, profilePic:string){
+            this.id= id;
+            this.firstName = firstName;
+            this.lastName = lastName;
+            this.email = email;
+            this.password = password;
+            this.lairCity = lairCity;
+            this.liarCountry = lairCountry;
+            this.profilePic = profilePic;
+        }
+
 }
