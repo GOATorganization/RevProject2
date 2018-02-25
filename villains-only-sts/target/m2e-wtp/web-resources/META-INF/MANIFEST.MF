@@ -1,5 +1,10 @@
 Manifest-Version: 1.0
+<<<<<<< HEAD
 Built-By: Chaos
 Build-Jdk: 1.8.0_161
+=======
+Built-By: WINST
+Build-Jdk: 1.8.0_151
+>>>>>>> cf8641b96f416bf3db7eebd86c68c8c03d6932c3
 Created-By: Maven Integration for Eclipse
 

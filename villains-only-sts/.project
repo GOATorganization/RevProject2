@@ -31,10 +31,18 @@
 			</arguments>
 		</buildCommand>
 		<buildCommand>
+			<name>org.fusesource.ide.project.RiderProjectBuilder</name>
+			<arguments>
+			</arguments>
+		</buildCommand>
+<<<<<<< HEAD
+=======
+		<buildCommand>
 			<name>org.eclipse.m2e.core.maven2Builder</name>
 			<arguments>
 			</arguments>
 		</buildCommand>
+>>>>>>> cf8641b96f416bf3db7eebd86c68c8c03d6932c3
 	</buildSpec>
 	<natures>
 		<nature>org.springframework.ide.eclipse.core.springnature</nature>
