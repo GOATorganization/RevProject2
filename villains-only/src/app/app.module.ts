@@ -8,6 +8,11 @@ import { HomepageComponent } from './homepage/homepage.component';
 import { AppRoutingModule } from './/app-routing.module';
 import { UserviewComponent } from './userview/userview.component';
 import { ProfileComponent } from './profile/profile.component';
+import { UserService } from './user.service';
+import { EditProfileComponent } from './edit-profile/edit-profile.component';
+
+import { FormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 
 
 @NgModule({
@@ -16,13 +21,16 @@ import { ProfileComponent } from './profile/profile.component';
     NavbarComponent,
     HomepageComponent,
     UserviewComponent,
-    ProfileComponent
+    ProfileComponent,
+    EditProfileComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule,
+    FormsModule
   ],
-  providers: [],
+  providers: [UserService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
