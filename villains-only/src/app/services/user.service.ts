@@ -7,19 +7,30 @@ import "rxjs/Rx";
 import { User } from '../model/user.model';
 import { Message } from '../model/message.model';
 
+<<<<<<< HEAD
 import { of } from "rxjs/observable/of";
 
+=======
+>>>>>>> cf8641b96f416bf3db7eebd86c68c8c03d6932c3
 
 @Injectable()
 export class UserService {
     constructor(private http: Http) { }
 
+<<<<<<< HEAD
     public registerUser(user: User): Observable<Message> {
+=======
+    public registerUser(user: User) : Observable<Message> {
+>>>>>>> cf8641b96f416bf3db7eebd86c68c8c03d6932c3
         const body = JSON.stringify(user);
         const headers = new Headers({'Content-Type' : 'application/json'});
         const options: RequestOptions = new RequestOptions({headers: headers});
 
+<<<<<<< HEAD
         return this.http
+=======
+        return this.http   
+>>>>>>> cf8641b96f416bf3db7eebd86c68c8c03d6932c3
             .post(`http://localhost:8090/VillainsOnly/registerUser.app`, body, options)
             .map((response: Response) => {
                 return <Message>response.json();
@@ -71,6 +82,7 @@ export class UserService {
         return Observable.throw(error.statusText);
     }
 
+<<<<<<< HEAD
     user: User = new User(
         0,
         'John',
@@ -90,4 +102,6 @@ export class UserService {
         this.user = user;
       }
 
+=======
+>>>>>>> cf8641b96f416bf3db7eebd86c68c8c03d6932c3
 }
