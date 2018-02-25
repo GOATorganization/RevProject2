@@ -16,28 +16,17 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.villains.model.User;
 import com.villains.pojo.Message;
-<<<<<<< HEAD
-import com.villains.service.VillainUserService;
-
-//MArk as a class
-=======
 import com.villains.service.UserService;
 
 //Mark as a class
->>>>>>> cf8641b96f416bf3db7eebd86c68c8c03d6932c3
 @Controller("userController")
 @CrossOrigin(origins = "http://localhost:4200")
 public class UserController {
 	
 	@Autowired
-	private VillainUserService villainUserService;
+	private UserService userService;
 	
 	@PostMapping("/registerUser.app")
-<<<<<<< HEAD
-	public @ResponseBody ResponseEntity<Message> registerHero(@RequestBody User user){
-		villainUserService.registerUser(user);
-		return new ResponseEntity<>(new Message("HERO REGISTERED SUCCESSFULLY"), HttpStatus.OK);
-=======
 	public @ResponseBody ResponseEntity<Message> registerHero(HttpSession session, @RequestBody User user){
 		if (userService.registerUser(user)) {	
 			// If registration is successful, log the user in.
@@ -45,7 +34,6 @@ public class UserController {
 		}
 		else
 			return new ResponseEntity<>(new Message("FAILED TO REGISTER HERO"), HttpStatus.OK);
->>>>>>> cf8641b96f416bf3db7eebd86c68c8c03d6932c3
 	}
 	
 	@GetMapping("/getAllUser.app")
