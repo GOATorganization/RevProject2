@@ -1,3 +1,5 @@
+import { PictureService } from './services/picture.service';
+import { PostService } from './services/post.service';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
@@ -11,7 +13,11 @@ import { UserviewComponent } from './userview/userview.component';
 import { UserService } from './services/user.service';
 import { RegisterComponent } from './register/register.component';
 import { HttpModule } from '@angular/http';
+<<<<<<< HEAD
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
+=======
+import { TestComponent } from './test/test.component';
+>>>>>>> remotes/origin/dev
 
 
 @NgModule({
@@ -21,7 +27,11 @@ import { ForgotPasswordComponent } from './forgot-password/forgot-password.compo
     HomepageComponent,
     UserviewComponent,
     RegisterComponent,
+<<<<<<< HEAD
     ForgotPasswordComponent
+=======
+    TestComponent
+>>>>>>> remotes/origin/dev
   ],
   imports: [
     BrowserModule,
@@ -29,7 +39,7 @@ import { ForgotPasswordComponent } from './forgot-password/forgot-password.compo
     HttpModule,
     FormsModule
   ],
-  providers: [UserService],
+  providers: [UserService, PostService, PictureService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

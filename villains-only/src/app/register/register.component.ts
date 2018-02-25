@@ -10,6 +10,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class RegisterComponent implements OnInit {
 
+  
+
   constructor(private userService: UserService) { }
 
   public user: User = new User(0,'','','','','','','');
@@ -22,7 +24,10 @@ export class RegisterComponent implements OnInit {
       error => this.message.text = 'Something went wrong.');
   }
 
+  
+
   ngOnInit() {
+    
   }
 
 }

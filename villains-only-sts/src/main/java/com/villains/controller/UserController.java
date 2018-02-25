@@ -1,5 +1,7 @@
 package com.villains.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,9 +9,11 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
+
 import com.villains.model.User;
 import com.villains.pojo.Message;
 import com.villains.service.UserService;
@@ -30,6 +34,16 @@ public class UserController {
 		}
 		else
 			return new ResponseEntity<>(new Message("FAILED TO REGISTER HERO"), HttpStatus.OK);
+	}
+	
+	@GetMapping("/getAllUser.app")
+	public @ResponseBody ResponseEntity<List<User>> getAllUser(){
+		return new ResponseEntity<>(userService.getAllUser() , HttpStatus.OK);
+	}
+	
+	@PostMapping("/getUserByEmail.app")
+	public @ResponseBody ResponseEntity<User> findUserByEmail(HttpSession session, @RequestBody User user){
+		return new ResponseEntity(userService.findUserByEmail(user), HttpStatus.OK);
 	}
 	
 	@PostMapping("/loginUser.app")

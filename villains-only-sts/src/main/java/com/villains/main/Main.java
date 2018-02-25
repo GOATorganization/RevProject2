@@ -3,15 +3,26 @@
 //import java.util.ArrayList;
 //import java.util.List;
 //
-//import com.villains.DAO.DAO;
-//import com.villains.DAO.DAOImpl;
 //import com.villains.model.Picture;
 //import com.villains.model.Post;
 //import com.villains.model.User;
+//import com.villains.repository.UserRepository;
+//import com.villains.repository.UserRepositoryImpl;
+//import com.villains.service.UserService;
+//import com.villains.service.UserServiceImpl;
 //
 //public class Main {
 //	public static void main(String[] args) {
 //		System.out.println("Main VVorks");
+//		
+//		UserService repo = new UserServiceImpl();
+//		User returnUser;
+//		User testUser = new User("Henry","Cavill","Email@email.com","password","Longview","Texas","")
+//		System.out.println();
+//		
+//		returnUser = repo.findUserByEmail(testUser);
+//		
+//		System.out.println(returnUser);
 //		
 //		DAO myDao = new DAOImpl();
 //
