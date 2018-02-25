@@ -48,8 +48,12 @@ export class PostService{
     }
 
     public getAllPostByUser(user : User) : Observable<Post[]>{
+        const body = JSON.stringify(user);
+        const headers = new Headers({'Content-Type' : 'application/json'});
+        const options: RequestOptions = new RequestOptions({headers: headers});
+
         return this.http
-            .get(`http://localhost:8090/VillainsOnly/getAllPostByUser.app`)
+            .post(`http://localhost:8090/VillainsOnly/getAllPostByUser.app`,body, options)
             .map((response: Response) => {
                 return<Post[]>response.json();
             })

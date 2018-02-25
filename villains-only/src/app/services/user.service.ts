@@ -42,8 +42,6 @@ export class UserService {
 
     }
 
-
-
     public getAllUser() : Observable<User[]> {
         return this.http
             .get(`http://localhost:8090/VillainsOnly/getAllUser.app`)
@@ -53,6 +51,19 @@ export class UserService {
             .catch(this.handleError);
     }
     
+    public getHeroByEmail(user: User) : Observable<User> {
+        const body = JSON.stringify(user);
+        const headers = new Headers({'Content-Type' : 'application/json'});
+        const options: RequestOptions = new RequestOptions({headers: headers});
+
+        return this.http
+            .post(`http://localhost:8090/VillainsOnly/getUserByEmail.app`, body, options)
+            .map((response: Response) => {
+                return <User>response.json();
+            })
+            .catch(this.handleError);
+
+    }
 
     private handleError(error: Response) {
         return Observable.throw(error.statusText);

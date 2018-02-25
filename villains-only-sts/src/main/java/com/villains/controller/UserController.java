@@ -41,6 +41,11 @@ public class UserController {
 		return new ResponseEntity<>(userService.getAllUser() , HttpStatus.OK);
 	}
 	
+	@PostMapping("/getUserByEmail.app")
+	public @ResponseBody ResponseEntity<User> findUserByEmail(HttpSession session, @RequestBody User user){
+		return new ResponseEntity(userService.findUserByEmail(user), HttpStatus.OK);
+	}
+	
 	@PostMapping("/loginUser.app")
 	public @ResponseBody ResponseEntity<Message> loginHero(HttpSession session, @RequestBody User user){
 		// Authenticate user and retrieve persisted user - necessary for retrieving id to store in session.

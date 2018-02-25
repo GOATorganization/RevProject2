@@ -33,9 +33,8 @@ public class PostRepositoryImpl implements PostRepository {
 	public List<Post> getAllPostByUser(User user) {
 		try {
 		return (List<Post>) sessionFactory.getCurrentSession().createCriteria(Post.class)
-				.add(Restrictions.like("userId", user.getUserId()))
-						.list()
-						.get(0);
+				.add(Restrictions.like("userId", user))
+						.list();
 		} catch(IndexOutOfBoundsException e) {
 			return null;
 		}
