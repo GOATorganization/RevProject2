@@ -11,6 +11,7 @@ import { UserviewComponent } from './userview/userview.component';
 import { UserService } from './services/user.service';
 import { RegisterComponent } from './register/register.component';
 import { HttpModule } from '@angular/http';
+import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 
 
 @NgModule({
@@ -19,7 +20,8 @@ import { HttpModule } from '@angular/http';
     NavbarComponent,
     HomepageComponent,
     UserviewComponent,
-    RegisterComponent
+    RegisterComponent,
+    ForgotPasswordComponent
   ],
   imports: [
     BrowserModule,
