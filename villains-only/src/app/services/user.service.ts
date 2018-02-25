@@ -25,6 +25,24 @@ export class UserService {
             .catch(this.handleError);
 
     }
+
+    public loginUser(user: User) : Observable<Message> {
+        const body = JSON.stringify(user);
+        const headers = new Headers({'Content-Type' : 'application/json'});
+        const options: RequestOptions = new RequestOptions({headers: headers});
+
+        console.log(body);
+
+        return this.http   
+            .post(`http://localhost:8090/VillainsOnly/loginUser.app`, body, options)
+            .map((response: Response) => {
+                return <Message>response.json();
+            })
+            .catch(this.handleError);
+
+    }
+
+
     private handleError(error: Response) {
         return Observable.throw(error.statusText);
     }
