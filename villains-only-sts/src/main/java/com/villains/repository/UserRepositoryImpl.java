@@ -43,7 +43,6 @@ public class UserRepositoryImpl implements UserRepository {
 	@Override
 	public void create(User user) {
 		sessionFactory.getCurrentSession().save(user);
-
 	}
 
 	@Override
