@@ -5,7 +5,7 @@ export class User {
     email: string;
     password: string;
     lairCity: string;
-    liarCountry: string;
+    lairCountry: string;
     profilePic: string;
 
     constructor(id: number, firstName: string, lastName: string, email: string, 
@@ -16,7 +16,7 @@ export class User {
             this.email = email;
             this.password = password;
             this.lairCity = lairCity;
-            this.liarCountry = lairCountry;
+            this.lairCountry = lairCountry;
             this.profilePic = profilePic;
         }
 

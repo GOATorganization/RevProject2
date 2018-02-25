@@ -5,10 +5,11 @@ import java.util.List;
 import com.villains.model.User;
 
 
-public interface VillainUserService {
+public interface UserService {
 	List<User> getAllUser();
-	void registerUser(User user);
-	User findHeroEmail(String email);
+	Boolean registerUser(User user);
+	User authenticateUser(User user);
+	User findUserByEmail(User user);
 	void editUser(User user);
 
 }

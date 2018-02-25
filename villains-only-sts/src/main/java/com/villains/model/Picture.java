@@ -1,5 +1,6 @@
 package com.villains.model;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -21,10 +22,10 @@ public class Picture {
 	
 	
 	@JoinColumn(name="post_id")
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	private Post post;
 	
-	@Column(name="picture_url")
+	@Column(name="picture_url", nullable = false)
 	private String pictureUrl;
 	
 	public Picture() {
