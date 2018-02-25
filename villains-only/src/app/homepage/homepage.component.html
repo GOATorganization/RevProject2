@@ -7,15 +7,15 @@
     <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6">
       <div class="container login">
         <div class="row justify-content-end">
-          <form class="form-inline">
+          <div class="form-inline">
             <div class="input-group form-ele">
-              <input type="text" class="form-control" placeholder="Username" aria-describedby="basic-addon1">
+              <input type="text" class="form-control" placeholder="Username" [(ngModel)]="user.email" aria-describedby="basic-addon1">
             </div>
             <div class="input-group form-ele">
-              <input type="password" class="form-control" placeholder="Password" aria-describedby="basic-addon1">
+              <input type="password" class="form-control" placeholder="Password" [(ngModel)]="user.password" aria-describedby="basic-addon1">
             </div>
-            <button routerLink = "/userhome" class="btn btn-primary" type="button" >Log In</button>
-          </form>
+            <button (click)="loginUser()" class="btn btn-primary" type="button" >Log In</button>
+          </div>
           <a href="#" id="forgotLogin">Forgot Login</a>
         </div>
 

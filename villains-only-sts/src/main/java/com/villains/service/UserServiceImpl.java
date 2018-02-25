@@ -10,12 +10,12 @@ import com.villains.repository.UserRepository;
 import com.villains.util.UserValidator;
 import com.villains.util.UserValidatorImpl;
 
-@Service("villainUserService")
+@Service("userService")
 public class UserServiceImpl implements UserService {
 	
 	@Autowired
 	private UserRepository userRepository;
-	//TODO: Inject this, and remove it from unnecessary ctors
+	@Autowired
 	private UserValidator userValidator;
 
 	public UserServiceImpl() {
@@ -63,6 +63,19 @@ public class UserServiceImpl implements UserService {
 	public void editUser(User user) {
 		userRepository.update(user);
 
+	}
+
+	@Override
+	public User authenticateUser(User user) {
+		User userToCheck = userRepository.findByEmail(user.getEmail());
+		
+		if (userToCheck != null) {
+			if (user.getPassword().equals(userToCheck.getPassword())) {
+				return userToCheck;
+			}
+		}
+		
+		return null;
 	}
 
 }
