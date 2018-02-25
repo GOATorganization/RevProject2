@@ -1,9 +1,12 @@
+import { PictureService } from './../services/picture.service';
 import { User } from './../model/user.model';
 import { Message } from './../model/message.model';
 import { Post } from './../model/post.model';
 import { PostService } from './../services/post.service';
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '../services/user.service';
+import { Picture } from '../model/picture.model';
+import { post } from 'selenium-webdriver/http';
 
 @Component({
   selector: 'app-test',
@@ -14,14 +17,17 @@ export class TestComponent implements OnInit {
 
   private users: User[];
   private posts : Post[];
+  private pictures : Picture[];
   public message: Message = new Message('');
 
-  
+  private testUser2 = new User(2, '', '', 'Email@email.com', '', '' ,'', '');
 
   private userGrabber :User; 
   private userGetter = new User(1, '', '', 'Email@email.com', '', '' ,'', '');
+  private poster = new Post(6, '', undefined, this.userGetter);
 
-  constructor(private userService: UserService, private postService :PostService) { }
+  constructor(private userService: UserService, private postService :PostService
+    ,private pictureService : PictureService) { }
 
   getAllPost(): void{
     this.postService.getAllPost().subscribe(
@@ -49,8 +55,8 @@ export class TestComponent implements OnInit {
         this.postService.getAllPostByUser(user).subscribe(
           post => {
             console.log(post);
-            let editPost = new Post(undefined, 'THis is a tester thing', undefined, user);
-            this.postService.createPost(editPost).subscribe(
+            let editPost = new Post(47, 'THis is a editing thing', undefined, user);
+            this.postService.editPost(editPost).subscribe(
               message => this.message = message,
               error => this.message.text = 'something wen wrong');
           },
@@ -60,14 +66,48 @@ export class TestComponent implements OnInit {
       error => this.message.text = 'something went wrong');
   }
 
+  getAllPicture() :void {
+    this.pictureService.getAllPictures().subscribe(
+      picture => {
+        this.pictures = picture;
+        console.log(picture);
+      },
+      error =>this.message.text = 'Something went wrong');
+  }
+
+  getAllPictureByPost(post : Post) : void{
+    this.pictureService.getAllPicturesByPost(post).subscribe(
+      picture => {
+        this.pictures = picture;
+        console.log(picture);
+      },
+      error =>this.message.text = 'Something went wrong');
+  } 
+
+  getAllPictureByUser(user : User) : void{
+    this.pictureService.getAllPicturesByUser(user).subscribe(
+      picture => {
+        this.pictures = picture;
+        console.log(picture);
+      },
+      error =>this.message.text = 'Something went wrong');
+  } 
+
+
+
+
  
 
 
 
   ngOnInit() {
-    this.getAllPost();
-    this.getAllUser();
-    this.getUserByEmail(this.userGetter);
+    // this.getAllPost();
+    // this.getAllUser();
+    // this.getUserByEmail(this.userGetter);
+    // this.getAllPicture();
+    // this.getAllPictureByPost(this.poster)
+    // this.getAllPictureByUser(this.testUser2);
+    // this.getAllPictureByUser(this.userGetter);
   }
 
 }
