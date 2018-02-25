@@ -30,7 +30,7 @@ public class UserRepositoryImpl implements UserRepository {
 	@Override
 	public User findByName(String fname, String lname) {
 		try {
-			return (User) sessionFactory.getCurrentSession().createCriteria(fname, lname)
+			return (User) sessionFactory.getCurrentSession().createCriteria(User.class)
 					.add(Restrictions.like("firstName", fname))
 					.add(Restrictions.like("lastName", lname))
 					.list()

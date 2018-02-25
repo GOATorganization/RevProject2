@@ -24,7 +24,7 @@ public class Picture {
 	@ManyToOne(fetch = FetchType.LAZY)
 	private Post post;
 	
-	@Column(name="picture_url")
+	@Column(name="picture_url", nullable = false)
 	private String pictureUrl;
 	
 	public Picture() {

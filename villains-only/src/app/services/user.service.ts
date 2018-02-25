@@ -25,6 +25,17 @@ export class UserService {
             .catch(this.handleError);
 
     }
+
+    public getAllUser() : Observable<User[]> {
+        return this.http
+            .get(`http://localhost:8090/VillainsOnly/getAllUser.app`)
+            .map((response: Response) => {
+                return <User[]>response.json();
+            })
+            .catch(this.handleError);
+    }
+    
+
     private handleError(error: Response) {
         return Observable.throw(error.statusText);
     }
