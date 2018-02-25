@@ -9,7 +9,7 @@ public interface UserService {
 	List<User> getAllUser();
 	Boolean registerUser(User user);
 	User authenticateUser(User user);
-	User findHeroEmail(String email);
+	User findUserByEmail(User user);
 	void editUser(User user);
 
 }

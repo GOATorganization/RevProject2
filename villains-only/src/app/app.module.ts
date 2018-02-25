@@ -1,3 +1,5 @@
+import { PictureService } from './services/picture.service';
+import { PostService } from './services/post.service';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
@@ -11,6 +13,7 @@ import { UserviewComponent } from './userview/userview.component';
 import { UserService } from './services/user.service';
 import { RegisterComponent } from './register/register.component';
 import { HttpModule } from '@angular/http';
+import { TestComponent } from './test/test.component';
 
 
 @NgModule({
@@ -19,7 +22,8 @@ import { HttpModule } from '@angular/http';
     NavbarComponent,
     HomepageComponent,
     UserviewComponent,
-    RegisterComponent
+    RegisterComponent,
+    TestComponent
   ],
   imports: [
     BrowserModule,
@@ -27,7 +31,7 @@ import { HttpModule } from '@angular/http';
     HttpModule,
     FormsModule
   ],
-  providers: [UserService],
+  providers: [UserService, PostService, PictureService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

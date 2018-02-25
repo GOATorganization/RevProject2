@@ -1,72 +1,69 @@
+import { User } from './../model/user.model';
+import { Post } from './../model/post.model';
+import { Message } from './../model/message.model';
 import { Injectable } from "@angular/core";
 import { Http, Headers, RequestOptions, Response } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 // For Map
 import "rxjs/Rx";
 
-import { User } from '../model/user.model';
-import { Message } from '../model/message.model';
-
 
 @Injectable()
-export class UserService {
-    constructor(private http: Http) { }
+export class PostService{
+    constructor(private http: Http){ }
 
-    public registerUser(user: User) : Observable<Message> {
-        const body = JSON.stringify(user);
+    public createPost(post : Post) : Observable<Message>{
+        const body = JSON.stringify(post);
         const headers = new Headers({'Content-Type' : 'application/json'});
         const options: RequestOptions = new RequestOptions({headers: headers});
 
-        return this.http   
-            .post(`http://localhost:8090/VillainsOnly/registerUser.app`, body, options)
-            .map((response: Response) => {
-                return <Message>response.json();
-            })
-            .catch(this.handleError);
-
-    }
-
-    public loginUser(user: User) : Observable<Message> {
-        const body = JSON.stringify(user);
-        const headers = new Headers({'Content-Type' : 'application/json'});
-        const options: RequestOptions = new RequestOptions({headers: headers});
-
-        console.log(body);
-
-        return this.http   
-            .post(`http://localhost:8090/VillainsOnly/loginUser.app`, body, options)
-            .map((response: Response) => {
-                return <Message>response.json();
-            })
-            .catch(this.handleError);
-
-    }
-
-    public getAllUser() : Observable<User[]> {
         return this.http
-            .get(`http://localhost:8090/VillainsOnly/getAllUser.app`)
+            .post(`http://localhost:8090/VillainsOnly/createPost.app`, body, options)
             .map((response: Response) => {
-                return <User[]>response.json();
+                return <Message> response.json();
             })
             .catch(this.handleError);
     }
-    
-    public getHeroByEmail(user: User) : Observable<User> {
+
+    public editPost(post : Post) : Observable<Message>{
+        const body = JSON.stringify(post);
+        const headers = new Headers({'Content-Type' : 'application/json'});
+        const options: RequestOptions = new RequestOptions({headers: headers});
+
+        return this.http
+            .post(`http://localhost:8090/VillainsOnly/editPost.app`, body, options)
+            .map((response: Response) => {
+                return <Message> response.json();
+            })
+            .catch(this.handleError);
+    }
+
+    public getAllPost() : Observable<Post[]>{
+        return this.http
+            .get(`http://localhost:8090/VillainsOnly/getAllPost.app`)
+            .map((response : Response) => {
+                return <Post[]> response.json();
+            })
+            .catch(this.handleError);
+    }
+
+    public getAllPostByUser(user : User) : Observable<Post[]>{
         const body = JSON.stringify(user);
         const headers = new Headers({'Content-Type' : 'application/json'});
         const options: RequestOptions = new RequestOptions({headers: headers});
 
         return this.http
-            .post(`http://localhost:8090/VillainsOnly/getUserByEmail.app`, body, options)
+            .post(`http://localhost:8090/VillainsOnly/getAllPostByUser.app`,body, options)
             .map((response: Response) => {
-                return <User>response.json();
+                return<Post[]>response.json();
             })
             .catch(this.handleError);
-
     }
+
 
     private handleError(error: Response) {
         return Observable.throw(error.statusText);
     }
+
 
 }

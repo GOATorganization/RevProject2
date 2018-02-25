@@ -2,6 +2,7 @@ package com.villains.model;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -22,7 +23,7 @@ public class Post {
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int postId;
 	
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name="user_id",nullable = false)
 	private User userId;
 	
@@ -31,7 +32,7 @@ public class Post {
 	
 	
 	@Column(name="contents_pics")
-	@OneToMany(fetch = FetchType.EAGER)
+	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	private List<Picture> contentsPic;
 	
 	/*@ManyToMany
