@@ -17,6 +17,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 /**
  * 
  * @author Chaos
@@ -53,7 +55,8 @@ public class User {
 	@Column
 	private String profilePic;
 
-	@OneToMany(mappedBy = "postId" ,fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@JsonIgnore
+	@OneToMany(mappedBy = "postId" ,fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	private List<Post> posts;
 
 	@OneToOne(cascade = CascadeType.ALL)

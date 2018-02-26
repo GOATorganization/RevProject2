@@ -9,7 +9,7 @@ import { ProfileComponent } from './profile/profile.component';
 const routes: Routes = [
   { path: '', redirectTo: '/homepage', pathMatch: 'full' },
   {path: 'homepage', component: HomepageComponent},
-  { path: 'userhome', component: UserviewComponent },
+  { path: 'userhome', component: PostviewComponent },
   { path: 'userprofile', component: ProfileComponent },
   { path: 'postview', component: PostviewComponent }
 ];
