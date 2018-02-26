@@ -1,3 +1,4 @@
+import { PictureService } from './services/picture.service';
 import { PostService } from './services/post.service';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
@@ -34,7 +35,7 @@ import { HttpClientModule } from '@angular/common/http';
     FormsModule,
     HttpClientModule
   ],
-  providers: [UserService, PostService],
+  providers: [UserService, PostService, PictureService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

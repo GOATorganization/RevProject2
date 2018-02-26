@@ -24,6 +24,10 @@ public class PostController {
 	@Autowired
 	private PostService postService;
 	
+	/**
+	 * Gets all the posts
+	 * @return a list of all the posts
+	 */
 	@GetMapping("/getAllPost.app")
 	public @ResponseBody ResponseEntity<List<Post>> getAllPost(){
 		return new ResponseEntity<>(postService.getAllPost() , HttpStatus.OK);
