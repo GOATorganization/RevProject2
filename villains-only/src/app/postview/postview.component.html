@@ -9,7 +9,7 @@
                     <h5>Remi-Chan</h5>
                     <h6>remichan@sempai.com</h6>
                     <div class="form-group">
-                        <input [(ngModel)]="userPost" placeholder="Enter Post" class="form-control" id="postSubmit"/>
+                        <input [(ngModel)]="userPost" placeholder="Enter Post" class="form-control" id="postSubmit" />
                     </div>
                     <div class="form-group">
                         <button class="btn btn-center btn-primary" (click)="submitPost()">Submit Post</button>
@@ -26,7 +26,11 @@
                             {{post.userId.firstName}} {{post.userId.lastName}}
                         </h4>
                         <div *ngIf="post.showHide">
-                            <h1>placeholder</h1>
+                            <div *ngFor="let picture of post.contentsPic" class="text-center">
+                                <img class="postImg" src="{{picture.pictureUrl}}">
+
+                            </div>
+
                         </div>
                         <p class="card-text cardtextpad cardContent">
                             {{post.contentsText}}

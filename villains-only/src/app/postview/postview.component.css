@@ -12,6 +12,10 @@
     margin-top: 45px;
 }
 
+.postImg{
+    width: 75%;
+}
+
 .cardpad{
     margin-bottom: 15px;
     background-color: rgba(71, 23, 246, 0.11);

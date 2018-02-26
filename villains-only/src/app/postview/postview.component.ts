@@ -1,3 +1,5 @@
+import { Picture } from './../model/picture.model';
+import { PictureService } from './../services/picture.service';
 import { UserService } from './../services/user.service';
 import { User } from './../model/user.model';
 import { Message } from './../model/message.model';
@@ -14,23 +16,33 @@ export class PostviewComponent implements OnInit {
 
   public message: Message = new Message('');
   private posts: Post[];
-  private testUser2 = new User(1, '', '', 'Email@email.com', '', '' ,'', '');
+  private testUser2 = new User(1, '', '', 'Email@email.com', '', '', '', '');
 
   private userPost: string;
 
 
-  constructor(private postService: PostService, private userService: UserService) { }
+  constructor(private postService: PostService, private userService: UserService
+    , private pictureService: PictureService) { }
 
   getAllPost(): void {
     this.postService.getAllPost().subscribe(
-      posts => {
-        console.log(posts);
-        for (var i = 0; i < posts.length; i++) {
-          if (posts[i].contentsPic.length != 0) {
-            posts[i].showHide = true;
-          }
+      postsIn => {
+        console.log(postsIn);
+        for (let i = 0; i < postsIn.length; i++) {
+          postsIn[i].contentsPic = [];
+          let tempPic: Picture[];
+          this.pictureService.getAllPicturesByPost(postsIn[i]).subscribe(
+            picture => {
+              tempPic = picture;
+              postsIn[i].contentsPic = tempPic;
+              console.log(postsIn[i]);
+              if (postsIn[i].contentsPic.length != 0) {
+                postsIn[i].showHide = true;
+              }
+            },
+            error => this.message.text = 'Failed');
         }
-        this.posts = posts
+        this.posts = postsIn;
       },
       error => this.message.text = 'something went wrong');
   }
