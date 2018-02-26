@@ -1,0 +1,35 @@
+<h2>Post View</h2>
+<div>
+  <ul class="postspanst">
+    <li *ngFor="let p of postss">
+        <div class="container">
+            <div class="row">
+              <div class="col-9 bg-primary">
+                  <span>Userid:{{p.user_id}}(profilepic)</span>
+              </div>
+              <div class="col bg-primary">
+                  <span>Date:{{p.post_date}}</span>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col bg-danger">
+                 <span class="content">Contents:{{p.contents_txt}}</span>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col bg-primary">
+                  <span>ContentsPic:{{p.contents_pic}}</span>
+              </div>
+              <div class="col-5 bg-secondary">
+                  <span>likelist:{{p.like_list}}</span>
+              </div>
+              <div class="col bg-secondary">
+                  <span>Postid:{{p.post_id}}</span>
+              </div>
+            </div>
+          </div>
+          <div></div>
+          <div></div>
+        </li>
+  </ul>
+</div>
