@@ -5,7 +5,9 @@ export class Post{
     postId : number;
     contentsText : string;
     contentsPic : Picture[];
-    userId : User
+    userId : User;
+
+    showHide = false;
 
     constructor(postId: number, contentsText: string, contentsPic: Picture[], userId: User){
         this.postId = postId;
