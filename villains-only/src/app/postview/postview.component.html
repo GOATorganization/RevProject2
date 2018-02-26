@@ -3,11 +3,11 @@
         <div class="row">
             <div class="col-lg-3 col-md-3 col-sm-3 col-xl-3 userColumn">
                 <div class="userInfo">
-                    <img class="profileImage" src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/96/Generic-person.svg/600px-Generic-person.svg.png">
+                    <img class="profileImage" src="{{currentUser.profilePic}}">
                     <br>
                     <br>
-                    <h5>Remi-Chan</h5>
-                    <h6>remichan@sempai.com</h6>
+                    <h5>Welcome {{currentUser.firstName}} {{currentUser.lastName}}</h5>
+                    <h6>{{currentUser.email}}</h6>
                     <div class="form-group">
                         <input [(ngModel)]="userPost" placeholder="Enter Post" class="form-control" id="postSubmit" />
                     </div>
