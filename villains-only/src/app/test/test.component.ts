@@ -22,7 +22,7 @@ export class TestComponent implements OnInit {
 
   private testUser2 = new User(2, '', '', 'Email@email.com', '', '' ,'', '');
 
-  private userGrabber :User; 
+  private userGrabber: User; 
   private userGetter = new User(1, '', '', 'Email@email.com', '', '' ,'', '');
   private poster = new Post(6, '', undefined, this.userGetter);
 
