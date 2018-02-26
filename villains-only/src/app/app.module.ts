@@ -1,3 +1,4 @@
+import { PostviewComponent } from './postview/postview.component';
 import { PictureService } from './services/picture.service';
 import { PostService } from './services/post.service';
 import { BrowserModule } from '@angular/platform-browser';
@@ -23,7 +24,8 @@ import { TestComponent } from './test/test.component';
     HomepageComponent,
     UserviewComponent,
     RegisterComponent,
-    TestComponent
+    TestComponent,
+    PostviewComponent
   ],
   imports: [
     BrowserModule,

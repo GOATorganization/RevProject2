@@ -48,7 +48,7 @@ export class TestComponent implements OnInit {
   }
 
   getUserByEmail(userId : User) : void{
-    this.userService.getHeroByEmail(userId).subscribe(
+    this.userService.getUserByEmail(userId).subscribe(
       user => {
         console.log(user);
         this.userGrabber = user;
@@ -101,7 +101,7 @@ export class TestComponent implements OnInit {
 
 
   ngOnInit() {
-    // this.getAllPost();
+    // this.getAllPost(); 
     // this.getAllUser();
     // this.getUserByEmail(this.userGetter);
     // this.getAllPicture();
