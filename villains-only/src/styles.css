@@ -7431,7 +7431,8 @@ a.text-dark:hover, a.text-dark:focus {
 }
 
 .light-back{
-  background-color: #52428138; /*linear-gradient(#e7dfdd, #5e34f3);*/
+  /* background-color: #52428138; linear-gradient(#e7dfdd, #5e34f3); */
+  background-color: rgba(83, 30, 143, 0.295);
 }
 
 body{
