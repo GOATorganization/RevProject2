@@ -9,7 +9,7 @@ import { Message } from '../model/message.model';
   styleUrls: ['./homepage.component.css']
 })
 export class HomepageComponent implements OnInit {
-
+  imageSource = '../../assets/VillainsOnlyLogo.png';
   constructor(private userService: UserService) { }
 
   public user: User = new User(0,'','','','','','','');
