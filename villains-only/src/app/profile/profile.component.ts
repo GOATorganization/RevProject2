@@ -14,11 +14,11 @@ export class ProfileComponent implements OnInit {
   constructor(private userService: UserService) { }
 
   ngOnInit() {
-    this.getUser();
+    this.user = this.userService.getLoggedInUser();
   }
 
   getUser(): void {
-    this.userService.getUser().subscribe(user => this.user = user);
+    this.userService.getUser().subscribe(user => { this.user = user; console.log('From profile component: getUser(): ' + user) });
   }
 
   editProfile(): void {
@@ -26,7 +26,8 @@ export class ProfileComponent implements OnInit {
   }
 
   submitProfileChanges(): void {
-    this.userService.editProfile(this.user);
+    console.log(this.user);
+    this.userService.editProfile(this.user).subscribe(message => console.log(message));
     this.isInEditMode = false;
   }
 }

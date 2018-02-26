@@ -1,6 +1,9 @@
+<h1>Your Profile</h1>
+
+
 <form>
   <div class="form-group">
-    <img src='{{user.profilePic}}' alt="profile pic" />
+    <img src='{{user.profilePic}}' alt="No profile picture." />
   </div>
 
   <div *ngIf='isInEditMode' class="form-group">
@@ -10,27 +13,32 @@
 
   <div class="form-group">
     <label for="firstName">First Name:</label>
-    <input id='firstName' [ngClass]="{'form-control': isInEditMode, 'form-control-plaintext': !isInEditMode}" value='{{user.firstName}}' [readonly]='!isInEditMode'>
+    <input id='firstName' [ngClass]="{'form-control': isInEditMode, 'form-control-plaintext': !isInEditMode}" [(ngModel)]='user.firstName'
+      [readonly]='!isInEditMode' name='fName'>
   </div>
 
   <div class="form-group">
     <label for="lastName">Last Name:</label>
-    <input id='lastName' [ngClass]="{'form-control': isInEditMode, 'form-control-plaintext': !isInEditMode}" value='{{user.lastName}}' [readonly]='!isInEditMode'>
+    <input id='lastName' [ngClass]="{'form-control': isInEditMode, 'form-control-plaintext': !isInEditMode}" [(ngModel)]='user.lastName'
+      [readonly]='!isInEditMode' name='lName'>
   </div>
 
   <div class="form-group">
     <label for="email">Email:</label>
-    <input id="email" type='email' [ngClass]="{'form-control': isInEditMode, 'form-control-plaintext': !isInEditMode}" value='{{user.email}}' [readonly]='!isInEditMode'>
+    <input id="email" type='email' [ngClass]="{'form-control': isInEditMode, 'form-control-plaintext': !isInEditMode}" [(ngModel)]='user.email'
+      [readonly]='!isInEditMode' name='email'>
   </div>
 
   <div class="form-group">
     <label for="city">Lair City:</label>
-    <input id="city" [ngClass]="{'form-control': isInEditMode, 'form-control-plaintext': !isInEditMode}" value='{{user.lairCity}}' [readonly]='!isInEditMode'>
+    <input id="city" [ngClass]="{'form-control': isInEditMode, 'form-control-plaintext': !isInEditMode}" [(ngModel)]='user.lairCity'
+      [readonly]='!isInEditMode' name='lairCity'>
   </div>
 
   <div class="form-group">
     <label for="country">Lair Location:</label>
-    <input id="country" [ngClass]="{'form-control': isInEditMode, 'form-control-plaintext': !isInEditMode}" value='{{user.lairCountry}}' [readonly]='!isInEditMode'>
+    <input id="country" [ngClass]="{'form-control': isInEditMode, 'form-control-plaintext': !isInEditMode}" [(ngModel)]='user.lairCountry'
+      [readonly]='!isInEditMode' name='lairCountry'>
   </div>
 
   <button type='button' class='btn' (click)='isInEditMode ? submitProfileChanges() : editProfile()'>{{isInEditMode ? 'Submit Changes': 'Edit Profile'}}</button>
