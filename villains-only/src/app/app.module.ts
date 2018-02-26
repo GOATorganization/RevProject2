@@ -15,6 +15,8 @@ import { UserService } from './services/user.service';
 import { RegisterComponent } from './register/register.component';
 import { HttpModule } from '@angular/http';
 import { TestComponent } from './test/test.component';
+import { ProfileComponent } from './profile/profile.component';
+import { HttpClientModule } from '@angular/common/http';
 
 
 @NgModule({
@@ -25,13 +27,14 @@ import { TestComponent } from './test/test.component';
     UserviewComponent,
     RegisterComponent,
     TestComponent,
+    ProfileComponent,
     PostviewComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpModule,
-    FormsModule
+    FormsModule,
   ],
   providers: [UserService, PostService, PictureService],
   bootstrap: [AppComponent]
