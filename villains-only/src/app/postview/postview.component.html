@@ -1,7 +1,25 @@
 <h2>Post View</h2>
 <div>
-  <ul class="postspanst">
-    <li *ngFor="let p of postss">
+  <ul class="postlist">
+    <li>
+        <div class="container">
+            <form method="POST" >
+                <div class="row">
+                    <div class="col-12">
+                            <input type="textbox"/>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-5 bg-dark">
+                        <button class="navbar-toggler" type="submit">
+                                <span class="text-muted">Post</span>
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </li>
+    <li *ngFor="let p of postss; let i = index " >
         <div class="container">
             <div class="row">
               <div class="col-9 bg-primary">
@@ -27,9 +45,24 @@
                   <span>Postid:{{p.post_id}}</span>
               </div>
             </div>
+            <div class="row">
+                <div class="col bg-danger">
+                        <div class="pos-f-t">
+                            <div class="collapse" [attr.id]="'navbarToggleExternalContent'+i">
+                                <div class="bg-dark p-4">
+                                <h4 class="text-white">Collapsed content</h4>
+                                <span class="text-muted">Toggleable via the navbar brand.</span>
+                                </div>
+                            </div>
+                            <nav class="navbar navbar-dark bg-dark">
+                                <button class="navbar-toggler" type="button" data-toggle="collapse"  [attr.data-target]="'#navbarToggleExternalContent'+i" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
+                                <span>View Pics</span>
+                                </button>
+                            </nav>
+                        </div>
+                </div>
+            </div>
           </div>
-          <div></div>
-          <div></div>
         </li>
   </ul>
 </div>

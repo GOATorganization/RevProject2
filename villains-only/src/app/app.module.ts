@@ -14,6 +14,8 @@ import { UserService } from './services/user.service';
 import { RegisterComponent } from './register/register.component';
 import { HttpModule } from '@angular/http';
 import { TestComponent } from './test/test.component';
+import { PostviewComponent} from './postview/postview.component';
+import { DisplaypicService } from './services/displaypic.service';
 
 
 @NgModule({
@@ -23,7 +25,8 @@ import { TestComponent } from './test/test.component';
     HomepageComponent,
     UserviewComponent,
     RegisterComponent,
-    TestComponent
+    TestComponent,
+    PostviewComponent,
   ],
   imports: [
     BrowserModule,
@@ -31,7 +34,7 @@ import { TestComponent } from './test/test.component';
     HttpModule,
     FormsModule
   ],
-  providers: [UserService, PostService, PictureService],
+  providers: [UserService, PostService, PictureService, DisplaypicService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
