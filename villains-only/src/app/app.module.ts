@@ -14,7 +14,7 @@ import { RegisterComponent } from './register/register.component';
 import { HttpModule } from '@angular/http';
 import { TestComponent } from './test/test.component';
 import { ProfileComponent } from './profile/profile.component';
-import { EditProfileComponent } from './edit-profile/edit-profile.component';
+import { HttpClientModule } from '@angular/common/http';
 
 
 @NgModule({
@@ -26,13 +26,13 @@ import { EditProfileComponent } from './edit-profile/edit-profile.component';
     RegisterComponent,
     TestComponent,
     ProfileComponent,
-    EditProfileComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpModule,
-    FormsModule
+    FormsModule,
+    HttpClientModule
   ],
   providers: [UserService, PostService],
   bootstrap: [AppComponent]
