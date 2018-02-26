@@ -49,8 +49,8 @@ public class User {
 	@Column
 	private String profilePic;
 	
-	@OneToMany(mappedBy = "postId" ,fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	private List<Post> posts;
+//	@OneToMany(mappedBy = "postId" ,fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+//	private List<Post> posts;
 	
 	
 	public User() {

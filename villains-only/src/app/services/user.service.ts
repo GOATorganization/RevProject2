@@ -51,7 +51,7 @@ export class UserService {
             .catch(this.handleError);
     }
     
-    public getHeroByEmail(user: User) : Observable<User> {
+    public getUserByEmail(user: User) : Observable<User> {
         const body = JSON.stringify(user);
         const headers = new Headers({'Content-Type' : 'application/json'});
         const options: RequestOptions = new RequestOptions({headers: headers});
