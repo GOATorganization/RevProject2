@@ -1,0 +1,16 @@
+<div class ="container">
+    <div class="row">
+      <div>
+        <tbody>
+          <tr *ngFor="let comment of comments">
+            <th scope = "row"> {{comment.postId}}</th>
+              <td>{{comment.id}}</td>
+              <td>{{comment.name}}</td>
+              <td>{{comment.email}}</td>
+              <td>{{comment.body}}</td>
+          </tr>
+        </tbody>
+      </div>
+    </div>
+  
+  </div>
