@@ -1,3 +1,4 @@
+import { PostviewComponent } from './postview/postview.component';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
@@ -10,11 +11,12 @@ const routes: Routes = [
   {path: 'homepage', component: HomepageComponent},
   { path: 'userhome', component: UserviewComponent },
   { path: 'userprofile', component: ProfileComponent },
+  { path: 'postview', component: PostviewComponent }
 ];
 
 @NgModule({
-  imports: [ RouterModule.forRoot(routes) ],
-  exports: [ RouterModule ]
+  imports: [RouterModule.forRoot(routes)],
+  exports: [RouterModule]
 })
 
 

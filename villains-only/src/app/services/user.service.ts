@@ -49,11 +49,11 @@ export class UserService {
 
     public getAllUser(): Observable<User[]> {
         return this.http
-        .get(`http://localhost:8090/VillainsOnly/getAllUser.app`)
-        .map((response: Response) => {
-            return <User[]>response.json();
-        })
-        .catch(this.handleError);
+            .get(`http://localhost:8090/VillainsOnly/getAllUser.app`)
+            .map((response: Response) => {
+                return <User[]>response.json();
+            })
+            .catch(this.handleError);
     }
 
     public getHeroByEmail(user: User): Observable<User> {
@@ -62,11 +62,11 @@ export class UserService {
         const options: RequestOptions = new RequestOptions({ headers: headers });
 
         return this.http
-        .post(`http://localhost:8090/VillainsOnly/getUserByEmail.app`, body, options)
-        .map((response: Response) => {
-            return <User>response.json();
-        })
-        .catch(this.handleError);
+            .post(`http://localhost:8090/VillainsOnly/getUserByEmail.app`, body, options)
+            .map((response: Response) => {
+                return <User>response.json();
+            })
+            .catch(this.handleError);
 
     }
 
@@ -78,14 +78,27 @@ export class UserService {
 
         // update user data in repository
         return this.http
-        .post(`http://localhost:8090/VillainsOnly/updateUserProfile.app`, body, options)
-        .map((response: Response) => {
-            return <Message>response.json();
-        })
-        .catch(this.handleError);
+            .post(`http://localhost:8090/VillainsOnly/updateUserProfile.app`, body, options)
+            .map((response: Response) => {
+                return <Message>response.json();
+            })
+            .catch(this.handleError);
     }
 
-    updateUserCookie(user: User) {
+
+    public getUserByEmail(user: User): Observable<User> {
+        const body = JSON.stringify(user);
+
+        // update user data in repository
+        return this.http
+            .post(`http://localhost:8090/VillainsOnly/updateUserProfile.app`, body, options)
+            .map((response: Response) => {
+                return <Message>response.json();
+            })
+            .catch(this.handleError);
+    }
+
+    updateUserCookie(user: User): void {
         document.cookie = `user=${JSON.stringify(user)}`;
     }
 
