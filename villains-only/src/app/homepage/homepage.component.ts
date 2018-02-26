@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { UserService } from '../services/user.service';
 import { User } from '../model/user.model';
 import { Message } from '../model/message.model';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-homepage',
@@ -10,7 +11,7 @@ import { Message } from '../model/message.model';
 })
 export class HomepageComponent implements OnInit {
   imageSource = '../../assets/VillainsOnlyLogo.png';
-  constructor(private userService: UserService) { }
+  constructor(private userService: UserService, private router: Router) { }
 
   public user: User = new User(0,'','','','','','','');
 
@@ -37,6 +38,7 @@ export class HomepageComponent implements OnInit {
           this.userService.getHeroByEmail(this.user).subscribe(user => {
             this.user = user;
             this.userService.updateUserCookie(user);
+            this.router.navigate(['/userhome']);
           });
         }
         else {
