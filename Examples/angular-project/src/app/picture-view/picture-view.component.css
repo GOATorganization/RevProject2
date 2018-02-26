@@ -1,0 +1,77 @@
+.bg{
+    width: 100%;
+    background-color:   #0e0b16;
+}
+.profileImage{
+    width: 100%;
+    margin-top: 45px;
+}
+
+.cardtextpad{
+    margin-bottom: 10px;
+    
+}
+
+.cardTitle{
+    margin-bottom: 15px;
+}
+
+.cardpad{
+  margin-bottom: 15px;
+  background-color: rgba(71, 23, 246, 0.11);
+  color: #e7dfdd;
+}
+
+.cardtextpad{
+  padding: 10px;
+}
+
+.cardContent{
+  margin-left: 20px;
+}
+
+#postColumn{
+  margin-left: 20px;
+  padding: 10px;
+  padding-top: 30px;
+}
+
+.userColumn{
+  margin-top: 20px;
+  margin-right: 20px;
+
+  color: #e7dfdd;
+}
+
+.thumbs{
+  fill: white;
+  margin-right: 5px;
+  margin-bottom: 5px;
+}
+
+.thumbsup{
+  color: #e7dfdd;
+  margin-left: 625px;
+  margin-bottom: 25px;
+  background-color: #A239ca;
+}
+
+.userInfo{
+  
+  position: sticky;
+  top:0;
+}
+
+.cardImg{
+    width : 100%;
+}
+
+.imageContent{
+  margin-left: 20px;
+  margin-right: 20px;
+}
+
+.purpleButton{
+  background-color: #A239ca;
+  color: #e7dfdd;
+}
