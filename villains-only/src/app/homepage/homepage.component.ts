@@ -16,6 +16,10 @@ export class HomepageComponent implements OnInit {
 
   public message: Message = new Message('');
 
+  ngOnInit() {
+    
+  }
+
   registerUser(): void {
     this.userService.registerUser(this.user).subscribe(
       message => this.message = message,
@@ -23,14 +27,22 @@ export class HomepageComponent implements OnInit {
   }
 
   loginUser(): void {
-    console.log(this.user.email + " " + this.user.password);
     this.userService.loginUser(this.user).subscribe(
-      message => this.message = message,
-      error => this.message.text = 'Something went wrong.');
+      message => {
+        this.message = message;
+        let msg = message.text.toLowerCase();
+        
+        if (msg.includes('success')) {
+          console.log(message.text);
+          this.userService.getHeroByEmail(this.user).subscribe(user => {
+            this.user = user;
+            this.userService.updateUserCookie(user);
+          });
+        }
+        else {
+          console.log(message.text);
+        }
+  },
+  error => this.message.text = 'Something went wrong.');
   }
-
-  ngOnInit() {
-  }
-
-
 }
