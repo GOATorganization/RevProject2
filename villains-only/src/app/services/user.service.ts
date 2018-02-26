@@ -37,6 +37,17 @@ export class UserService {
             .catch(this.handleError);
     }
 
+    public requestPasswordReset(user: User) : Observable<Message> {
+        const body = JSON.stringify(user);
+
+        return this.http   
+            .post(`http://localhost:8090/VillainsOnly/requestPasswordReset.app`, body, options)
+            .map((response: Response) => {
+                return <Message>response.json();
+            })
+            .catch(this.handleError);
+    }
+
     public loginUser(user: User): Observable<Message> {
         const body = JSON.stringify(user);
         const headers = new Headers({ 'Content-Type': 'application/json' });
