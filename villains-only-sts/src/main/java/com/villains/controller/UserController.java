@@ -89,5 +89,16 @@ public class UserController {
 		userService.editUser(user);
 		return new ResponseEntity<>(new Message("Updated changes"), HttpStatus.OK);
 	}
+	
+	@PostMapping("/requestPasswordReset.app")
+	public @ResponseBody ResponseEntity<Message> requestPasswordReset(HttpSession session, @RequestBody User user) {
+
+		if (userService.processResetRequest(user))
+			return new ResponseEntity<>(new Message("EMAIL SENT"), HttpStatus.OK);
+		else
+			return new ResponseEntity<>(new Message("COULDN'T FIND THAT EMAIL"), HttpStatus.OK);
+	}
+	
+
 
 }

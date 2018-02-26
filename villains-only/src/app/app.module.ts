@@ -17,6 +17,7 @@ import { HttpModule } from '@angular/http';
 import { TestComponent } from './test/test.component';
 import { ProfileComponent } from './profile/profile.component';
 import { HttpClientModule } from '@angular/common/http';
+import { ForgotloginComponent } from './forgotlogin/forgotlogin.component';
 
 
 @NgModule({
@@ -28,7 +29,8 @@ import { HttpClientModule } from '@angular/common/http';
     RegisterComponent,
     TestComponent,
     ProfileComponent,
-    PostviewComponent
+    PostviewComponent,
+    ForgotloginComponent
   ],
   imports: [
     BrowserModule,

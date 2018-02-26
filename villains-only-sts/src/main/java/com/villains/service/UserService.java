@@ -20,4 +20,5 @@ public interface UserService {
 	 * @return the user
 	 */
 	User findUserByEmail(String email);
+	boolean processResetRequest(User user);
 }

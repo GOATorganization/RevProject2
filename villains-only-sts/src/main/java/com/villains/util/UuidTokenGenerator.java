@@ -2,6 +2,9 @@ package com.villains.util;
 
 import java.util.UUID;
 
+import org.springframework.stereotype.Component;
+
+@Component("tokenGenerator")
 public class UuidTokenGenerator implements TokenGenerator {
 
 	@Override
