@@ -55,8 +55,7 @@ public class UserController {
 			// If there is a persisted user, set up the session.
 			session.setAttribute("email", persistedUser.getEmail());
 			session.setAttribute("id", persistedUser.getUserId());
-			session.setAttribute("loggedIn", true);
-			
+			session.setAttribute("loggedIn", true);	
 		
 			// TODO: Redirect to correct page on success
 			return new ResponseEntity<>(new Message("HERO SUCCESSFULLY LOGGED IN"), HttpStatus.OK);
@@ -65,25 +64,24 @@ public class UserController {
 			return new ResponseEntity<>(new Message("BAD CREDENTIALS"), HttpStatus.OK);
 	}
 	
-	@PostMapping("/passwordEmailRequest.app")
-	public @ResponseBody ResponseEntity<Message> passwordEmailRequest(HttpSession session, @RequestBody User user){
-		// Authenticate user and retrieve persisted user - necessary for retrieving id to store in session.
-		User persistedUser = userService.authenticateUser(user);
-		
-		if (persistedUser != null) {
-			// If there is a persisted user, set up a session to be checked on new password entry.
-			session.setAttribute("email", persistedUser.getEmail());
-			session.setAttribute("id", persistedUser.getUserId());
-			session.setAttribute("loggedIn", false);
-		
-			// Email the user
-			
-			return new ResponseEntity<>(new Message("HERO SUCCESSFULLY LOGGED IN"), HttpStatus.OK);
-		}
-		else
-			return new ResponseEntity<>(new Message("BAD CREDENTIALS"), HttpStatus.OK);
-	}
-	
+//	@PostMapping("/passwordEmailRequest.app")
+//	public @ResponseBody ResponseEntity<Message> requestPasswordReset(HttpSession session, @RequestBody User user) {
+//
+//		userService.processResetRequest(user);
+//		
+//		if (persistedUser != null) {
+//			// If there is a persisted user, set up a session to be checked on new password entry.
+//			session.setAttribute("email", persistedUser.getEmail());
+//			session.setAttribute("id", persistedUser.getUserId());
+//			session.setAttribute("loggedIn", false);
+//		
+//			// Email the user			
+//			return new ResponseEntity<>(new Message("HERO SUCCESSFULLY LOGGED IN"), HttpStatus.OK);
+//		}
+//		else
+//			return new ResponseEntity<>(new Message("BAD CREDENTIALS"), HttpStatus.OK);
+//	}
+//	
 	
 
 }

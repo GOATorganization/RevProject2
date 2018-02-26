@@ -12,6 +12,20 @@ import { Message } from '../model/message.model';
 export class UserService {
     constructor(private http: Http) { }
 
+    public requestPasswordReset(user: User) : Observable<Message> {
+        const body = JSON.stringify(user);
+        const headers = new Headers({'Content-Type' : 'application/json'});
+        const options: RequestOptions = new RequestOptions({headers: headers});
+
+        return this.http   
+            .post(`http://localhost:8090/VillainsOnly/requestPasswordReset.app`, body, options)
+            .map((response: Response) => {
+                return <Message>response.json();
+            })
+            .catch(this.handleError);
+
+    }
+
     public registerUser(user: User) : Observable<Message> {
         const body = JSON.stringify(user);
         const headers = new Headers({'Content-Type' : 'application/json'});

@@ -11,5 +11,6 @@ public interface UserService {
 	User authenticateUser(User user);
 	User findUserByEmail(User user);
 	void editUser(User user);
+	//void processResetRequest(User user);
 
 }

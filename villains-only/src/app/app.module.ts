@@ -13,11 +13,8 @@ import { UserviewComponent } from './userview/userview.component';
 import { UserService } from './services/user.service';
 import { RegisterComponent } from './register/register.component';
 import { HttpModule } from '@angular/http';
-<<<<<<< HEAD
-import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
-=======
 import { TestComponent } from './test/test.component';
->>>>>>> remotes/origin/dev
+import { ForgotloginComponent } from './forgotlogin/forgotlogin.component';
 
 
 @NgModule({
@@ -27,11 +24,8 @@ import { TestComponent } from './test/test.component';
     HomepageComponent,
     UserviewComponent,
     RegisterComponent,
-<<<<<<< HEAD
-    ForgotPasswordComponent
-=======
-    TestComponent
->>>>>>> remotes/origin/dev
+    TestComponent,
+    ForgotloginComponent
   ],
   imports: [
     BrowserModule,

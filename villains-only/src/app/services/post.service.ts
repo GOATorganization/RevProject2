@@ -64,6 +64,4 @@ export class PostService{
     private handleError(error: Response) {
         return Observable.throw(error.statusText);
     }
-
-
 }
