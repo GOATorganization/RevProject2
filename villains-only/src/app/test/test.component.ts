@@ -18,7 +18,7 @@ export class TestComponent implements OnInit {
 
   
 
-  private userGrabber :User; 
+  private userGrabber: User; 
   private userGetter = new User(1, '', '', 'Email@email.com', '', '' ,'', '');
 
   constructor(private userService: UserService, private postService :PostService) { }
