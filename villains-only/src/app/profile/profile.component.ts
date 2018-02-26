@@ -17,16 +17,11 @@ export class ProfileComponent implements OnInit {
     this.user = this.userService.getLoggedInUser();
   }
 
-  getUser(): void {
-    this.userService.getUser().subscribe(user => { this.user = user; console.log('From profile component: getUser(): ' + user) });
-  }
-
   editProfile(): void {
     this.isInEditMode = true;
   }
 
   submitProfileChanges(): void {
-    console.log(this.user);
     this.userService.editProfile(this.user).subscribe(message => console.log(message));
     this.isInEditMode = false;
   }
