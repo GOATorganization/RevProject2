@@ -15,30 +15,45 @@ const httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
 };
 
+const headers = new Headers({ 'Content-Type': 'application/json' });
+const options: RequestOptions = new RequestOptions({ headers: headers });
+
 @Injectable()
 export class UserService {
-    constructor(private http: HttpClient) { }
+
+
+    constructor(private http: Http) { }
+
 
     public registerUser(user: User): Observable<Message> {
+        const body = JSON.stringify(user);
+
         return this.http
-            .post<Message>(`http://localhost:8090/VillainsOnly/registerUser.app`, user, httpOptions)
-            .pipe(
-                catchError(this.myHandleError('registerUser', new Message('Error registering user')))
-            );
+            .post(`http://localhost:8090/VillainsOnly/registerUser.app`, body, options)
+            .map((response: Response) => {
+                return <Message>response.json();
+            })
+            .catch(this.handleError);
     }
 
     public loginUser(user: User): Observable<Message> {
+        const body = JSON.stringify(user);
+
         return this.http
-            .post<Message>(`http://localhost:8090/VillainsOnly/loginUser.app`, user, httpOptions)
-            .pipe(
-                catchError(this.myHandleError('loginUser', new Message('Error logging in')))
-            );
+            .post(`http://localhost:8090/VillainsOnly/loginUser.app`, body, options)
+            .map((response: Response) => {
+                return <Message>response.json();
+            })
+            .catch(this.handleError);
     }
 
     public getAllUser(): Observable<User[]> {
         return this.http
-            .get<User[]>(`http://localhost:8090/VillainsOnly/getAllUser.app`)
-            .catch(this.handleError);
+        .get(`http://localhost:8090/VillainsOnly/getAllUser.app`)
+        .map((response: Response) => {
+            return <User[]>response.json();
+        })
+        .catch(this.handleError);
     }
 
     public getHeroByEmail(user: User): Observable<User> {
@@ -47,8 +62,11 @@ export class UserService {
         const options: RequestOptions = new RequestOptions({ headers: headers });
 
         return this.http
-            .post<User>(`http://localhost:8090/VillainsOnly/getUserByEmail.app`, body, httpOptions)
-            .catch(this.handleError);
+        .post(`http://localhost:8090/VillainsOnly/getUserByEmail.app`, body, options)
+        .map((response: Response) => {
+            return <User>response.json();
+        })
+        .catch(this.handleError);
 
     }
 
@@ -56,12 +74,15 @@ export class UserService {
         // update user cookie
         this.updateUserCookie(user);
 
+        const body = JSON.stringify(user);
+
         // update user data in repository
         return this.http
-            .post<Message>(`http://localhost:8090/VillainsOnly/updateUserProfile.app`, user, httpOptions)
-            .pipe(
-                catchError(this.myHandleError('editProfile', new Message('Error editing profile')))
-            );
+        .post(`http://localhost:8090/VillainsOnly/updateUserProfile.app`, body, options)
+        .map((response: Response) => {
+            return <Message>response.json();
+        })
+        .catch(this.handleError);
     }
 
     updateUserCookie(user: User) {
@@ -72,20 +93,6 @@ export class UserService {
         let cookieName = "user";
         let cookieValue = document.cookie.replace(/(?:(?:^|.*;\s*)user\s*\=\s*([^;]*).*$)|^.*$/, "$1")
         return <User>JSON.parse(cookieValue);
-    }
-
-    private myHandleError<T>(operation = 'operation', result?: T) {
-        return (error: any): Observable<T> => {
-
-            // TODO: send the error to remote logging infrastructure
-            console.error(error); // log to console instead
-
-            // TODO: better job of transforming error for user consumption
-            console.log(`${operation} failed: ${error.message}`);
-
-            // Let the app keep running by returning an empty result.
-            return of(result as T);
-        };
     }
 
     private handleError(error: Response) {

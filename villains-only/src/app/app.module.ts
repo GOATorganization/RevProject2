@@ -33,7 +33,6 @@ import { HttpClientModule } from '@angular/common/http';
     AppRoutingModule,
     HttpModule,
     FormsModule,
-    HttpClientModule
   ],
   providers: [UserService, PostService, PictureService],
   bootstrap: [AppComponent]
