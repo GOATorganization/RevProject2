@@ -56,13 +56,14 @@ public class User {
 	private String profilePic;
 
 	@JsonIgnore
-	@OneToMany(mappedBy = "postId" ,fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "postId" ,fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	private List<Post> posts;
 
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name="password_reset_id", nullable = true)
 	private PasswordResetToken pwResetToken;
 
+	@JsonIgnore
 	@ManyToMany(cascade = CascadeType.ALL)
 	@JoinTable(name="likes", 
 	    joinColumns=@JoinColumn(name="user_id"), 
