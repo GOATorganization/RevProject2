@@ -37,7 +37,7 @@ export class PostviewComponent implements OnInit {
             picture => {
               tempPic = picture;
               postsIn[i].contentsPic = tempPic;
-              // console.log(postsIn[i]);
+              //  console.log(picture);
               if (postsIn[i].contentsPic.length != 0) {
                 postsIn[i].showHide = true;
               }

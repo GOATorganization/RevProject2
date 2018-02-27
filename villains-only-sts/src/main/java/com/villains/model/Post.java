@@ -15,6 +15,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name="post")
 public class Post {
@@ -24,17 +26,19 @@ public class Post {
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int postId;
 	
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name="user_id",nullable = false)
 	private User userId;
 	
 	@Column(name="contents_txt")
 	private String contentsText;
 		
+	
 	@Column(name="contents_pics")
 	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	private List<Picture> contentsPic;
 	
+	@JsonIgnore
 	@ManyToMany(mappedBy="likes") 
 	private List<User> likers;
 	
