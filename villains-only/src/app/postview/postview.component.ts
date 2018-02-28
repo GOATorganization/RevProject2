@@ -61,7 +61,7 @@ export class PostviewComponent implements OnInit {
     let tempPicture: Picture = new Picture(undefined, undefined, undefined);
     var post = new Post(undefined, this.userPost, undefined, this.currentUser);
     if (this.rawUrlString != undefined) {
-      let rawUrl = this.rawUrlString.split(",");
+      let rawUrl = this.rawUrlString.split(" ");
       for (let k = 0; k < rawUrl.length; k++) {
         tempPicture = new Picture(undefined, undefined, rawUrl[k]);
         this.imageUrl[k] = tempPicture;
@@ -75,6 +75,7 @@ export class PostviewComponent implements OnInit {
       error => this.message.text = 'Failed to post');
 
     (<HTMLInputElement>document.getElementById('postSubmit')).value = '';
+    (<HTMLInputElement>document.getElementById('imgInput')).value = '';
     this.getAllPost();
   }
 

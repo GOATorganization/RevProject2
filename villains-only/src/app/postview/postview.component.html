@@ -19,8 +19,9 @@
                             <textarea class="form-control" [(ngModel)]="userPost" (keyup)="getCharLeft()" placeholder="Enter Post text" class="form-control" id="postSubmit" rows="5"></textarea>
                         </div>
                         <div class="form-group">
-                            <input [(ngModel)]="rawUrlString" placeholder="Enter image URLs"/>
-                            <button class="btn btn-center btn-primary" (click)="submitPost()">Submit Post</button>
+                            <input id="imgInput" [(ngModel)]="rawUrlString" placeholder="Enter image URLs"/>
+                            <button *ngIf="charLeft >= 0" class="btn btn-center btn-primary" (click)="submitPost()">Submit Post</button>
+                            <button *ngIf="charLeft < 0" class="btn btn-outline-light">Can't Submit</button>
                             <h6 id = "charLeft" >{{charLeft}}</h6>
                         </div>
                     </div>
