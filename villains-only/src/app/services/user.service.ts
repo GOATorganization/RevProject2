@@ -23,7 +23,6 @@ export class UserService {
 
     constructor(private http: Http) { }
 
-
     public registerUser(user: User): Observable<Message> {
         const body = JSON.stringify(user);
         const headers = new Headers({ 'Content-Type': 'application/json' });
