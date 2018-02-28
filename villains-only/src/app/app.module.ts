@@ -17,6 +17,7 @@ import { HttpModule } from '@angular/http';
 import { TestComponent } from './test/test.component';
 import { ProfileComponent } from './profile/profile.component';
 import { HttpClientModule } from '@angular/common/http';
+import { AwsS3Service } from './services/aws-s3.service';
 
 
 @NgModule({
@@ -36,7 +37,7 @@ import { HttpClientModule } from '@angular/common/http';
     HttpModule,
     FormsModule,
   ],
-  providers: [UserService, PostService, PictureService],
+  providers: [UserService, PostService, PictureService, AwsS3Service],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
