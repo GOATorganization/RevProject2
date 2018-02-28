@@ -41,7 +41,6 @@ export class UserService {
         const body = JSON.stringify(user);
         const headers = new Headers({ 'Content-Type': 'application/json' });
         const options: RequestOptions = new RequestOptions({ headers: headers });
-
         return this.http   
             .post(`http://localhost:8090/VillainsOnly/requestPasswordReset.app`, body, options)
             .map((response: Response) => {
@@ -72,19 +71,18 @@ export class UserService {
             .catch(this.handleError);
     }
 
-    public getHeroByEmail(user: User): Observable<User> {
-        const body = JSON.stringify(user);
-        const headers = new Headers({ 'Content-Type': 'application/json' });
-        const options: RequestOptions = new RequestOptions({ headers: headers });
+    // public getHeroByEmail(user: User): Observable<User> {
+    //     const body = JSON.stringify(user);
+    //     const headers = new Headers({ 'Content-Type': 'application/json' });
+    //     const options: RequestOptions = new RequestOptions({ headers: headers });
 
-        return this.http
-            .post(`http://localhost:8090/VillainsOnly/getUserByEmail.app`, body, options)
-            .map((response: Response) => {
-                return <User>response.json();
-            })
-            .catch(this.handleError);
-
-    }
+    //     return this.http
+    //         .post(`http://localhost:8090/VillainsOnly/getUserByEmail.app`, body, options)
+    //         .map((response: Response) => {
+    //             return <User>response.json();
+    //         })
+    //         .catch(this.handleError);
+    // }
 
     editProfile(user: User): Observable<Message> {
         // update user cookie
