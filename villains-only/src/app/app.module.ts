@@ -1,3 +1,4 @@
+import { DataService } from './services/data.service';
 import { PostviewComponent } from './postview/postview.component';
 import { PictureService } from './services/picture.service';
 import { PostService } from './services/post.service';
@@ -38,7 +39,7 @@ import { ForgotloginComponent } from './forgotlogin/forgotlogin.component';
     HttpModule,
     FormsModule,
   ],
-  providers: [UserService, PostService, PictureService],
+  providers: [UserService, PostService, PictureService, DataService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

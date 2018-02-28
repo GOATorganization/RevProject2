@@ -49,6 +49,7 @@ export class PictureService{
 
     public addPicture( picture : Picture) : Observable<Message>{
         const body = JSON.stringify(picture);
+        console.log(body);
         const headers = new Headers({'Content-Type' : 'application/json'});
         const options: RequestOptions = new RequestOptions({headers:headers});
 
