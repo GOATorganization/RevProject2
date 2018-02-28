@@ -1,5 +1,6 @@
 package com.villains.model;
 
+import java.io.Serializable;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -27,7 +28,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name="villain_user")
-public class User {
+public class User implements Serializable {
 	
 	@Id
 	@Column(name="user_id")
@@ -55,8 +56,7 @@ public class User {
 	@Column
 	private String profilePic;
 
-	@JsonIgnore
-	@OneToMany(mappedBy = "postId" ,fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "postId" ,fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	private List<Post> posts;
 
 	@OneToOne(cascade = CascadeType.ALL)

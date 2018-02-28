@@ -44,7 +44,7 @@ public class UserController {
 	// Add in httpsession at a later date
 	@PostMapping("/getUserByEmail.app")
 	public @ResponseBody ResponseEntity<User> findUserByEmail(@RequestBody User user){
-		return new ResponseEntity(userService.findUserByEmail(user), HttpStatus.OK);
+		return new ResponseEntity<User>(userService.findUserByEmail(user), HttpStatus.OK);
 	}
 	
 	@PostMapping("/loginUser.app")

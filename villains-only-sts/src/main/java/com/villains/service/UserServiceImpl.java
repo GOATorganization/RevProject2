@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.villains.model.PasswordResetToken;
 import com.villains.model.User;
 import com.villains.repository.UserRepository;
 import com.villains.util.Mailer;
@@ -99,8 +100,12 @@ public class UserServiceImpl implements UserService {
 		
 		if (userToCheck != null) {
 			String resetToken = tokenGenerator.generateToken(3);
+			PasswordResetToken prt = new PasswordResetToken(resetToken, userToCheck);
+			userToCheck.setPwResetToken(prt);
 			
-			mailer.SendMail("gesner.ian@gmail.com", "This is your email with a password reset token of: " + resetToken);
+			userRepository.update(userToCheck);
+			
+			//mailer.SendMail("gesner.ian@gmail.com", "This is your email with a password reset token of: " + resetToken);
 			
 			return true;
 		}

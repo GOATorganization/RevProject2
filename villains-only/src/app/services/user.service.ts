@@ -39,6 +39,8 @@ export class UserService {
 
     public requestPasswordReset(user: User) : Observable<Message> {
         const body = JSON.stringify(user);
+        const headers = new Headers({ 'Content-Type': 'application/json' });
+        const options: RequestOptions = new RequestOptions({ headers: headers });
 
         return this.http   
             .post(`http://localhost:8090/VillainsOnly/requestPasswordReset.app`, body, options)
