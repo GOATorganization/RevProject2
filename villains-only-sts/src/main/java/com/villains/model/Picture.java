@@ -20,9 +20,9 @@ public class Picture {
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int pictureId;
 	
-	
-	@JoinColumn(name="post_id")
+
 	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name="post_id")
 	private Post post;
 	
 	@Column(name="picture_url", nullable = false)
