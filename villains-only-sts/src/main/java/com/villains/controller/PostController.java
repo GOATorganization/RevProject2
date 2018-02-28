@@ -39,9 +39,9 @@ public class PostController {
 	}
 	
 	@PostMapping("/createPost.app")
-	public @ResponseBody ResponseEntity<Message> createPost(@RequestBody Post post){
+	public @ResponseBody ResponseEntity<Post> createPost(@RequestBody Post post){
 		postService.createPost(post);
-		return new ResponseEntity<>(new Message("Post Created Sucessfully!"), HttpStatus.OK);
+		return new ResponseEntity<Post>( post, HttpStatus.OK);
 	}
 	
 	
@@ -50,5 +50,6 @@ public class PostController {
 		postService.editPost(post);
 		return new ResponseEntity<>(new Message("Post Edited Sucessfully!"), HttpStatus.OK);
 	}
+	
 
 }

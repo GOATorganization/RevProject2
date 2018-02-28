@@ -12,7 +12,7 @@ import "rxjs/Rx";
 export class PostService {
     constructor(private http: Http) { }
 
-    public createPost(post: Post): Observable<Message> {
+    public createPost(post : Post) : Observable<Post>{
         const body = JSON.stringify(post);
         const headers = new Headers({ 'Content-Type': 'application/json' });
         const options: RequestOptions = new RequestOptions({ headers: headers });
@@ -20,7 +20,7 @@ export class PostService {
         return this.http
             .post(`http://localhost:8090/VillainsOnly/createPost.app`, body, options)
             .map((response: Response) => {
-                return <Message>response.json();
+                return <Post> response.json();
             })
             .catch(this.handleError);
     }
