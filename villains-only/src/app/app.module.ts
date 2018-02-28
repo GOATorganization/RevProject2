@@ -19,6 +19,8 @@ import { TestComponent } from './test/test.component';
 import { ProfileComponent } from './profile/profile.component';
 import { HttpClientModule } from '@angular/common/http';
 import { ForgotloginComponent } from './forgotlogin/forgotlogin.component';
+import { DataService } from './services/data.service';
+import { LikepostService } from './services/likepost.service';
 
 
 @NgModule({
@@ -39,7 +41,7 @@ import { ForgotloginComponent } from './forgotlogin/forgotlogin.component';
     HttpModule,
     FormsModule,
   ],
-  providers: [UserService, PostService, PictureService, DataService],
+  providers: [UserService, PostService, PictureService, DataService, LikepostService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
