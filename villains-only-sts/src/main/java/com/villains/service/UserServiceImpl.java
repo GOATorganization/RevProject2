@@ -7,8 +7,11 @@ import org.springframework.stereotype.Service;
 
 import com.villains.model.User;
 import com.villains.repository.UserRepository;
+import com.villains.util.Mailer;
+import com.villains.util.TokenGenerator;
 import com.villains.util.UserValidator;
 import com.villains.util.UserValidatorImpl;
+import com.villains.util.UuidTokenGenerator;
 
 @Service("userService")
 public class UserServiceImpl implements UserService {
@@ -17,6 +20,10 @@ public class UserServiceImpl implements UserService {
 	private UserRepository userRepository;
 	@Autowired
 	private UserValidator userValidator;
+	@Autowired
+	private Mailer mailer;
+	@Autowired
+	private TokenGenerator tokenGenerator;
 
 	public UserServiceImpl() {
 		super();
@@ -58,6 +65,14 @@ public class UserServiceImpl implements UserService {
 	public User findUserByEmail(User user) {
 		return userRepository.findByEmail(user.getEmail());
 	}
+	
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public User findUserByEmail(String email) {
+		return userRepository.findByEmail(email);
+	}
 
 	@Override
 	public void editUser(User user) {
@@ -76,6 +91,22 @@ public class UserServiceImpl implements UserService {
 		}
 		
 		return null;
+	}
+	
+	@Override
+	public boolean processResetRequest(User user) {
+		User userToCheck = userRepository.findByEmail(user.getEmail());
+		
+		if (userToCheck != null) {
+			String resetToken = tokenGenerator.generateToken(3);
+			
+			mailer.SendMail("gesner.ian@gmail.com", "This is your email with a password reset token of: " + resetToken);
+			
+			return true;
+		}
+		else
+			return false;
+		
 	}
 
 }

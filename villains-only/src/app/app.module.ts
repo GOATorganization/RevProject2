@@ -1,3 +1,4 @@
+import { PostviewComponent } from './postview/postview.component';
 import { PictureService } from './services/picture.service';
 import { PostService } from './services/post.service';
 import { BrowserModule } from '@angular/platform-browser';
@@ -14,6 +15,9 @@ import { UserService } from './services/user.service';
 import { RegisterComponent } from './register/register.component';
 import { HttpModule } from '@angular/http';
 import { TestComponent } from './test/test.component';
+import { ProfileComponent } from './profile/profile.component';
+import { HttpClientModule } from '@angular/common/http';
+import { ForgotloginComponent } from './forgotlogin/forgotlogin.component';
 
 
 @NgModule({
@@ -23,13 +27,16 @@ import { TestComponent } from './test/test.component';
     HomepageComponent,
     UserviewComponent,
     RegisterComponent,
-    TestComponent
+    TestComponent,
+    ProfileComponent,
+    PostviewComponent,
+    ForgotloginComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpModule,
-    FormsModule
+    FormsModule,
   ],
   providers: [UserService, PostService, PictureService, DataService],
   bootstrap: [AppComponent]

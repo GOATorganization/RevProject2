@@ -1,0 +1,60 @@
+.overDiv{
+   background: #e7dfdd;
+}
+
+.userInfo{
+    position: sticky;
+    top:0;
+}
+
+.profileImage{
+    width: 100%;
+    margin-top: 45px;
+}
+
+.postImg{
+    width: 75%;
+}
+
+.cardpad{
+    margin-bottom: 15px;
+    background-color: rgba(71, 23, 246, 0.11);
+    color: #e7dfdd;
+}
+
+.cardtextpad{
+    padding: 10px;
+    margin-right: 5px;
+}
+
+.cardContent{
+    margin-left: 20px;
+}
+
+.cardtextpad{
+    margin-bottom: 10px;
+    
+}
+
+.cardTitle{
+    margin-bottom: 15px;
+}
+
+#postColumn{
+    padding: 10px;
+    padding-top: 60px;
+}
+
+.thumbs{
+    fill: white;
+    margin-right: 5px;
+    margin-bottom: 5px;
+}
+
+.thumbsup{
+    color: #e7dfdd;
+    margin-bottom: 25px;
+    float: right;
+    margin-right: 30px;
+    background-color: #A239ca;
+}

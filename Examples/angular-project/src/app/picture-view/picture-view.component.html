@@ -1,0 +1,43 @@
+<div class=" bg">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-3 col-md-3 col-sm-3 col-xl-3 userColumn">
+        <div class="userInfo">
+          <img class="profileImage" src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/96/Generic-person.svg/600px-Generic-person.svg.png">
+          <br>
+          <br>
+          <h5>Wilfred "The Kid" Childs</h5>
+          <h6>yungwilfred@email.com</h6>
+          <div class="form-group">
+            <input [(ngModel)]="albumId" placeholder="Album Id" class="form-control" />
+          </div>
+          <div class="form-group">
+            <button class="btn purpleButton btn-center" (click)="getAlbum()">GET</button>
+          </div>
+          <img src="">
+        </div>
+
+      </div>
+      <div class="col-lg-8 col-md-8 col-sm-8 col-xl-8" id="postColumn">
+        <div *ngFor="let album of albums" class="card card-outline-info cardpad">
+          <div class="card-block cardtextpad">
+            <div class="card-text cardtextpad imageContent">
+              <img src="{{album.url}}" class="cardImg">
+            </div>
+            <h5 class="card-subtitle cardSubtitle cardContent">
+              {{album.title}}
+
+            </h5>
+
+          </div>
+          <div class="card-block">
+            <a class="btn thumbsup" href="#">
+              <img class="thumbs" src="assets/icons/thumbsup.svg" alt="Thumbsup"> Like
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+  </div>
