@@ -20,6 +20,10 @@
                     <a class="nav-link disabled" href="#!">Disabled</a>
                 </li>
             </ul>
+            <span class="form-ele form-inline my-2 my-lg-0">
+              <input class="form-control mr-sm-2" type="search" [(ngModel)]="user.email" placeholder="Search"  aria-label="Search">
+              <button class="btn btn-outline-success my-2 my-sm-0" type="submit" (click)="getHero()">Search</button>
+            </span>
 
         </div>
     </nav>

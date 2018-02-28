@@ -31,7 +31,7 @@ import { TestComponent } from './test/test.component';
     HttpModule,
     FormsModule
   ],
-  providers: [UserService, PostService, PictureService],
+  providers: [UserService, PostService, PictureService, DataService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

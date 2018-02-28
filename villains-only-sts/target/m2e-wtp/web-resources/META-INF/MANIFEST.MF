@@ -1,5 +1,8 @@
 Manifest-Version: 1.0
+<<<<<<< Updated upstream
 <<<<<<< HEAD
+=======
+>>>>>>> Stashed changes
 Built-By: Chaos
 Build-Jdk: 1.8.0_161
 =======

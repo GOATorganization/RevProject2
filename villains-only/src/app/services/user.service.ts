@@ -12,12 +12,12 @@ import { Message } from '../model/message.model';
 export class UserService {
     constructor(private http: Http) { }
 
-    public registerUser(user: User) : Observable<Message> {
+    public registerUser(user: User): Observable<Message> {
         const body = JSON.stringify(user);
-        const headers = new Headers({'Content-Type' : 'application/json'});
-        const options: RequestOptions = new RequestOptions({headers: headers});
+        const headers = new Headers({ 'Content-Type': 'application/json' });
+        const options: RequestOptions = new RequestOptions({ headers: headers });
 
-        return this.http   
+        return this.http
             .post(`http://localhost:8090/VillainsOnly/registerUser.app`, body, options)
             .map((response: Response) => {
                 return <Message>response.json();
@@ -26,14 +26,14 @@ export class UserService {
 
     }
 
-    public loginUser(user: User) : Observable<Message> {
+    public loginUser(user: User): Observable<Message> {
         const body = JSON.stringify(user);
-        const headers = new Headers({'Content-Type' : 'application/json'});
-        const options: RequestOptions = new RequestOptions({headers: headers});
+        const headers = new Headers({ 'Content-Type': 'application/json' });
+        const options: RequestOptions = new RequestOptions({ headers: headers });
 
         console.log(body);
 
-        return this.http   
+        return this.http
             .post(`http://localhost:8090/VillainsOnly/loginUser.app`, body, options)
             .map((response: Response) => {
                 return <Message>response.json();
@@ -42,7 +42,7 @@ export class UserService {
 
     }
 
-    public getAllUser() : Observable<User[]> {
+    public getAllUser(): Observable<User[]> {
         return this.http
             .get(`http://localhost:8090/VillainsOnly/getAllUser.app`)
             .map((response: Response) => {
@@ -50,11 +50,11 @@ export class UserService {
             })
             .catch(this.handleError);
     }
-    
-    public getHeroByEmail(user: User) : Observable<User> {
+
+    public getHeroByEmail(user: User): Observable<User> {
         const body = JSON.stringify(user);
-        const headers = new Headers({'Content-Type' : 'application/json'});
-        const options: RequestOptions = new RequestOptions({headers: headers});
+        const headers = new Headers({ 'Content-Type': 'application/json' });
+        const options: RequestOptions = new RequestOptions({ headers: headers });
 
         return this.http
             .post(`http://localhost:8090/VillainsOnly/getUserByEmail.app`, body, options)
