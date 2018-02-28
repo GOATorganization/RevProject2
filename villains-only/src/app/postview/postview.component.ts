@@ -15,10 +15,12 @@ import { Component, OnInit } from '@angular/core';
 export class PostviewComponent implements OnInit {
 
   public message: Message = new Message('');
+  private profilePicture: string;
   private posts: Post[];
-  private testUser2 = new User(1, '', '', 'Email@email.com', '', '', '', '');
+  // private currentUser : User;
 
   private userPost: string;
+  private currentUser: User;
 
 
   constructor(private postService: PostService, private userService: UserService
@@ -27,7 +29,7 @@ export class PostviewComponent implements OnInit {
   getAllPost(): void {
     this.postService.getAllPost().subscribe(
       postsIn => {
-        console.log(postsIn);
+        // console.log(postsIn);
         for (let i = 0; i < postsIn.length; i++) {
           postsIn[i].contentsPic = [];
           let tempPic: Picture[];
@@ -35,7 +37,7 @@ export class PostviewComponent implements OnInit {
             picture => {
               tempPic = picture;
               postsIn[i].contentsPic = tempPic;
-              console.log(postsIn[i]);
+              //  console.log(picture);
               if (postsIn[i].contentsPic.length != 0) {
                 postsIn[i].showHide = true;
               }
@@ -49,23 +51,22 @@ export class PostviewComponent implements OnInit {
 
   submitPost(): void {
     console.log(this.userPost);
-    this.userService.getUserByEmail(this.testUser2).subscribe(
-      user => {
-        var post = new Post(undefined, this.userPost, undefined, user);
+    // console.log(this.currentUser);
 
-        this.postService.createPost(post).subscribe(
-          message => this.message = message,
-          error => this.message.text = 'Failed to post');
+    var post = new Post(undefined, this.userPost, undefined, this.currentUser);
+    console.log(post);
+    this.postService.createPost(post).subscribe(
+      message => this.message = message,
+      error => this.message.text = 'Failed to post');
 
-      },
-      error => this.message.text = 'Something went wrong'
-    );
     (<HTMLInputElement>document.getElementById('postSubmit')).value = '';
     this.getAllPost();
   }
 
   ngOnInit() {
     this.getAllPost();
+
+    this.currentUser = this.userService.getLoggedInUser();
   }
 
 }

@@ -15,8 +15,7 @@ const httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
 };
 
-const headers = new Headers({ 'Content-Type': 'application/json' });
-const options: RequestOptions = new RequestOptions({ headers: headers });
+
 
 @Injectable()
 export class UserService {
@@ -27,6 +26,8 @@ export class UserService {
 
     public registerUser(user: User): Observable<Message> {
         const body = JSON.stringify(user);
+        const headers = new Headers({ 'Content-Type': 'application/json' });
+        const options: RequestOptions = new RequestOptions({ headers: headers });
 
         return this.http
             .post(`http://localhost:8090/VillainsOnly/registerUser.app`, body, options)
@@ -36,8 +37,22 @@ export class UserService {
             .catch(this.handleError);
     }
 
+    public requestPasswordReset(user: User) : Observable<Message> {
+        const body = JSON.stringify(user);
+        const headers = new Headers({ 'Content-Type': 'application/json' });
+        const options: RequestOptions = new RequestOptions({ headers: headers });
+        return this.http   
+            .post(`http://localhost:8090/VillainsOnly/requestPasswordReset.app`, body, options)
+            .map((response: Response) => {
+                return <Message>response.json();
+            })
+            .catch(this.handleError);
+    }
+
     public loginUser(user: User): Observable<Message> {
         const body = JSON.stringify(user);
+        const headers = new Headers({ 'Content-Type': 'application/json' });
+    const options: RequestOptions = new RequestOptions({ headers: headers });
 
         return this.http
             .post(`http://localhost:8090/VillainsOnly/loginUser.app`, body, options)
@@ -56,23 +71,24 @@ export class UserService {
             .catch(this.handleError);
     }
 
-    public getHeroByEmail(user: User): Observable<User> {
-        const body = JSON.stringify(user);
-        const headers = new Headers({ 'Content-Type': 'application/json' });
-        const options: RequestOptions = new RequestOptions({ headers: headers });
+    // public getHeroByEmail(user: User): Observable<User> {
+    //     const body = JSON.stringify(user);
+    //     const headers = new Headers({ 'Content-Type': 'application/json' });
+    //     const options: RequestOptions = new RequestOptions({ headers: headers });
 
-        return this.http
-            .post(`http://localhost:8090/VillainsOnly/getUserByEmail.app`, body, options)
-            .map((response: Response) => {
-                return <User>response.json();
-            })
-            .catch(this.handleError);
-
-    }
+    //     return this.http
+    //         .post(`http://localhost:8090/VillainsOnly/getUserByEmail.app`, body, options)
+    //         .map((response: Response) => {
+    //             return <User>response.json();
+    //         })
+    //         .catch(this.handleError);
+    // }
 
     editProfile(user: User): Observable<Message> {
         // update user cookie
         this.updateUserCookie(user);
+        const headers = new Headers({ 'Content-Type': 'application/json' });
+        const options: RequestOptions = new RequestOptions({ headers: headers });
 
         const body = JSON.stringify(user);
 
@@ -88,10 +104,12 @@ export class UserService {
 
     public getUserByEmail(user: User): Observable<User> {
         const body = JSON.stringify(user);
+        const headers = new Headers({ 'Content-Type': 'application/json' });
+        const options: RequestOptions = new RequestOptions({ headers: headers });
 
         // update user data in repository
         return this.http
-            .post(`http://localhost:8090/VillainsOnly/updateUserProfile.app`, body, options)
+            .post(`http://localhost:8090/VillainsOnly/getUserByEmail.app`, body, options)
             .map((response: Response) => {
                 return <Message>response.json();
             })

@@ -34,8 +34,8 @@ export class HomepageComponent implements OnInit {
         let msg = message.text.toLowerCase();
         
         if (msg.includes('success')) {
-          console.log(message.text);
-          this.userService.getHeroByEmail(this.user).subscribe(user => {
+          // console.log(message.text);
+          this.userService.getUserByEmail(this.user).subscribe(user => {
             this.user = user;
             this.userService.updateUserCookie(user);
             this.router.navigate(['/userhome']);
