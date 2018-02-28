@@ -3,12 +3,12 @@
 
   <form>
     <div class="form-group">
-      <img src='{{user.profilePic}}' alt="No profile picture." />
+      <img #profilePic id='profilePic' src='{{user.profilePic}}' alt="No profile picture." />
     </div>
 
     <div *ngIf='isInEditMode' class="form-group">
       <label for='profilePicInput'>New profile pic:</label>
-      <input #profilePic id='profilePicInput' type="file" class="form-control-file">
+      <input #profilePicInput id='profilePicInput' type="file" class="form-control-file" (change)='changePic(profilePicInput, profilePic)'>
     </div>
 
     <div class="form-group">

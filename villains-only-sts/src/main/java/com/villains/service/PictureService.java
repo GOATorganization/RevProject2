@@ -46,5 +46,11 @@ public interface PictureService {
 	 * @param picture the piture in question to remove
 	 */
 	void removePicture(Picture picture);
-
+	
+	/**
+	 * Gets picture by url
+	 * @param url the url to search for
+	 * @return the picture
+	 */
+	Picture getPictureByUrl(String url);
 }

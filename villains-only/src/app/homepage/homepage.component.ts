@@ -45,6 +45,6 @@ export class HomepageComponent implements OnInit {
           console.log(message.text);
         }
   },
-  error => this.message.text = 'Something went wrong.');
+  error => {this.message.text = 'Something went wrong logging in.'; console.log(this.message.text)});
   }
 }

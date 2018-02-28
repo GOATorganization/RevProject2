@@ -59,4 +59,9 @@ public class PictureController {
 		return new ResponseEntity<>(new Message("Picture Successfully Deleted!"), HttpStatus.OK);
 	}
 	
+	@PostMapping("getPictureByUrl")
+	public @ResponseBody ResponseEntity<Picture> getPictureByUrl(@RequestBody String url) {
+		return new ResponseEntity<>(pictureService.getPictureByUrl(url), HttpStatus.OK);
+	}
+	
 }

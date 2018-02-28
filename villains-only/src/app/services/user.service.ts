@@ -10,10 +10,7 @@ import { Message } from '../model/message.model';
 
 import { of } from "rxjs/observable/of";
 import { tap, catchError } from "rxjs/operators";
-
-const httpOptions = {
-    headers: new HttpHeaders({ 'Content-Type': 'application/json' })
-};
+import { AwsS3Service } from "./aws-s3.service";
 
 const headers = new Headers({ 'Content-Type': 'application/json' });
 const options: RequestOptions = new RequestOptions({ headers: headers });
@@ -58,8 +55,6 @@ export class UserService {
 
     public getHeroByEmail(user: User): Observable<User> {
         const body = JSON.stringify(user);
-        const headers = new Headers({ 'Content-Type': 'application/json' });
-        const options: RequestOptions = new RequestOptions({ headers: headers });
 
         return this.http
             .post(`http://localhost:8090/VillainsOnly/getUserByEmail.app`, body, options)
@@ -91,18 +86,18 @@ export class UserService {
 
         // update user data in repository
         return this.http
-            .post(`http://localhost:8090/VillainsOnly/updateUserProfile.app`, body, options)
+            .post(`http://localhost:8090/VillainsOnly/getUserByEmail.app`, body, options)
             .map((response: Response) => {
                 return <Message>response.json();
             })
             .catch(this.handleError);
     }
 
-    updateUserCookie(user: User): void {
+    public updateUserCookie(user: User): void {
         document.cookie = `user=${JSON.stringify(user)}`;
     }
 
-    getLoggedInUser(): User {
+    public getLoggedInUser(): User {
         let cookieName = "user";
         let cookieValue = document.cookie.replace(/(?:(?:^|.*;\s*)user\s*\=\s*([^;]*).*$)|^.*$/, "$1")
         return <User>JSON.parse(cookieValue);
