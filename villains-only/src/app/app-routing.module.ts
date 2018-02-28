@@ -10,7 +10,7 @@ import { ForgotloginComponent } from './forgotlogin/forgotlogin.component';
 const routes: Routes = [
   { path: '', redirectTo: '/homepage', pathMatch: 'full' },
   {path: 'homepage', component: HomepageComponent},
-  { path: 'userhome', component: PostviewComponent },
+  { path: 'userhome', component: UserviewComponent },
   { path: 'userprofile', component: ProfileComponent },
   { path: 'postview', component: PostviewComponent },
   { path: 'forgotlogin', component: ForgotloginComponent }
