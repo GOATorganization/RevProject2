@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { UserService } from '../services/user.service';
 import { User } from '../model/user.model';
 import { Message } from '../model/message.model';
+import { Response } from '@angular/http';
+import { Router, RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-forgotlogin',
@@ -10,7 +12,8 @@ import { Message } from '../model/message.model';
 })
 export class ForgotloginComponent implements OnInit {
 
-  constructor(private userService: UserService) { }
+  constructor(private userService: UserService,
+            private router: Router) { }
 
   public user: User = new User(0,'','','','','','','');
 
@@ -18,7 +21,7 @@ export class ForgotloginComponent implements OnInit {
 
   requestPasswordReset(): void {
     this.userService.requestPasswordReset(this.user).subscribe(
-      message => this.message = message,
+      response => response.status == 200 ? this.router.navigate(['homepage']) : this.router.navigate(['homepage']),
       error => this.message.text = 'Something went wrong.');
   }
 
