@@ -1,12 +1,44 @@
-<div class = "container">
-    <div class = "row">
-      <div class = "col-sm">
-        <img src = {{profileimage}}>
+<div class="over-div">
+  <div class="container">
+      <div class="row">
+          <div class="col-lg-3 col-md-3 col-sm-3 col-xl-3 userColumn">
+              <div class="userInfo">
+                  <img class="profileImage" src="{{user.profilePic}}">
+                  <br>
+                  <br>
+                  <h5>{{user.firstName}} {{user.lastName}}</h5>
+                  <h6>{{user.email}}</h6>
+              </div>
+
+
+
+          </div>
+          <div class="col-lg-8 col-md-8 col-sm-8 col-xl-8" id="postColumn">
+              <div *ngFor="let post of posts" class="card card-outline-info cardpad">
+                  <div class="card-block cardtextpad">
+                      <h4 class="card-title cardTitle">
+                          {{post.userId.firstName}} {{post.userId.lastName}}
+                      </h4>
+                      <div *ngIf="post.showHide">
+                          <div *ngFor="let picture of post.contentsPic" class="text-center">
+                              <img class="postImg" src="{{picture.pictureUrl}}">
+
+                          </div>
+
+                      </div>
+                      <p class="card-text cardtextpad cardContent">
+                          {{post.contentsText}}
+                      </p>
+                  </div>
+                  <div class="card-block">
+                      <a class="btn btn-primary thumbsup " href="#">
+                          <img class="thumbs" src="assets/icons/thumbsdown.svg" alt="Thumbsup"> Proper Evil
+                      </a>
+
+                  </div>
+              </div>
+          </div>
       </div>
-      <div class = "col-sm">
-        <h1>{{villainname}}</h1>
-        <h3></h3>
-      </div>
-    </div>
-    
+  </div>
+
 </div>

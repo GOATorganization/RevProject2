@@ -9,7 +9,7 @@
         <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
             <ul class="navbar-nav mr-auto mt-2 mt-md-0">
                 <li class="nav-item active">
-                    <a class="nav-link" routerLink="/userhome">Home
+                    <a class="nav-link" routerLink="/postview">Home
                         <span class="sr-only">(current)</span>
                     </a>
                 </li>
@@ -17,6 +17,10 @@
                     <a class="nav-link" routerLink="/userprofile">Profile</a>
                 </li>
             </ul>
+            <span class="form-ele form-inline my-2 my-lg-0">
+              <input class="form-control mr-sm-2" type="search" [(ngModel)]="user.email" placeholder="Search"  aria-label="Search">
+              <button class="btn btn-outline-success my-2 my-sm-0" type="submit" (click)="getHero()">Search</button>
+            </span>
             <button type="button" class='btn' routerLink='/homepage'>Log Out</button>
 
         </div>

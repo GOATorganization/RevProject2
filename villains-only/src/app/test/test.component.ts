@@ -55,10 +55,6 @@ export class TestComponent implements OnInit {
         this.postService.getAllPostByUser(user).subscribe(
           post => {
             console.log(post);
-            let editPost = new Post(47, 'THis is a editing thing', undefined, user);
-            this.postService.editPost(editPost).subscribe(
-              message => this.message = message,
-              error => this.message.text = 'something wen wrong');
           },
           error =>  this.message.text = 'something went wrong');
 

@@ -38,7 +38,7 @@ export class HomepageComponent implements OnInit {
           this.userService.getUserByEmail(this.user).subscribe(user => {
             this.user = user;
             this.userService.updateUserCookie(user);
-            this.router.navigate(['/userhome']);
+            this.router.navigate(['/postview']);
           });
         }
         else {
