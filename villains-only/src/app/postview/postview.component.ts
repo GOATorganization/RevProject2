@@ -59,7 +59,7 @@ export class PostviewComponent implements OnInit {
 
     this.imageUrl = [];
     let tempPicture: Picture = new Picture(undefined, undefined, undefined);
-    var post = new Post(undefined, this.userPost, undefined, this.currentUser);
+    var post = new Post(undefined, this.userPost, undefined, this.currentUser, undefined);
     if (this.rawUrlString != undefined) {
       let rawUrl = this.rawUrlString.split(" ");
       for (let k = 0; k < rawUrl.length; k++) {

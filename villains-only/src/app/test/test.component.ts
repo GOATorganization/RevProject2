@@ -24,7 +24,7 @@ export class TestComponent implements OnInit {
 
   private userGrabber: User; 
   private userGetter = new User(1, '', '', 'Email@email.com', '', '' ,'', '');
-  private poster = new Post(6, '', undefined, this.userGetter);
+  private poster = new Post(6, '', undefined, this.userGetter, undefined);
 
   constructor(private userService: UserService, private postService :PostService
     ,private pictureService : PictureService) { }

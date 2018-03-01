@@ -3,6 +3,7 @@ import { UserService } from '../services/user.service';
 import { DataService } from '../services/data.service';
 import { PostService } from '../services/post.service';
 import { PictureService } from '../services/picture.service';
+import { LikepostService } from '../services/likepost.service';
 import { User } from '../model/user.model';
 import { Post } from '../model/post.model';
 import { Picture } from '../model/picture.model';
@@ -21,7 +22,8 @@ export class UserviewComponent implements OnInit {
   private posts: Post[];
 
   constructor(private userService: UserService, private data: DataService,
-    private postService: PostService, private pictureService: PictureService) { }
+    private postService: PostService, private pictureService: PictureService,
+    private likepostService: LikepostService) { }
 
   postDisplay() {
     this.postService.getAllPostByUser(this.user).subscribe(postsIn => {
@@ -49,7 +51,7 @@ export class UserviewComponent implements OnInit {
       this.postDisplay();
 
     },
-    error => console.log('Error in userview Component, onInit')
+      error => console.log('Error in userview Component, onInit')
 
     );
     // console.log(this.user);
@@ -59,10 +61,8 @@ export class UserviewComponent implements OnInit {
 
   }
 
-
-
-
-  onChange() {
+  likePost(post: Post) {
+    this.likepostService.likePost(post, this.userService.getLoggedInUser());
 
   }
 
