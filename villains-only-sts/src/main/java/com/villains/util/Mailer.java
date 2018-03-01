@@ -1,5 +1,5 @@
 package com.villains.util;
 
 public interface Mailer {
-	void send(String from, String password, String to, String sub, String msg);
+	public void send(String username, String password, String recipient, String subject, String body);
 }

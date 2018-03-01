@@ -27,8 +27,9 @@
 		<!-- Tell SessionFactory where to find the POJO mappings -->
 		<!-- POJO Mappings can also be configured using XML or @s -->
 		<!-- <mapping file="this would location of HBM.xml" -->
- 		<mapping class="com.villains.model.User" />
- 		<mapping class="com.villains.model.Post" />
- 		<mapping class="com.villains.model.Picture" />
-</session-factory>
+		<mapping class="com.villains.model.User" />
+		<mapping class="com.villains.model.Post" />
+		<mapping class="com.villains.model.Picture" />
+		<mapping class="com.villains.model.PasswordResetToken" />
+	</session-factory>
 </hibernate-configuration>

@@ -16,33 +16,32 @@ import org.springframework.stereotype.Component;
 public class GmailMailer implements Mailer {
 
 	@Override
-	public void send(String from, String password, String to, String sub, String msg) {
-		// Get properties object
-		Properties props = new Properties();
-		props.put("mail.smtp.host", "smtp.gmail.com");
-		props.put("mail.smtp.socketFactory.port", "465");
-		props.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
-		props.put("mail.smtp.auth", "true");
-		props.put("mail.smtp.port", "465");
-		// get Session
-		Session session = Session.getDefaultInstance(props, new javax.mail.Authenticator() {
+	public void send(String username, String password, String recipient, String subject, String body) {
+
+		Properties properties = new Properties();
+		properties.put("mail.smtp.auth", "true");
+		properties.put("mail.smtp.starttls.enable", "true");
+		properties.put("mail.smtp.ssl.trust", "smtp.gmail.com");
+		properties.put("mail.smtp.host", "smtp.gmail.com");
+		properties.put("mail.smtp.port", "587");
+
+		Session session = Session.getInstance(properties,
+		  new javax.mail.Authenticator() {
 			protected PasswordAuthentication getPasswordAuthentication() {
-				return new PasswordAuthentication(from, password);
+				return new PasswordAuthentication(username, password);
 			}
-		});
-		// compose message
+		  });
+
 		try {
-			MimeMessage message = new MimeMessage(session);
-			message.addRecipient(Message.RecipientType.TO, new InternetAddress(to));
-			message.setSubject(sub);
-			message.setText(msg);
-			// send message
+			Message message = new MimeMessage(session);
+			message.setRecipients(Message.RecipientType.TO,
+				InternetAddress.parse(recipient));
+			message.setSubject(subject);
+			message.setContent(body, "text/html; charset=utf-8");
+
 			Transport.send(message);
-			System.out.println("message sent successfully");
 		} catch (MessagingException e) {
 			throw new RuntimeException(e);
 		}
-
 	}
-
 }
