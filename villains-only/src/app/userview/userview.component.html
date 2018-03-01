@@ -1,12 +1,57 @@
-<div class = "container">
-    <div class = "row">
-      <div class = "col-sm">
-        <img src = {{profileimage}}>
-      </div>
-      <div class = "col-sm">
-        <h1>{{user.firstName}}</h1>
-        <h3></h3>
-      </div>
+<div class="over-div">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-3 col-md-3 col-sm-3 col-xl-3 userColumn">
+                <div class="userInfo">
+                    <img class="profileImage" src="{{user.profilePic}}">
+                    <br>
+                    <br>
+                    <h5>{{user.firstName}} {{user.lastName}}</h5>
+                    <h6>{{user.email}}</h6>
+                </div>
+
+
+
+            </div>
+            <div class="col-lg-8 col-md-8 col-sm-8 col-xl-8" id="postColumn">
+                <div *ngFor="let post of posts" class="card card-outline-info cardpad">
+                    <div class="card-block cardtextpad">
+                        <h4 class="card-title cardTitle">
+                            {{post.userId.firstName}} {{post.userId.lastName}}
+                        </h4>
+                        <div *ngIf="post.showHide">
+                            <div [attr.id]="'pictureCarousel' + post.postId" class="carousel slide" data-ride="carousel">
+                                <div class="carousel-inner">
+                                    <div *ngFor="let picture of post.contentsPic; let k = index" [ngClass]="k==0 ? 'item active' : 'item'" class="carousel-item">
+                                        <img class="d-block img-fluid" src="{{picture.pictureUrl}}">
+                                    </div>
+                                </div>
+                                <a class="carousel-control-prev" [attr.href]="'#pictureCarousel' + post.postId" role="button" data-slide="prev">
+                                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                    <span class="sr-only">Previous</span>
+                                </a>
+
+                                <a class="carousel-control-next" [attr.href]="'#pictureCarousel' + post.postId" role="button" data-slide="next">
+                                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                    <span class="sr-only">Next</span>
+                                </a>
+
+                            </div>
+
+                        </div>
+                        <p class="card-text cardtextpad cardContent">
+                            {{post.contentsText}}
+                        </p>
+                    </div>
+                    <div class="card-block">
+                        <a class="btn btn-primary thumbsup " href="#">
+                            <img class="thumbs" src="assets/icons/thumbsdown.svg" alt="Thumbsup"> Proper Evil
+                        </a>
+
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-    
+
 </div>

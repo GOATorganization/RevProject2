@@ -34,11 +34,11 @@ export class HomepageComponent implements OnInit {
         let msg = message.text.toLowerCase();
         
         if (msg.includes('success')) {
-          // console.log(message.text);
+           console.log(message.text);
           this.userService.getUserByEmail(this.user).subscribe(user => {
             this.user = user;
-            this.userService.updateUserCookie(user);
-            this.router.navigate(['/userhome']);
+            //this.userService.updateUserCookie(user);
+            this.router.navigate(['/postview']);
           });
         }
         else {

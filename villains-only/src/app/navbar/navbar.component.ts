@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from './../services/user.service';
 import { User } from '../model/user.model';
-import { Router } from '@angular/router';
+import { Router, RouterEvent } from '@angular/router';
 import { DataService } from '../services/data.service';
 
 @Component({
@@ -11,12 +11,30 @@ import { DataService } from '../services/data.service';
 })
 export class NavbarComponent implements OnInit {
 
-  constructor(private userService: UserService, private router: Router, private data: DataService) { }
+  constructor(private userService: UserService, private router: Router, private data: DataService) { 
+
+    // On page change, trigger an action. 
+    router.events.filter(e => e instanceof RouterEvent).subscribe(e => {
+      // console.log("page change");
+      // this.nameChange();
+    });
+  }
 
   public user: User = new User(0, '', '', '', '', '', '', '');
+  public currentUser: User = new User(0, '', '', '', '', '', '', '');
 
   ngOnInit() {
+    
   }
+
+  nameChange(){
+    this.currentUser = this.userService.getLoggedInUser();
+  }
+
+  clearUser(){
+    this.currentUser = new User(0, '', 'Home', '', '', '', '', '');
+  }
+  
 
   public getHero(): void {
     console.log(this.user);

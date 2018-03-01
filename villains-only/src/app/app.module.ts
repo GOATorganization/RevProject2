@@ -1,12 +1,9 @@
-import { DataService } from './services/data.service';
 import { PostviewComponent } from './postview/postview.component';
 import { PictureService } from './services/picture.service';
 import { PostService } from './services/post.service';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-
-
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { HomepageComponent } from './homepage/homepage.component';
@@ -19,6 +16,9 @@ import { TestComponent } from './test/test.component';
 import { ProfileComponent } from './profile/profile.component';
 import { HttpClientModule } from '@angular/common/http';
 import { ForgotloginComponent } from './forgotlogin/forgotlogin.component';
+import { LikepostService } from './services/likepost.service';
+import { UpdatepasswordComponent } from './updatepassword/updatepassword.component';
+import { DataService } from './services/data.service';
 
 
 @NgModule({
@@ -31,7 +31,8 @@ import { ForgotloginComponent } from './forgotlogin/forgotlogin.component';
     TestComponent,
     ProfileComponent,
     PostviewComponent,
-    ForgotloginComponent
+    ForgotloginComponent,
+    UpdatepasswordComponent
   ],
   imports: [
     BrowserModule,
@@ -39,7 +40,7 @@ import { ForgotloginComponent } from './forgotlogin/forgotlogin.component';
     HttpModule,
     FormsModule,
   ],
-  providers: [UserService, PostService, PictureService, DataService],
+  providers: [UserService, PostService, PictureService, DataService, LikepostService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

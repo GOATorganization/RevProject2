@@ -36,18 +36,9 @@ export class PostviewComponent implements OnInit {
       postsIn => {
         console.log(postsIn);
         for (let i = 0; i < postsIn.length; i++) {
-          // let tempPic: Picture[];
-          // this.pictureService.getAllPicturesByPost(postsIn[i]).subscribe(
-          //   picture => {
-          //     tempPic = picture;
-          //     console.log(tempPic);
-          //     postsIn[i].contentsPic = tempPic;
-          //  console.log(picture);
           if (postsIn[i].contentsPic.length != 0) {
             postsIn[i].showHide = true;
           }
-          // },
-          // error => this.message.text = 'Failed');
         }
         this.posts = postsIn;
       },
@@ -60,6 +51,7 @@ export class PostviewComponent implements OnInit {
     this.imageUrl = [];
     let tempPicture: Picture = new Picture(undefined, undefined, undefined);
     var post = new Post(undefined, this.userPost, undefined, this.currentUser);
+    
     if (this.rawUrlString != undefined) {
       let rawUrl = this.rawUrlString.split(" ");
       for (let k = 0; k < rawUrl.length; k++) {
@@ -79,6 +71,8 @@ export class PostviewComponent implements OnInit {
     this.getAllPost();
   }
 
+
+
   getCharLeft() {
     this.charLeft = this.maxChar - this.userPost.length;
   }
@@ -87,6 +81,7 @@ export class PostviewComponent implements OnInit {
     this.getAllPost();
     this.charLeft = this.maxChar;
     this.currentUser = this.userService.getLoggedInUser();
+    
   }
 
 }
