@@ -12,6 +12,10 @@
     margin-top: 45px;
 }
 
+.postImg{
+    width: 75%;
+}
+
 .cardpad{
     margin-bottom: 15px;
     background-color: rgba(71, 23, 246, 0.11);
@@ -54,3 +58,11 @@
     margin-right: 30px;
     background-color: #A239ca;
 }
+
+#charLeft{
+    float:right;
+}
+
+.carousel-inner img {
+    margin: 0 auto;
+  }

@@ -1,3 +1,5 @@
+import { Picture } from './../model/picture.model';
+import { PictureService } from './../services/picture.service';
 import { UserService } from './../services/user.service';
 import { User } from './../model/user.model';
 import { Message } from './../model/message.model';
@@ -13,47 +15,73 @@ import { Component, OnInit } from '@angular/core';
 export class PostviewComponent implements OnInit {
 
   public message: Message = new Message('');
+  private profilePicture: string;
   private posts: Post[];
-  private testUser2 = new User(1, '', '', 'Email@email.com', '', '' ,'', '');
 
   private userPost: string;
+  private currentUser: User;
+
+  private maxChar: number = 250;
+  private charLeft: number;
+
+  private rawUrlString: string;
+  private imageUrl: Picture[];
 
 
-  constructor(private postService: PostService, private userService: UserService) { }
+  constructor(private postService: PostService, private userService: UserService
+    , private pictureService: PictureService) { }
 
   getAllPost(): void {
     this.postService.getAllPost().subscribe(
-      posts => {
-        console.log(posts);
-        for (var i = 0; i < posts.length; i++) {
-          if (posts[i].contentsPic.length != 0) {
-            posts[i].showHide = true;
+      postsIn => {
+        console.log(postsIn);
+        for (let i = 0; i < postsIn.length; i++) {
+          if (postsIn[i].contentsPic.length != 0) {
+            postsIn[i].showHide = true;
           }
         }
-        this.posts = posts
+        this.posts = postsIn;
       },
       error => this.message.text = 'something went wrong');
   }
 
   submitPost(): void {
     console.log(this.userPost);
-    this.userService.getUserByEmail(this.testUser2).subscribe(
-      user => {
-        var post = new Post(undefined, this.userPost, undefined, user);
 
-        this.postService.createPost(post).subscribe(
-          message => this.message = message,
-          error => this.message.text = 'Failed to post');
+    this.imageUrl = [];
+    let tempPicture: Picture = new Picture(undefined, undefined, undefined);
+    var post = new Post(undefined, this.userPost, undefined, this.currentUser);
+    
+    if (this.rawUrlString != undefined) {
+      let rawUrl = this.rawUrlString.split(" ");
+      for (let k = 0; k < rawUrl.length; k++) {
+        tempPicture = new Picture(undefined, undefined, rawUrl[k]);
+        this.imageUrl[k] = tempPicture;
+      }
+    }
+    post.contentsPic = this.imageUrl;
 
+    this.postService.createPost(post).subscribe(
+      post => {
       },
-      error => this.message.text = 'Something went wrong'
-    );
+      error => this.message.text = 'Failed to post');
+
     (<HTMLInputElement>document.getElementById('postSubmit')).value = '';
+    (<HTMLInputElement>document.getElementById('imgInput')).value = '';
     this.getAllPost();
+  }
+
+
+
+  getCharLeft() {
+    this.charLeft = this.maxChar - this.userPost.length;
   }
 
   ngOnInit() {
     this.getAllPost();
+    this.charLeft = this.maxChar;
+    this.currentUser = this.userService.getLoggedInUser();
+    
   }
 
 }

@@ -10,8 +10,14 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 /**
  * 
@@ -48,10 +54,21 @@ public class User {
 
 	@Column
 	private String profilePic;
-	
-//	@OneToMany(mappedBy = "postId" ,fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-//	private List<Post> posts;
-	
+
+	@JsonIgnore
+	@OneToMany(mappedBy = "postId" ,fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	private List<Post> posts;
+
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name="password_reset_id", nullable = true)
+	private PasswordResetToken pwResetToken;
+
+	@JsonIgnore
+	@ManyToMany(cascade = CascadeType.ALL)
+	@JoinTable(name="likes", 
+	    joinColumns=@JoinColumn(name="user_id"), 
+	    inverseJoinColumns=@JoinColumn(name="post_id")) 
+	private List<Post> likes;
 	
 	public User() {
 		
@@ -86,6 +103,23 @@ public class User {
 		this.lairCity = lairCity;
 		this.lairCountry = lairCountry;
 		this.profilePic = profilePic;
+	}
+
+	public User(int userId, String firstName, String lastName, String email, String password, String lairCity,
+			String lairCountry, String profilePic, List<Post> posts, PasswordResetToken pwResetToken,
+			List<Post> likes) {
+		super();
+		this.userId = userId;
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.email = email;
+		this.password = password;
+		this.lairCity = lairCity;
+		this.lairCountry = lairCountry;
+		this.profilePic = profilePic;
+		this.posts = posts;
+		this.pwResetToken = pwResetToken;
+		this.likes = likes;
 	}
 
 	public int getUserId() {
@@ -150,6 +184,30 @@ public class User {
 
 	public void setProfilePic(String profilePic) {
 		this.profilePic = profilePic;
+	}
+
+	public List<Post> getPosts() {
+		return posts;
+	}
+
+	public void setPosts(List<Post> posts) {
+		this.posts = posts;
+	}
+
+	public PasswordResetToken getPwResetToken() {
+		return pwResetToken;
+	}
+
+	public void setPwResetToken(PasswordResetToken pwResetToken) {
+		this.pwResetToken = pwResetToken;
+	}
+
+	public List<Post> getLikes() {
+		return likes;
+	}
+
+	public void setLikes(List<Post> likes) {
+		this.likes = likes;
 	}
 
 	@Override

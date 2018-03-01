@@ -10,9 +10,12 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name="post")
@@ -29,15 +32,15 @@ public class Post {
 	
 	@Column(name="contents_txt")
 	private String contentsText;
-	
+		
 	
 	@Column(name="contents_pics")
 	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	private List<Picture> contentsPic;
 	
-	/*@ManyToMany
-	@JoinColumn(name="like_list")
-	private List<Integer> likeList;*/
+	@JsonIgnore
+	@ManyToMany(mappedBy="likes") 
+	private List<User> likers;
 	
 	public Post() {
 		
@@ -48,7 +51,6 @@ public class Post {
 		this.userId = userId;
 		this.contentsText = contentsText;
 		this.contentsPic = contentsPic;
-		//this.likeList = likeList;
 	}
 
 	public Post(int postId, User userId, String contentsText, List<Picture> contentsPic/*, List<Integer> likeList*/) {
@@ -57,7 +59,15 @@ public class Post {
 		this.userId = userId;
 		this.contentsText = contentsText;
 		this.contentsPic = contentsPic;
-		//this.likeList = likeList;
+	}
+	
+	public Post(int postId, User userId, String contentsText, List<Picture> contentsPic, List<User> likers) {
+		super();
+		this.postId = postId;
+		this.userId = userId;
+		this.contentsText = contentsText;
+		this.contentsPic = contentsPic;
+		this.likers = likers;
 	}
 
 	public int getPostId() {
@@ -92,13 +102,13 @@ public class Post {
 		this.contentsPic = contentsPic;
 	}
 
-	/*public List<Integer> getLikeList() {
-		return likeList;
+	public List<User> getLikers() {
+		return likers;
 	}
 
-	public void setLikeList(List<Integer> likeList) {
-		this.likeList = likeList;
-	}*/
+	public void setLikers(List<User> likers) {
+		this.likers = likers;
+	}
 
 	@Override
 	public String toString() {

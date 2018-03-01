@@ -12,17 +12,18 @@
               <input type="text" class="form-control" placeholder="Username" [(ngModel)]="user.email" aria-describedby="basic-addon1">
             </div>
             <div class="input-group form-ele">
-              <input type="password" class="form-control" placeholder="Password" [(ngModel)]="user.password" aria-describedby="basic-addon1">
+              <input type="password" class="form-control" placeholder="Password" [(ngModel)]="user.password" aria-describedby="basic-addon1"
+                (keydown.enter)="loginUser()">
             </div>
-            <button (click)="loginUser()" class="btn btn-primary" type="button" >Log In</button>
+            <button (click)="loginUser()" class="btn btn-primary" type="button">Log In</button>
           </div>
-          
+
         </div>
-        <a href="#" id="forgotLogin">Forgot Login</a>
+        <a routerLink="../forgotlogin" id="forgotLogin">Forgot Login</a>
         <div class="row signup">
           <div class="dropdown">
             <h2>Connect and collaborate with other Villains today!</h2>
-            
+
             <app-register></app-register>
           </div>
         </div>
