@@ -65,6 +65,16 @@ public class UserController {
 		} else
 			return new ResponseEntity<>(new Message("BAD CREDENTIALS"), HttpStatus.OK);
 	}
+	
+	@GetMapping("/test.app")
+	public @ResponseBody ResponseEntity<Message> test(HttpSession session) {
+		String email = (String)session.getAttribute("email");
+		Integer id = (Integer)session.getAttribute("id");
+		
+		System.out.println(email + " " + id);
+				
+		return new ResponseEntity<>(new Message("TEST COMPLETE"), HttpStatus.OK);
+	}
 
 	/**
 	 * Checks the currently logged in user based on the session.

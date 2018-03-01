@@ -14,7 +14,7 @@ export class PictureService{
 
     public getAllPictures() : Observable<Picture[]>{
         return this.http
-            .get(`http://localhost:8090/VillainsOnly/getAllPictures.app`)
+            .get(`/VillainsOnly/getAllPictures.app`)
             .map((response : Response) =>{
                 return <Picture[]>response.json();
             })
@@ -27,7 +27,7 @@ export class PictureService{
         const options: RequestOptions = new RequestOptions({headers: headers});
 
         return this.http
-            .post(`http://localhost:8090/VillainsOnly/getAllPicturesByPost.app`, body, options)
+            .post(`/VillainsOnly/getAllPicturesByPost.app`, body, options)
             .map((response : Response) => {
                 return <Picture[]> response.json();
             })
@@ -40,7 +40,7 @@ export class PictureService{
         const options: RequestOptions = new RequestOptions({headers:headers});
 
         return this.http
-            .post('http://localhost:8090/VillainsOnly/getAllPicturesByUser.app',body,options)
+            .post('/VillainsOnly/getAllPicturesByUser.app',body,options)
             .map((response : Response) => {
                 return <Picture[]> response.json();
             })
@@ -54,7 +54,7 @@ export class PictureService{
         const options: RequestOptions = new RequestOptions({headers:headers});
 
         return this.http
-            .post('http://localhost:8090/VillainsOnly/addPicture.app',body,options)
+            .post('/VillainsOnly/addPicture.app',body,options)
             .map((response : Response) => {
                 return <Message> response.json();
             })
@@ -67,7 +67,7 @@ export class PictureService{
         const options: RequestOptions = new RequestOptions({headers:headers});
 
         return this.http
-            .post('http://localhost:8090/VillainsOnly/editPicture.app',body,options)
+            .post('/VillainsOnly/editPicture.app',body,options)
             .map((response : Response) => {
                 return <Message> response.json();
             })
@@ -80,7 +80,7 @@ export class PictureService{
         const options: RequestOptions = new RequestOptions({headers:headers});
 
         return this.http
-            .post('http://localhost:8090/VillainsOnly/deletePicture.app',body,options)
+            .post('/VillainsOnly/deletePicture.app',body,options)
             .map((response : Response) => {
                 return <Message> response.json();
             })
