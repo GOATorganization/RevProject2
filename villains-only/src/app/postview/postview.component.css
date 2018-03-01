@@ -62,3 +62,7 @@
 #charLeft{
     float:right;
 }
+
+.carousel-inner img {
+    margin: 0 auto;
+  }
