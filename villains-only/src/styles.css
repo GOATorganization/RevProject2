@@ -7453,3 +7453,15 @@ body{
 .form-control{
   background-color: #e7dfdd;
 }
+
+.btn-outline-primary{
+  color: #A239ca;
+  background-color: transparent;
+  background-image: none;
+  border-color: #A239ca;
+}
+.btn-outline-primary:hover{
+  color: #fff;
+    background-color: #A239ca;
+    border-color: #A239ca;
+}
