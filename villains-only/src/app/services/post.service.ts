@@ -18,7 +18,7 @@ export class PostService {
         const options: RequestOptions = new RequestOptions({ headers: headers });
 
         return this.http
-            .post(`http://localhost:8090/VillainsOnly/createPost.app`, body, options)
+            .post(`/VillainsOnly/createPost.app`, body, options)
             .map((response: Response) => {
                 return <Post>response.json();
             })
@@ -31,7 +31,7 @@ export class PostService {
         const options: RequestOptions = new RequestOptions({ headers: headers });
 
         return this.http
-            .post(`http://localhost:8090/VillainsOnly/editPost.app`, body, options)
+            .post(`/VillainsOnly/editPost.app`, body, options)
             .map((response: Response) => {
                 return <Message>response.json();
             })
@@ -40,7 +40,7 @@ export class PostService {
 
     public getAllPost(): Observable<Post[]> {
         return this.http
-            .get(`http://localhost:8090/VillainsOnly/getAllPost.app`)
+            .get(`/VillainsOnly/getAllPost.app`)
             .map((response: Response) => {
                 return <Post[]>response.json();
             })
@@ -53,7 +53,7 @@ export class PostService {
         const options: RequestOptions = new RequestOptions({ headers: headers });
 
         return this.http
-            .post(`http://localhost:8090/VillainsOnly/getAllPostByUser.app`, body, options)
+            .post(`/VillainsOnly/getAllPostByUser.app`, body, options)
             .map((response: Response) => {
                 return <Post[]>response.json();
             })

@@ -6,6 +6,7 @@ import { UserviewComponent } from './userview/userview.component';
 import { HomepageComponent } from './homepage/homepage.component';
 import { ProfileComponent } from './profile/profile.component';
 import { ForgotloginComponent } from './forgotlogin/forgotlogin.component';
+import { UpdatepasswordComponent } from './updatepassword/updatepassword.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/homepage', pathMatch: 'full' },
@@ -13,7 +14,8 @@ const routes: Routes = [
   { path: 'userhome', component: UserviewComponent },
   { path: 'userprofile', component: ProfileComponent },
   { path: 'postview', component: PostviewComponent },
-  { path: 'forgotlogin', component: ForgotloginComponent }
+  { path: 'forgotlogin', component: ForgotloginComponent },
+  { path: 'updatepassword', component: UpdatepasswordComponent }
 ];
 
 @NgModule({

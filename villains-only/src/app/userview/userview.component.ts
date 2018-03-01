@@ -1,3 +1,4 @@
+import { Message } from './../model/message.model';
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '../services/user.service';
 import { DataService } from '../services/data.service';
@@ -16,6 +17,7 @@ import { Observable } from 'rxjs/Observable';
 })
 export class UserviewComponent implements OnInit {
 
+  public message: Message = new Message('');
   user: User = new User(0, '', '', '', '', '', '', '');
   villainname = 'Villain';
   profileimage = '../app/images/villainprofile.png';
@@ -26,22 +28,17 @@ export class UserviewComponent implements OnInit {
     private likepostService: LikepostService) { }
 
   postDisplay() {
-    this.postService.getAllPostByUser(this.user).subscribe(postsIn => {
-      for (let i = 0; i < postsIn.length; i++) {
-        postsIn[i].contentsPic = [];
-        let tempPic: Picture[];
-        this.pictureService.getAllPicturesByPost(postsIn[i]).subscribe(
-          picture => {
-            tempPic = picture;
-            postsIn[i].contentsPic = tempPic;
-            if (postsIn[i].contentsPic.length != 0) {
-              postsIn[i].showHide = true;
-            }
-          },
-          error => console.log('Error In Userview Component'));
-      }
-      this.posts = postsIn;
-    });
+    this.postService.getAllPostByUser(this.user).subscribe(
+      postsIn => {
+        console.log(postsIn);
+        for (let i = 0; i < postsIn.length; i++) {
+          if (postsIn[i].contentsPic.length != 0) {
+            postsIn[i].showHide = true;
+          }
+        }
+        this.posts = postsIn;
+      },
+      error => this.message.text = 'something went wrong');
   }
 
   ngOnInit() {
