@@ -33,6 +33,7 @@ export class NavbarComponent implements OnInit {
 
   clearUser(){
     this.currentUser = new User(0, '', 'Home', '', '', '', '', '',undefined);
+    this.userService.clearUserCookie();
   }
   
 

@@ -125,11 +125,14 @@ export class UserService {
     }
 
     updateUserCookie(user: User): void {
-        console.log(user);
         document.cookie = `user=${JSON.stringify(user)}`;
     }
 
-    public getLoggedInUser(): User {
+    clearUserCookie(): void {
+        document.cookie = `user=; max-age=0`;
+    }
+
+    getLoggedInUser(): User {
         let cookieName = "user";
         let cookieValue = document.cookie.replace(/(?:(?:^|.*;\s*)user\s*\=\s*([^;]*).*$)|^.*$/, "$1")
         return <User>JSON.parse(cookieValue);
