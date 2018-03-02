@@ -38,7 +38,7 @@ export class ProfileComponent implements OnInit {
     // if there is a file to change
     if (pictureFile) {
       // add picture to db to get unique id to build url
-      let picture: Picture = new Picture(null, null, pictureFile.name);
+      let picture: Picture = new Picture(0, null, pictureFile.name);
       this.pictureService.addPicture(picture).subscribe(
         message => {
           console.log('from submit profile changes message:');
