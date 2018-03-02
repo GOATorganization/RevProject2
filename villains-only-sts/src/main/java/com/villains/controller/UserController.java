@@ -117,20 +117,37 @@ public class UserController {
 	 */
 	@PostMapping("/updateUserProfile.app")
 	public @ResponseBody ResponseEntity<Message> updateUserProfile(@RequestBody User user) {
+		System.out.println(user);
 		System.out.println("getting to update profile");
 		userService.editUser(user);
 		return new ResponseEntity<>(new Message("Updated changes"), HttpStatus.OK);
 	}
 
+	/**
+	 * Requests a password reset email
+	 * 
+	 * @param user
+	 *            User whose data is being updated
+	 * @return A successful message if processResetRequest succeeds
+	 * 
+	 */
 	@PostMapping("/requestPasswordReset.app")
 	public @ResponseBody ResponseEntity<Message> requestPasswordReset(HttpSession session, @RequestBody User user) {
 
 		if (userService.processResetRequest(user))
-			return new ResponseEntity<>(new Message("EMAIL SENT"), HttpStatus.OK);
+			return new ResponseEntity<>(HttpStatus.OK);
 		else
-			return new ResponseEntity<>(new Message("COULDN'T FIND THAT EMAIL"), HttpStatus.OK);
+			return new ResponseEntity<>(HttpStatus.FORBIDDEN);
 	}
 
+	/**
+	 * Sets a new password
+	 * 
+	 * @param vm
+	 *            User data & password + password confirmation input
+	 * @return A successful message if setPassword() succeeds
+	 * 
+	 */
 	@PostMapping("/setNewPassword.app")
 	public @ResponseBody ResponseEntity<Message> setNewPassword(HttpSession session, @RequestBody PasswordResetVm vm) {
 		boolean success = false;
@@ -140,7 +157,7 @@ public class UserController {
 			return new ResponseEntity<>(new Message(String.valueOf(success)), HttpStatus.OK);
 		}
 		else
-			return new ResponseEntity<>(HttpStatus.I_AM_A_TEAPOT);
+			return new ResponseEntity<>(HttpStatus.FORBIDDEN);
 	}
 
 }

@@ -15,7 +15,7 @@ export class ForgotloginComponent implements OnInit {
   constructor(private userService: UserService,
             private router: Router) { }
 
-  public user: User = new User(0,'','','','','','','');
+  public user: User = new User(0,'','','','','','','', undefined);
 
   public message: Message = new Message('');
 
