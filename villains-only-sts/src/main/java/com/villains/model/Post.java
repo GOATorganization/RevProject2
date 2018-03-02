@@ -41,6 +41,7 @@ public class Post {
 	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	private List<Picture> contentsPic;
 	
+	@JsonIgnore
 	@Fetch(FetchMode.SUBSELECT)
 	@ManyToMany(mappedBy="likes", fetch = FetchType.EAGER) 
 	private List<User> likers;
