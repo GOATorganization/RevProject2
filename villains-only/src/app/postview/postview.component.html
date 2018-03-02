@@ -58,8 +58,11 @@
                         </p>
                     </div>
                     <div class="card-block">
-                        <a class="btn btn-primary thumbsup " href="#">
-                            <img class="thumbs" src="assets/icons/thumbsdown.svg" alt="Thumbsup"> Proper Evil
+                        <a class="btn btn-primary thumbsup " (click)="likePost(post)" *ngIf="!post.likedPost">
+                            <img class="thumbs" src="assets/icons/thumbsdown.svg" alt="Thumbsup">Evil
+                        </a>
+                        <a class="btn btn-primary thumbsup " (click)="likePost(post)" *ngIf="post.likedPost">
+                            <img class="thumbs" src="assets/icons/thumbsdown.svg" alt="Thumbsup">Properly Evil
                         </a>
 
                     </div>

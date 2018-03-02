@@ -18,7 +18,7 @@ import { Observable } from 'rxjs/Observable';
 export class UserviewComponent implements OnInit {
 
   public message: Message = new Message('');
-  user: User = new User(0, '', '', '', '', '', '', '',undefined);
+  user: User = new User(0, '', '', '', '', '', '', '', undefined);
   villainname = 'Villain';
   profileimage = '../app/images/villainprofile.png';
   private posts: Post[];
@@ -32,6 +32,7 @@ export class UserviewComponent implements OnInit {
       postsIn => {
         console.log(postsIn);
         for (let i = 0; i < postsIn.length; i++) {
+          // tslint:disable-next-line:triple-equals
           if (postsIn[i].contentsPic.length != 0) {
             postsIn[i].showHide = true;
           }
@@ -46,21 +47,15 @@ export class UserviewComponent implements OnInit {
     this.data.currentMessage.subscribe(user => {
       this.user = user;
       this.postDisplay();
-
     },
       error => console.log('Error in userview Component, onInit')
-
     );
-    // console.log(this.user);
-
-
-
 
   }
 
   likePost(post: Post) {
     this.likepostService.likePost(post, this.userService.getLoggedInUser());
-
+    post.likedPost = !post.likedPost;
   }
 
 }
