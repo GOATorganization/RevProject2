@@ -24,6 +24,11 @@ export class ProfileComponent implements OnInit {
     this.isInEditMode = true;
   }
 
+  cancelEditingProfile(): void {
+    this.isInEditMode = false;
+    this.user = this.userService.getLoggedInUser();
+  }
+
   submitProfileChanges(): void {
     let fileInput: HTMLInputElement = <HTMLInputElement>document.getElementById("profilePicInput");
     let pictureFile: File = fileInput.files[0];

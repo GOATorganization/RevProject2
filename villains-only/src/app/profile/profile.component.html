@@ -42,5 +42,6 @@
     </div>
 
     <button id='btn' type='button' class='btn' (click)='isInEditMode ? submitProfileChanges() : editProfile()'>{{isInEditMode ? 'Submit Changes': 'Edit Profile'}}</button>
+    <button *ngIf='isInEditMode' id='btnCancel' type='button' class='btn' (click)='cancelEditingProfile()'>Cancel Changes</button>
   </form>
 </div>
