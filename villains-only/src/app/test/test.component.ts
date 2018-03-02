@@ -20,11 +20,11 @@ export class TestComponent implements OnInit {
   private pictures : Picture[];
   public message: Message = new Message('');
 
-  private testUser2 = new User(2, '', '', 'Email@email.com', '', '' ,'', '');
+  private testUser2 = new User(2, '', '', 'Email@email.com', '', '' ,'', '',undefined);
 
   private userGrabber: User; 
-  private userGetter = new User(1, '', '', 'Email@email.com', '', '' ,'', '');
-  private poster = new Post(6, '', undefined, this.userGetter);
+  private userGetter = new User(1, '', '', 'Email@email.com', '', '' ,'', '',undefined);
+  private poster = new Post(6, '', undefined, this.userGetter, undefined);
 
   constructor(private userService: UserService, private postService :PostService
     ,private pictureService : PictureService) { }
@@ -55,10 +55,6 @@ export class TestComponent implements OnInit {
         this.postService.getAllPostByUser(user).subscribe(
           post => {
             console.log(post);
-            let editPost = new Post(47, 'THis is a editing thing', undefined, user);
-            this.postService.editPost(editPost).subscribe(
-              message => this.message = message,
-              error => this.message.text = 'something wen wrong');
           },
           error =>  this.message.text = 'something went wrong');
 

@@ -58,3 +58,11 @@
     margin-right: 30px;
     background-color: #A239ca;
 }
+
+#charLeft{
+    float:right;
+}
+
+.carousel-inner img {
+    margin: 0 auto;
+  }

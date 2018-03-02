@@ -10,10 +10,9 @@ public class UserValidatorImpl implements UserValidator {
 			if (user.getFirstName().length() == 0 || user.getLastName().length() == 0 ||
 				user.getEmail().length() == 0 || user.getPassword().length() == 0 ||
 				user.getFirstName().length() > 64 || user.getLastName().length() > 64 ||
-				user.getEmail().length() > 64 || user.getPassword().length() > 64)
+				user.getEmail().length() > 64 || user.getPassword().length() > 64)		
 				return false;
 			else 
 				return true;
 		}
-
 }
