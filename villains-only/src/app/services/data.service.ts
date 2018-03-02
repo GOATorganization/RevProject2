@@ -5,7 +5,7 @@ import { User } from '../model/user.model';
 @Injectable()
 export class DataService {
 
-  private user: User = new User(0, '', '', '', '', '', '', '');
+  private user: User = new User(0, '', '', '', '', '', '', '',undefined);
   private messageSource = new BehaviorSubject<User>(this.user);
   currentMessage = this.messageSource.asObservable();
 

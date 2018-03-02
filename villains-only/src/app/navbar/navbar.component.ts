@@ -20,8 +20,8 @@ export class NavbarComponent implements OnInit {
     });
   }
 
-  public user: User = new User(0, '', '', '', '', '', '', '');
-  public currentUser: User = new User(0, '', '', '', '', '', '', '');
+  public user: User = new User(0, '', '', '', '', '', '', '',undefined);
+  public currentUser: User = new User(0, '', '', '', '', '', '', '', undefined);
 
   ngOnInit() {
     
@@ -32,7 +32,7 @@ export class NavbarComponent implements OnInit {
   }
 
   clearUser(){
-    this.currentUser = new User(0, '', 'Home', '', '', '', '', '');
+    this.currentUser = new User(0, '', 'Home', '', '', '', '', '',undefined);
   }
   
 
