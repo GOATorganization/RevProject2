@@ -6,15 +6,15 @@ export class Post {
     contentsText: string;
     contentsPic: Picture[];
     userId: User;
-    public likedBy: User[];
+    likers: User[];
 
     showHide = false;
 
-    constructor(postId: number, contentsText: string, contentsPic: Picture[], userId: User, likedBy) {
+    constructor(postId: number, contentsText: string, contentsPic: Picture[], userId: User, likers: User[]) {
         this.postId = postId;
         this.contentsText = contentsText;
         this.contentsPic = contentsPic;
         this.userId = userId;
-        this.likedBy = likedBy;
+        this.likers = likers;
     }
 }

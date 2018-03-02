@@ -117,6 +117,7 @@ public class UserController {
 	 */
 	@PostMapping("/updateUserProfile.app")
 	public @ResponseBody ResponseEntity<Message> updateUserProfile(@RequestBody User user) {
+		System.out.println(user);
 		System.out.println("getting to update profile");
 		userService.editUser(user);
 		return new ResponseEntity<>(new Message("Updated changes"), HttpStatus.OK);

@@ -13,7 +13,7 @@ export class HomepageComponent implements OnInit {
   imageSource = '../../assets/VillainsOnlyLogo.png';
   constructor(private userService: UserService, private router: Router) { }
 
-  public user: User = new User(0,'','','','','','','');
+  public user: User = new User(0,'','','','','','','', undefined);
 
   public message: Message = new Message('');
 
@@ -37,7 +37,7 @@ export class HomepageComponent implements OnInit {
            console.log(message.text);
           this.userService.getUserByEmail(this.user).subscribe(user => {
             this.user = user;
-            //this.userService.updateUserCookie(user);
+            this.userService.updateUserCookie(user);
             this.router.navigate(['/postview']);
           });
         }

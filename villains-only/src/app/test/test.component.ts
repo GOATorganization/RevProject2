@@ -20,10 +20,10 @@ export class TestComponent implements OnInit {
   private pictures : Picture[];
   public message: Message = new Message('');
 
-  private testUser2 = new User(2, '', '', 'Email@email.com', '', '' ,'', '');
+  private testUser2 = new User(2, '', '', 'Email@email.com', '', '' ,'', '',undefined);
 
   private userGrabber: User; 
-  private userGetter = new User(1, '', '', 'Email@email.com', '', '' ,'', '');
+  private userGetter = new User(1, '', '', 'Email@email.com', '', '' ,'', '',undefined);
   private poster = new Post(6, '', undefined, this.userGetter, undefined);
 
   constructor(private userService: UserService, private postService :PostService

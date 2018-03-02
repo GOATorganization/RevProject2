@@ -18,7 +18,7 @@ import { Observable } from 'rxjs/Observable';
 export class UserviewComponent implements OnInit {
 
   public message: Message = new Message('');
-  user: User = new User(0, '', '', '', '', '', '', '');
+  user: User = new User(0, '', '', '', '', '', '', '',undefined);
   villainname = 'Villain';
   profileimage = '../app/images/villainprofile.png';
   private posts: Post[];

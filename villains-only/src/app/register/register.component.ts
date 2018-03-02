@@ -14,7 +14,7 @@ export class RegisterComponent implements OnInit {
 
   constructor(private userService: UserService) { }
 
-  public user: User = new User(0,'','','','','','','');
+  public user: User = new User(0,'','','','','','','',undefined);
 
   public message: Message = new Message('');
 

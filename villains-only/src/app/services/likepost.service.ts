@@ -3,6 +3,7 @@ import { Post } from '../model/post.model';
 import { User } from '../model/user.model';
 import { UserService } from '../services/user.service';
 import { PostService } from '../services/post.service';
+import { Message } from '../model/message.model';
 
 @Injectable()
 export class LikepostService {
@@ -11,32 +12,33 @@ export class LikepostService {
   constructor(private userService: UserService, private postService: PostService) { }
 
   noMatch = false;
+  public message: Message = new Message('');
   index: number;
 
   likePost(post: Post, user: User) {
-    if (post.likedBy === undefined) {
-      post.likedBy = [];
+    if (!user.likes) {
+      user.likes = [];
     }
-    console.log('Post liked!!');
-    console.log(post.postId + ' User:' + user.firstName);
-    console.log('Likedby length:' + post.likedBy.length);
-    post.likedBy.forEach(element => {
-      if (element.id === user.id) {
+    user.likes.forEach(element => {
+      if (element.postId === post.postId) {
         this.noMatch = true;
       }
     });
     if (this.noMatch == true) {
       console.log('already liked,unliking');
-      this.index = post.likedBy.indexOf(user, 0);
-      post.likedBy.splice(this.index, 1);
+      this.index = user.likes.indexOf(post, 0);
+      user.likes.splice(this.index, 1);
       this.noMatch = false;
     } else {
       console.log('not liked,liking');
-      post.likedBy.push(user);
-      console.log(post.likedBy);
+      user.likes.push(post);
+      console.log(user.likes);
     }
-    this.postService.editPost(post);
     console.log(post);
+    this.userService.editProfile(user).subscribe(message => {
+
+    },
+      error => this.message.text = 'Failed to like');
   }
 
 }

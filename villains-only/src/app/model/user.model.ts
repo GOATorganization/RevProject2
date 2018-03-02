@@ -1,3 +1,5 @@
+import { Post } from "./post.model";
+
 export class User {
     id: number;
     firstName: string;
@@ -7,9 +9,10 @@ export class User {
     lairCity: string;
     lairCountry: string;
     profilePic: string;
+    likes: Post[];
 
     constructor(id: number, firstName: string, lastName: string, email: string,
-        password: string, lairCity: string, lairCountry: string, profilePic: string) {
+        password: string, lairCity: string, lairCountry: string, profilePic: string, likes: Post[]) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -18,6 +21,7 @@ export class User {
         this.lairCity = lairCity;
         this.lairCountry = lairCountry;
         this.profilePic = profilePic;
+        this.likes = likes;
     }
 
 }
