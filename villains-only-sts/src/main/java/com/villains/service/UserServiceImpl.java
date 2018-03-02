@@ -90,7 +90,7 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public void editUser(User user) {
-		userRepository.updateIgnorePass(user);
+		userRepository.update(user);
 
 	}
 
