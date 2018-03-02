@@ -130,7 +130,6 @@ export class UserService {
     }
 
     updateUserCookie(user: User): void {
-        user.password = null;
         console.log(user);
         document.cookie = `user=${JSON.stringify(user)}`;
     }
