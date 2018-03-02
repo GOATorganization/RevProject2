@@ -20,14 +20,14 @@ export class UserService {
     constructor(private http: Http,
         private router: Router) { }
 
-    public setNewPassword(email: string, token:string, password: string, passwordConfirm: string): Observable<Response> {
-        const body = JSON.stringify({email: email, token: token, password: password, passwordConfirm: passwordConfirm});
+    public setNewPassword(email: string, token: string, password: string, passwordConfirm: string): Observable<Response> {
+        const body = JSON.stringify({ email: email, token: token, password: password, passwordConfirm: passwordConfirm });
         console.log("body is " + body);
         const headers = new Headers({ 'Content-Type': 'application/json' });
         const options: RequestOptions = new RequestOptions({ headers: headers });
 
         return this.http
-            .post(`http://localhost:8090/VillainsOnly/setNewPassword.app`, body, options)
+            .post(`/VillainsOnly/setNewPassword.app`, body, options)
             .map((response: Response) => {
                 return response;
             })
@@ -41,7 +41,7 @@ export class UserService {
         const options: RequestOptions = new RequestOptions({ headers: headers });
 
         return this.http
-            .post(`http://localhost:8090/VillainsOnly/registerUser.app`, body, options)
+            .post(`/VillainsOnly/registerUser.app`, body, options)
             .map((response: Response) => {
                 return <Message>response.json();
             })
@@ -53,7 +53,7 @@ export class UserService {
         const headers = new Headers({ 'Content-Type': 'application/json' });
         const options: RequestOptions = new RequestOptions({ headers: headers });
         return this.http
-            .post(`http://localhost:8090/VillainsOnly/requestPasswordReset.app`, body, options)
+            .post(`/VillainsOnly/requestPasswordReset.app`, body, options)
             .map((response: Response) => {
                 return response;
             })
@@ -66,16 +66,26 @@ export class UserService {
         const options: RequestOptions = new RequestOptions({ headers: headers });
 
         return this.http
-            .post(`http://localhost:8090/VillainsOnly/loginUser.app`, body, options)
+            .post(`/VillainsOnly/loginUser.app`, body, options)
             .map((response: Response) => {
                 return <Message>response.json();
             })
             .catch(this.handleError);
     }
 
+    public test(): Observable<Response> {
+        return this.http
+            .get(`/VillainsOnly/test.app`)
+            .map((response: Response) => {
+                console.log(response);
+                return response;
+            })
+            .catch(this.handleError);
+    }
+
     public getAllUser(): Observable<User[]> {
         return this.http
-            .get(`http://localhost:8090/VillainsOnly/getAllUser.app`)
+            .get(`/VillainsOnly/getAllUser.app`)
             .map((response: Response) => {
                 return <User[]>response.json();
             })
@@ -92,7 +102,7 @@ export class UserService {
 
         // update user data in repository
         return this.http
-            .post(`http://localhost:8090/VillainsOnly/updateUserProfile.app`, body, options)
+            .post(`/VillainsOnly/updateUserProfile.app`, body, options)
             .map((response: Response) => {
                 return <Message>response.json();
             })
@@ -107,14 +117,15 @@ export class UserService {
 
         // update user data in repository
         return this.http
-            .post(`http://localhost:8090/VillainsOnly/getUserByEmail.app`, body, options)
+            .post(`/VillainsOnly/getUserByEmail.app`, body, options)
             .map((response: Response) => {
                 return <Message>response.json();
             })
             .catch(this.handleError);
     }
 
-    public updateUserCookie(user: User): void {
+    updateUserCookie(user: User): void {
+        console.log(user);
         document.cookie = `user=${JSON.stringify(user)}`;
     }
 
