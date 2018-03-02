@@ -1,0 +1,34 @@
+<div id='profileView' *ngIf='user'>
+  <h1>{{user.email}}'s Profile</h1>
+
+  <form>
+    <div class="form-group">
+      <img src='{{user.profilePic}}' alt="No profile picture." />
+    </div>
+
+    <div class="form-group">
+      <label for="firstName">First Name:</label>
+      <span id="firstName">{{user.firstName}}</span>
+    </div>
+
+    <div class="form-group">
+      <label for="lastName">Last Name:</label>
+      <span id="lastName">{{user.lastName}}</span>
+    </div>
+
+    <div class="form-group">
+      <label for="email">Email:</label>
+      <span id="email">{{user.email}}</span>
+    </div>
+
+    <div class="form-group">
+      <label for="city">Lair City:</label>
+      <span id="city">{{user.lairCity}}</span>
+    </div>
+
+    <div class="form-group">
+      <label for="country">Lair Location:</label>
+      <span id="country">{{user.lairCountry}}</span>
+    </div>
+  </form>
+</div>

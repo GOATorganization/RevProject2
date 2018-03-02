@@ -7,6 +7,7 @@ import { HomepageComponent } from './homepage/homepage.component';
 import { ProfileComponent } from './profile/profile.component';
 import { ForgotloginComponent } from './forgotlogin/forgotlogin.component';
 import { UpdatepasswordComponent } from './updatepassword/updatepassword.component';
+import { ViewOtherProfileComponent } from './view-other-profile/view-other-profile.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/homepage', pathMatch: 'full' },
@@ -15,7 +16,8 @@ const routes: Routes = [
   { path: 'userprofile', component: ProfileComponent },
   { path: 'postview', component: PostviewComponent },
   { path: 'forgotlogin', component: ForgotloginComponent },
-  { path: 'updatepassword', component: UpdatepasswordComponent }
+  { path: 'updatepassword', component: UpdatepasswordComponent },
+  { path: 'userprofile/:userEmail', component: ViewOtherProfileComponent }
 ];
 
 @NgModule({

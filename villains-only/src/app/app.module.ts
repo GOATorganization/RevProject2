@@ -19,6 +19,7 @@ import { ForgotloginComponent } from './forgotlogin/forgotlogin.component';
 import { LikepostService } from './services/likepost.service';
 import { UpdatepasswordComponent } from './updatepassword/updatepassword.component';
 import { DataService } from './services/data.service';
+import { ViewOtherProfileComponent } from './view-other-profile/view-other-profile.component';
 
 
 @NgModule({
@@ -32,7 +33,8 @@ import { DataService } from './services/data.service';
     ProfileComponent,
     PostviewComponent,
     ForgotloginComponent,
-    UpdatepasswordComponent
+    UpdatepasswordComponent,
+    ViewOtherProfileComponent
   ],
   imports: [
     BrowserModule,
