@@ -1,17 +1,17 @@
-import { Injectable } from "@angular/core";
+import { Injectable } from '@angular/core';
 import { Http, Headers, RequestOptions, Response } from '@angular/http';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 // For Map
-import "rxjs/Rx";
+import 'rxjs/Rx';
 
 import { User } from '../model/user.model';
 import { Message } from '../model/message.model';
 
 import { of } from "rxjs/observable/of";
 import { tap, catchError } from "rxjs/operators";
+import { Router, RouterModule } from '@angular/router';
 import { AwsS3Service } from "./aws-s3.service";
-import { Router, RouterModule } from "@angular/router";
 
 @Injectable()
 export class UserService {
@@ -22,7 +22,7 @@ export class UserService {
 
     public setNewPassword(email: string, token: string, password: string, passwordConfirm: string): Observable<Response> {
         const body = JSON.stringify({ email: email, token: token, password: password, passwordConfirm: passwordConfirm });
-        console.log("body is " + body);
+        console.log('body is ' + body);
         const headers = new Headers({ 'Content-Type': 'application/json' });
         const options: RequestOptions = new RequestOptions({ headers: headers });
 
@@ -125,6 +125,7 @@ export class UserService {
     }
 
     updateUserCookie(user: User): void {
+        console.log(user);
         document.cookie = `user=${JSON.stringify(user)}`;
     }
 
@@ -133,7 +134,7 @@ export class UserService {
     }
 
     getLoggedInUser(): User {
-        let cookieName = "user";
+        let cookieName = 'user';
         let cookieValue = document.cookie.replace(/(?:(?:^|.*;\s*)user\s*\=\s*([^;]*).*$)|^.*$/, "$1")
         return <User>JSON.parse(cookieValue);
     }

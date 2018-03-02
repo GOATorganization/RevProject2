@@ -100,6 +100,7 @@ public class UserServiceImpl implements UserService {
 
 		if (userToCheck != null) {
 			if (user.getPassword().equals(userToCheck.getPassword())) {
+				userToCheck.setPassword(null);
 				return userToCheck;
 			}
 		}

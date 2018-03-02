@@ -24,7 +24,7 @@ export class LikepostService {
         this.noMatch = true;
       }
     });
-    if (this.noMatch == true) {
+    if (this.noMatch === true) {
       console.log('already liked,unliking');
       this.index = user.likes.indexOf(post, 0);
       user.likes.splice(this.index, 1);
