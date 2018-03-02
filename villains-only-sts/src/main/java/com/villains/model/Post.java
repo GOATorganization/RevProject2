@@ -15,6 +15,9 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
@@ -39,7 +42,8 @@ public class Post {
 	private List<Picture> contentsPic;
 	
 	@JsonIgnore
-	@ManyToMany(mappedBy="likes") 
+	@Fetch(FetchMode.SUBSELECT)
+	@ManyToMany(mappedBy="likes", fetch = FetchType.EAGER) 
 	private List<User> likers;
 	
 	public Post() {
@@ -113,8 +117,10 @@ public class Post {
 	@Override
 	public String toString() {
 		return "Post [postId=" + postId + ", userId=" + userId.getUserId() + ", contentsText=" + contentsText + ", contentsPic="
-				+ contentsPic + /*", likeList=" + likeList +*/ "]";
+				+ contentsPic + "]";
 	}
+
+	
 	
 	
 	
