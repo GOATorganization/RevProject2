@@ -8,7 +8,7 @@
 
     <div *ngIf='isInEditMode' class="form-group">
       <label for='profilePicInput'>New profile pic:</label>
-      <input #profilePicInput id='profilePicInput' type="file" class="form-control-file" (change)='changePic(profilePicInput, profilePic)'>
+      <input #profilePicInput id='profilePicInput' type="file" accept="image/jpeg, image/png" class="form-control-file" (change)='changePic(profilePicInput, profilePic)'>
     </div>
 
     <div class="form-group">
