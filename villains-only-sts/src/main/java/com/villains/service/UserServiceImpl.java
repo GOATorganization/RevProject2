@@ -90,7 +90,7 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public void editUser(User user) {
-		userRepository.update(user);
+		userRepository.updateIgnorePass(user);
 
 	}
 
@@ -100,6 +100,7 @@ public class UserServiceImpl implements UserService {
 
 		if (userToCheck != null) {
 			if (user.getPassword().equals(userToCheck.getPassword())) {
+				userToCheck.setPassword(null);
 				return userToCheck;
 			}
 		}

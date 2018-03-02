@@ -130,12 +130,13 @@ export class UserService {
     }
 
     updateUserCookie(user: User): void {
+        user.password = null;
         console.log(user);
         document.cookie = `user=${JSON.stringify(user)}`;
     }
 
     getLoggedInUser(): User {
-        let cookieName = "user";
+        let cookieName = 'user';
         let cookieValue = document.cookie.replace(/(?:(?:^|.*;\s*)user\s*\=\s*([^;]*).*$)|^.*$/, "$1")
         return <User>JSON.parse(cookieValue);
     }

@@ -21,7 +21,15 @@ public class PostServiceImpl implements PostService {
 
 	@Override
 	public List<Post> getAllPost() {
-		return postRepository.getAllPost();
+		List<Post> returner = postRepository.getAllPost();
+		for(int i = 0; i < returner.size(); i++) {
+			User rawUser = returner.get(i).getUserId();
+			rawUser.setPassword(null);
+			rawUser.setLikes(null);
+			rawUser.setPosts(null);
+			returner.get(i).setUserId(rawUser);
+		}
+		return returner;
 	}
 
 	@Override

@@ -22,7 +22,7 @@ export class PostviewComponent implements OnInit {
   private userPost: string;
   private currentUser: User;
 
-  private maxChar: number = 250;
+  private maxChar = 250;
   private charLeft: number;
 
   private rawUrlString: string;
@@ -30,18 +30,20 @@ export class PostviewComponent implements OnInit {
 
 
   constructor(private postService: PostService, private userService: UserService
-    , private pictureService: PictureService, private likepostService : LikepostService) { }
+    , private pictureService: PictureService, private likepostService: LikepostService) { }
 
   getAllPost(): void {
     this.postService.getAllPost().subscribe(
       postsIn => {
         console.log(postsIn);
         for (let i = 0; i < postsIn.length; i++) {
-          // if(this.currentUser.likes.find(function(element){return element == postsIn[i];}))
-          // {
-          //   postsIn[i].liked = true;
-          // }
-          if (postsIn[i].contentsPic.length != 0) {
+          for (let p = 0; p < this.currentUser.likes.length; p++) {
+            if (postsIn[i].postId === this.currentUser.likes[p].postId) {
+              postsIn[i].likedPost = true;
+            }
+          }
+
+          if (postsIn[i].contentsPic.length !== 0) {
             postsIn[i].showHide = true;
           }
         }
@@ -55,9 +57,9 @@ export class PostviewComponent implements OnInit {
 
     this.imageUrl = [];
     let tempPicture: Picture = new Picture(undefined, undefined, undefined);
-    var post = new Post(undefined, this.userPost, undefined, this.currentUser, undefined);
-    if (this.rawUrlString != undefined) {
-      let rawUrl = this.rawUrlString.split(" ");
+    var post = new Post(undefined, this.userPost, undefined, this.currentUser, undefined, undefined);
+    if (this.rawUrlString !== undefined) {
+      let rawUrl = this.rawUrlString.split(' ');
       for (let k = 0; k < rawUrl.length; k++) {
         tempPicture = new Picture(undefined, undefined, rawUrl[k]);
         this.imageUrl[k] = tempPicture;
@@ -66,8 +68,8 @@ export class PostviewComponent implements OnInit {
     post.contentsPic = this.imageUrl;
     console.log(post);
     this.postService.createPost(post).subscribe(
-      post => {
-        console.log(post);
+      posts => {
+        console.log(posts);
       },
       error => this.message.text = 'Failed to post');
 
@@ -87,12 +89,11 @@ export class PostviewComponent implements OnInit {
     this.charLeft = this.maxChar;
     this.currentUser = this.userService.getLoggedInUser();
     console.log(this.currentUser);
-    
   }
 
   likePost(post: Post) {
     this.likepostService.likePost(post, this.userService.getLoggedInUser());
-
+    post.likedPost = !post.likedPost;
   }
 
 }
