@@ -1,3 +1,4 @@
+import { LikepostService } from './../services/likepost.service';
 import { Picture } from './../model/picture.model';
 import { PictureService } from './../services/picture.service';
 import { UserService } from './../services/user.service';
@@ -29,13 +30,17 @@ export class PostviewComponent implements OnInit {
 
 
   constructor(private postService: PostService, private userService: UserService
-    , private pictureService: PictureService) { }
+    , private pictureService: PictureService, private likepostService : LikepostService) { }
 
   getAllPost(): void {
     this.postService.getAllPost().subscribe(
       postsIn => {
         console.log(postsIn);
         for (let i = 0; i < postsIn.length; i++) {
+          // if(this.currentUser.likes.find(function(element){return element == postsIn[i];}))
+          // {
+          //   postsIn[i].liked = true;
+          // }
           if (postsIn[i].contentsPic.length != 0) {
             postsIn[i].showHide = true;
           }
@@ -59,9 +64,10 @@ export class PostviewComponent implements OnInit {
       }
     }
     post.contentsPic = this.imageUrl;
-
+    console.log(post);
     this.postService.createPost(post).subscribe(
       post => {
+        console.log(post);
       },
       error => this.message.text = 'Failed to post');
 
@@ -80,7 +86,13 @@ export class PostviewComponent implements OnInit {
     this.getAllPost();
     this.charLeft = this.maxChar;
     this.currentUser = this.userService.getLoggedInUser();
+    console.log(this.currentUser);
     
+  }
+
+  likePost(post: Post) {
+    this.likepostService.likePost(post, this.userService.getLoggedInUser());
+
   }
 
 }
