@@ -37,7 +37,7 @@ export class HomepageComponent implements OnInit {
            console.log(message.text);
           this.userService.getUserByEmail(this.user).subscribe(user => {
             this.user = user;
-            //this.userService.updateUserCookie(user);
+            this.userService.updateUserCookie(user);
             this.router.navigate(['/postview']);
           });
         }

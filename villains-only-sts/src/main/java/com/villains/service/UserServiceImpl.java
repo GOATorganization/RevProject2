@@ -44,6 +44,16 @@ public class UserServiceImpl implements UserService {
 		this.userRepository = userRepository;
 		this.userValidator = userValidator;
 	}
+	
+	public UserServiceImpl(UserRepository userRepository, UserValidator userValidator, Mailer mailer,
+			TokenGenerator tokenGenerator, PasswordResetTokenRepository tokenRepo) {
+		super();
+		this.userRepository = userRepository;
+		this.userValidator = userValidator;
+		this.mailer = mailer;
+		this.tokenGenerator = tokenGenerator;
+		this.tokenRepo = tokenRepo;
+	}
 
 	@Override
 	public List<User> getAllUser() {
@@ -149,7 +159,8 @@ public class UserServiceImpl implements UserService {
 	public boolean setPassword(PasswordResetVm vm) {
 		User userToCheck = userRepository.findByEmail(vm.getEmail());
 		
-		if (userToCheck != null && userToCheck.getPwResetToken().getToken().equals(vm.getToken())) {
+		if (userToCheck != null && vm.getPassword().equals(vm.getPasswordConfirm()) 
+				&& userToCheck.getPwResetToken().getToken().equals(vm.getToken())) {
 			userToCheck.setPassword(vm.getPassword());		
 			PasswordResetToken oldTok = userToCheck.getPwResetToken();
 			userToCheck.setPwResetToken(null);
