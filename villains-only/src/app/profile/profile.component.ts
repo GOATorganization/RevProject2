@@ -27,6 +27,8 @@ export class ProfileComponent implements OnInit {
   cancelEditingProfile(): void {
     this.isInEditMode = false;
     this.user = this.userService.getLoggedInUser();
+    let profilePic: HTMLImageElement = <HTMLImageElement>document.getElementById('profilePic');
+    profilePic.src = this.user.profilePic;
   }
 
   submitProfileChanges(): void {
