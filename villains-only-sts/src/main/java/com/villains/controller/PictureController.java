@@ -43,13 +43,13 @@ public class PictureController {
 	
 	@PostMapping("addPicture.app")
 	public @ResponseBody ResponseEntity<Message> addPicture(@RequestBody Picture picture){
-		System.out.println(picture.getPostId().getPostId());
 		pictureService.addPicture(picture);
 		return new ResponseEntity<>(new Message("Picture Successfully Uploaded!"), HttpStatus.OK);
 	}
 	
 	@PostMapping("editPicture.app")
 	public @ResponseBody ResponseEntity<Message> editPicture(@RequestBody Picture picture){
+		pictureService.editPicture(picture);
 		return new ResponseEntity<>(new Message("Picture Successfully Changed!"), HttpStatus.OK);
 	}
 	
@@ -57,6 +57,11 @@ public class PictureController {
 	public @ResponseBody ResponseEntity<Message> deletePicture(@RequestBody Picture picture){
 		pictureService.removePicture(picture);
 		return new ResponseEntity<>(new Message("Picture Successfully Deleted!"), HttpStatus.OK);
+	}
+	
+	@PostMapping("getPictureByUrl")
+	public @ResponseBody ResponseEntity<Picture> getPictureByUrl(@RequestBody String url) {
+		return new ResponseEntity<>(pictureService.getPictureByUrl(url), HttpStatus.OK);
 	}
 	
 }

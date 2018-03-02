@@ -3,9 +3,8 @@ package com.villains.service;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.springframework.stereotype.Service;
 import org.springframework.beans.factory.annotation.Autowired;
-
+import org.springframework.stereotype.Service;
 
 import com.villains.model.Picture;
 import com.villains.model.Post;
@@ -60,4 +59,13 @@ public class PictureServiceImpl implements PictureService {
 
 	}
 
+	/* (non-Javadoc)
+	 * @see com.villains.service.PictureService#getPictureByUrl(java.lang.String)
+	 */
+	@Override
+	public Picture getPictureByUrl(String url) {
+		return pictureRepository.getPictureByUrl(url);
+	}
+	
+	
 }
