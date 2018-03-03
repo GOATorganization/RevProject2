@@ -51,8 +51,7 @@ public class Post {
 	private List<Picture> contentsPic;
 	
 	@JsonIgnore
-	@Fetch(FetchMode.SUBSELECT)
-	@ManyToMany(mappedBy="likes", fetch = FetchType.EAGER) 
+	@ManyToMany(mappedBy="likes", fetch = FetchType.LAZY) 
 	private List<User> likers;
 	
 	public Post() {
