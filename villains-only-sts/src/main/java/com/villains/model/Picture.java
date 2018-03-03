@@ -25,7 +25,7 @@ public class Picture {
 	@JoinColumn(name="post_id")
 	private Post post;
 	
-	@Column(name="picture_url", nullable = false, columnDefinition = "NVARCHAR(MAX)")
+	@Column(name="picture_url", nullable = false)
 	private String pictureUrl;
 	
 	public Picture() {
