@@ -57,7 +57,7 @@
                             {{post.contentsText}}
                         </p>
                     </div>
-                    <div class="card-block">
+                    <div class="card-block" *ngIf="post.userId.userId != currentUser.userId">
                         <a class="btn btn-primary thumbsup " (click)="likePost(post)" *ngIf="!post.likedPost">
                             <img class="thumbs" src="assets/icons/thumbsup.svg" alt="Thumbsup">Evil
                         </a>

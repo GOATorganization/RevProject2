@@ -62,6 +62,7 @@ public class User {
 	@OneToMany(mappedBy = "postId" ,fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	private List<Post> posts;
 
+	@JsonIgnore
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name="password_reset_id", nullable = true)
 	private PasswordResetToken pwResetToken;
@@ -217,7 +218,7 @@ public class User {
 	public String toString() {
 		return "User [userId=" + userId + ", firstName=" + firstName + ", lastName=" + lastName + ", email=" + email
 				+ ", password=" + password + ", lairCity=" + lairCity + ", lairCountry=" + lairCountry + ", profilePic="
-				+ profilePic + ", posts=" + posts + ", pwResetToken=" + pwResetToken + ", likes=" + likes + "]";
+				+ profilePic + ", pwResetToken=" + pwResetToken + ", likes=" + likes + "]";
 	}
 
 	
