@@ -24,6 +24,7 @@ public class PostServiceImpl implements PostService {
 		List<Post> returner = postRepository.getAllPost();
 		for(int i = 0; i < returner.size(); i++) {
 			User rawUser = returner.get(i).getUserId();
+			returner.get(i).setLikers(null);
 			rawUser.setPassword(null);
 			rawUser.setLikes(null);
 			rawUser.setPosts(null);
