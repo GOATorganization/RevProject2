@@ -1,5 +1,7 @@
 package com.villains.controller;
 
+import java.util.EnumSet;
+import java.util.Enumeration;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -16,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.villains.model.Post;
 import com.villains.model.User;
 import com.villains.pojo.Message;
 import com.villains.pojo.PasswordResetVm;
@@ -158,6 +161,29 @@ public class UserController {
 		}
 		else
 			return new ResponseEntity<>(HttpStatus.FORBIDDEN);
+	}
+	
+	@PostMapping("/getUserLikes.app")
+	public @ResponseBody ResponseEntity<List<Post>> getUserLikes(@RequestBody User user) {
+		System.out.println("controller has been hit");
+		return new ResponseEntity<List<Post>>(userService.getUserLikes(user), HttpStatus.OK);
+	}
+	
+	@PostMapping("/addLike.app")
+	public @ResponseBody ResponseEntity<Message> addLike(HttpSession session, @RequestBody List<Post> post) {
+		System.out.println(post);
+		
+		Enumeration attributeNames = session.getAttributeNames();
+		while (attributeNames.hasMoreElements()) {
+			System.out.println(attributeNames.nextElement());
+		}
+		User blankUser = new User();
+		blankUser.setEmail(session.getAttribute("email").toString());
+		User editUser = userService.findUserByEmail(blankUser);
+		System.out.println(editUser);
+		editUser.setLikes(post);
+		userService.editUser(editUser);
+		return new ResponseEntity<>(new Message("Success"), HttpStatus.OK); //new ResponseEntity<List<Post>>(userService.getUserLikes(user), HttpStatus.OK);
 	}
 
 }

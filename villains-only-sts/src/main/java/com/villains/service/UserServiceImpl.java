@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.villains.model.PasswordResetToken;
+import com.villains.model.Post;
 import com.villains.model.User;
 import com.villains.pojo.PasswordResetVm;
 import com.villains.repository.PasswordResetTokenRepository;
@@ -100,6 +101,7 @@ public class UserServiceImpl implements UserService {
 
 		if (userToCheck != null) {
 			if (user.getPassword().equals(userToCheck.getPassword())) {
+				userToCheck.setPassword(null);
 				return userToCheck;
 			}
 		}
@@ -173,6 +175,21 @@ public class UserServiceImpl implements UserService {
 		}
 		else
 			return false;
+	}
+
+	@Override
+	public List<Post> getUserLikes(User user) {
+		List<Post> returner = userRepository.findByEmail(user.getEmail()).getLikes();
+		System.out.println(returner.size());
+		for(int i = 0; i < returner.size(); i++) {
+			
+			User rawUser = returner.get(i).getUserId();
+			rawUser.setPassword(null);
+			rawUser.setLikes(null);
+			rawUser.setPosts(null);
+			returner.get(i).setUserId(rawUser);
+		}
+		return returner;
 	}
 
 }

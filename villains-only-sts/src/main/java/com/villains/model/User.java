@@ -67,6 +67,7 @@ public class User {
 	@JoinColumn(name="password_reset_id", nullable = true)
 	private PasswordResetToken pwResetToken;
 
+	@JsonIgnore
 	@Fetch(FetchMode.SUBSELECT)
 	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@JoinTable(name="likes", 
@@ -218,7 +219,7 @@ public class User {
 	public String toString() {
 		return "User [userId=" + userId + ", firstName=" + firstName + ", lastName=" + lastName + ", email=" + email
 				+ ", password=" + password + ", lairCity=" + lairCity + ", lairCountry=" + lairCountry + ", profilePic="
-				+ profilePic + ", posts=" + posts + ", pwResetToken=" + pwResetToken + ", likes=" + likes + "]";
+				+ profilePic + ", pwResetToken=" + pwResetToken + ", likes=" + likes + "]";
 	}
 
 	
