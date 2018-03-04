@@ -15,8 +15,11 @@ export class LikepostService {
   public message: Message = new Message('');
   index: number;
 
+  
+
   likePost(post: Post, user: User) {
     if (!user.likes) {
+      console.log(user.likes);
       user.likes = [];
     }
     user.likes.forEach(element => {
@@ -35,7 +38,7 @@ export class LikepostService {
       console.log(user.likes);
     }
     console.log(post);
-    this.userService.editProfile(user).subscribe(message => {
+    this.userService.addLike(user.likes).subscribe(message => {
 
     },
       error => this.message.text = 'Failed to like');
