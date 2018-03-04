@@ -67,6 +67,7 @@ public class User {
 	@JoinColumn(name="password_reset_id", nullable = true)
 	private PasswordResetToken pwResetToken;
 
+	@JsonIgnore
 	@Fetch(FetchMode.SUBSELECT)
 	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@JoinTable(name="likes", 

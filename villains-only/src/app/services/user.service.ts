@@ -1,3 +1,4 @@
+import { Post } from './../model/post.model';
 import { Injectable } from '@angular/core';
 import { Http, Headers, RequestOptions, Response } from '@angular/http';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
@@ -146,6 +147,33 @@ export class UserService {
 
     private handleError(error: Response) {
         return Observable.throw(error.statusText);
+    }
+
+    getUserLikes(user: User): Observable<Post[]> {
+        this.updateUserCookie(user);
+        const headers = new Headers({ 'Content-Type': 'application/json' });
+        const options: RequestOptions = new RequestOptions({ headers: headers });
+        const body = JSON.stringify(user);
+
+        return this.http
+            .post(`/VillainsOnly/getUserLikes.app`, body, options)
+            .map((response: Response) => {
+                return <Post[]>response.json();
+            })
+            .catch(this.handleError);
+    }
+
+    addLike(likedPost : Post[]) : Observable<Message>{
+        const body = JSON.stringify(likedPost);
+        const headers = new Headers({ 'Content-Type': 'application/json' });
+        const options: RequestOptions = new RequestOptions({ headers: headers });
+        
+        return this.http   
+            .post(`/VillainsOnly/addLike.app`, body, options)
+            .map((response: Response) => {
+                return <Message>response.json();
+            })
+            .catch(this.handleError);
     }
 
 }
