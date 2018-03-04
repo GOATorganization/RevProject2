@@ -19,10 +19,6 @@
         <input type="text" class="form-control" [(ngModel)]="user.lastName" placeholder="Last Name">
       </div>
 
-
-      <div *ngIf="invalidEmail" class="alert alert-danger">
-        <strong>Not a valid email address</strong>
-      </div>
       <div *ngIf="requiredFieldsMissing" class="alert alert-danger">
         <strong>All fields are required</strong>
       </div>
