@@ -1,22 +1,31 @@
-<button class="btn btn-primary" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-  Join Now!
-</button>
 
-<div class="dropdown-menu dropdown-size light-back" aria-labelledby="dropdownMenuButton">
-  <div class= "dropdown-ele">
-    <div class="form-group ">
-      <input type="email" class="form-control" [(ngModel)]="user.email" placeholder="Email Address">
-    </div>
-    <div class="form-group">
-      <input type="password" class="form-control" [(ngModel)]="user.password" placeholder="Password">
-    </div>
-    <div class="form-group">
-      <input type="text" class="form-control" [(ngModel)]="user.firstName" placeholder="First Name">
-    </div>
-    <div class="form-group">
-      <input type="text" class="form-control" [(ngModel)]="user.lastName" placeholder="Last Name">
-    </div>
+<div class="light-back">
+      <div class="form-group ">
+        <input type="email" class="form-control" [(ngModel)]="user.email" placeholder="Email Address">
+      </div>
+      <div *ngIf="invalidEmail" class="alert alert-danger">
+          <strong>Not a valid email address</strong>
+        </div>
+      <div class="form-group">
+        <input type="password" class="form-control" [(ngModel)]="user.password" placeholder="Password">
+      </div>
+      <div *ngIf="invalidPassword" class="alert alert-danger">
+          <strong>Password must be greater than 8 characters</strong>
+      </div>
+      <div class="form-group">
+        <input type="text" class="form-control" [(ngModel)]="user.firstName" placeholder="First Name">
+      </div>
+      <div class="form-group">
+        <input type="text" class="form-control" [(ngModel)]="user.lastName" placeholder="Last Name">
+      </div>
 
-    <button (click)="registerUser()" class="btn btn-primary">Get Started</button>
+
+      <div *ngIf="invalidEmail" class="alert alert-danger">
+        <strong>Not a valid email address</strong>
+      </div>
+      <div *ngIf="requiredFieldsMissing" class="alert alert-danger">
+        <strong>All fields are required</strong>
+      </div>
+  
+      <button (click)="registerUser()" class="btn btn-primary">Get Started</button>
   </div>
-</div>

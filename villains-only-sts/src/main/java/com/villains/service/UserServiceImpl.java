@@ -130,9 +130,11 @@ public class UserServiceImpl implements UserService {
 
 			String emailSubject = "Password Reset Request";
 
-			String emailBody = "Click " + "<a href=\"http://localhost:4200/updatepassword?email="
-					+ userToCheck.getEmail() + "&token=" + newTokenStr + "\">" + "here" + "</a>"
-					+ " to reset your password.";
+//			String emailBody = "Click " + "<a href=\"http://localhost:4200/updatepassword?email="
+//					+ userToCheck.getEmail() + "&token=" + newTokenStr + "\">" + "here" + "</a>"
+//					+ " to reset your password.";
+			
+			String emailBody = "Your token is: " + newTokenStr;
 
 			mailer.send("villains.only.do.not.reply@gmail.com", "p4ssw0rd123", user.getEmail(), emailSubject,
 					emailBody);
