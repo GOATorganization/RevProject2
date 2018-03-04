@@ -92,7 +92,11 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public void editUser(User user) {
 		userRepository.update(user);
-
+	}
+	
+	@Override
+	public void editUserIgnorePass(User user) {
+		userRepository.updateIgnorePass(user);
 	}
 
 	@Override
@@ -173,11 +177,6 @@ public class UserServiceImpl implements UserService {
 		}
 		else
 			return false;
-	}
-
-	@Override
-	public void editUserIgnorePass(User user) {
-		userRepository.updateIgnorePass(user);
 	}
 
 	public List<Post> getUserLikes(User user) {
