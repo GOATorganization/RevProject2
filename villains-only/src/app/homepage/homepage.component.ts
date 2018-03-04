@@ -16,9 +16,16 @@ export class HomepageComponent implements OnInit {
   public user: User = new User(0,'','','','','','','', undefined);
 
   public message: Message = new Message('');
+  public loginFailure: boolean = false;
+  public showRegister: boolean = false;
 
   ngOnInit() {
     
+  }
+
+  showRegisterToggle(){
+    this.showRegister = !this.showRegister;
+    console.log(this.showRegister);
   }
 
   getUserLikes(): void{
@@ -56,6 +63,7 @@ export class HomepageComponent implements OnInit {
         }
         else {
           console.log(message.text);
+          this.loginFailure = true;
         }
   },
   error => {this.message.text = 'Something went wrong logging in.'; console.log(this.message.text)});

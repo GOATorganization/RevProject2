@@ -142,9 +142,9 @@ public class UserController {
 	public @ResponseBody ResponseEntity<Message> requestPasswordReset(HttpSession session, @RequestBody User user) {
 
 		if (userService.processResetRequest(user))
-			return new ResponseEntity<>(HttpStatus.OK);
+			return new ResponseEntity<>(new Message("SUCCESS"), HttpStatus.OK);
 		else
-			return new ResponseEntity<>(HttpStatus.FORBIDDEN);
+			return new ResponseEntity<>(new Message("FAILURE"), HttpStatus.OK);
 	}
 
 	/**
