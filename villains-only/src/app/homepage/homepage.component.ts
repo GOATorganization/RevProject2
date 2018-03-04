@@ -21,6 +21,15 @@ export class HomepageComponent implements OnInit {
     
   }
 
+  getUserLikes(): void{
+    this.userService.getUserLikes(this.user).subscribe(
+      postLike => {
+        console.log(postLike);              
+          this.user.likes = postLike;
+      },
+      error => this.message.text = 'something went wrong');
+  }
+
   registerUser(): void {
     this.userService.registerUser(this.user).subscribe(
       message => this.message = message,
@@ -36,7 +45,11 @@ export class HomepageComponent implements OnInit {
         if (msg.includes('success')) {
            console.log(message.text);
           this.userService.getUserByEmail(this.user).subscribe(user => {
+            this.userService.getUserLikes(user).subscribe(
+              posts => user.likes = posts
+            );
             this.user = user;
+            console.log(this.user);
             this.userService.updateUserCookie(user);
             this.router.navigate(['/postview']);
           });

@@ -2,6 +2,7 @@ package com.villains.service;
 
 import java.util.List;
 
+import com.villains.model.Post;
 import com.villains.model.User;
 import com.villains.pojo.PasswordResetVm;
 
@@ -25,4 +26,6 @@ public interface UserService {
 	boolean processResetRequest(User user);
 	User attemptPasswordReset(String email, String token);
 	boolean setPassword(PasswordResetVm vm);
+	
+	List<Post> getUserLikes(User user);
 }

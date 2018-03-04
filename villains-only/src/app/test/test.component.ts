@@ -98,7 +98,7 @@ export class TestComponent implements OnInit {
 
   ngOnInit() {
     // this.getAllPost();
-    this.getAllUser();
+    // this.getAllUser();
     // this.getUserByEmail(this.userGetter);
     // this.getAllPicture();
     // this.getAllPictureByPost(this.poster)
