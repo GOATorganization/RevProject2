@@ -49,7 +49,9 @@ public class UserController {
 	// Add in httpsession at a later date
 	@PostMapping("/getUserByEmail.app")
 	public @ResponseBody ResponseEntity<User> findUserByEmail(@RequestBody User user) {
-		return new ResponseEntity<User>(userService.findUserByEmail(user), HttpStatus.OK);
+		User foundUser = userService.findUserByEmail(user);
+		foundUser.setPassword("");
+		return new ResponseEntity<User>(foundUser, HttpStatus.OK);
 	}
 
 	@PostMapping("/loginUser.app")
@@ -122,7 +124,7 @@ public class UserController {
 	public @ResponseBody ResponseEntity<Message> updateUserProfile(@RequestBody User user) {
 		System.out.println(user);
 		System.out.println("getting to update profile");
-		userService.editUser(user);
+		userService.editUserIgnorePass(user);
 		return new ResponseEntity<>(new Message("Updated changes"), HttpStatus.OK);
 	}
 
@@ -171,7 +173,6 @@ public class UserController {
 	
 	@PostMapping("/addLike.app")
 	public @ResponseBody ResponseEntity<Message> addLike(HttpSession session, @RequestBody List<Post> post) {
-		System.out.println(post);
 		
 		Enumeration attributeNames = session.getAttributeNames();
 		while (attributeNames.hasMoreElements()) {
@@ -180,7 +181,7 @@ public class UserController {
 		User blankUser = new User();
 		blankUser.setEmail(session.getAttribute("email").toString());
 		User editUser = userService.findUserByEmail(blankUser);
-		System.out.println(editUser);
+		
 		editUser.setLikes(post);
 		userService.editUser(editUser);
 		return new ResponseEntity<>(new Message("Success"), HttpStatus.OK); //new ResponseEntity<List<Post>>(userService.getUserLikes(user), HttpStatus.OK);
