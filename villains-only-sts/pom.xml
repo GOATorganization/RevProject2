@@ -90,5 +90,13 @@
 			<version>6.0.7.Final</version>
 		</dependency>
 
+		<!-- https://mvnrepository.com/artifact/org.springframework/spring-aspects -->
+		<dependency>
+		    <groupId>org.springframework</groupId>
+		    <artifactId>spring-aspects</artifactId>
+		    <version>4.3.7.RELEASE</version>
+		</dependency>
+
+
 	</dependencies>
 </project>
