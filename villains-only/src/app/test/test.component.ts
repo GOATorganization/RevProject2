@@ -24,7 +24,7 @@ export class TestComponent implements OnInit {
 
   private userGrabber: User; 
   private userGetter = new User(1, '', '', 'Email@email.com', '', '' ,'', '',undefined);
-  private poster = new Post(6, '', undefined, this.userGetter, undefined);
+  private poster = new Post(6, '', undefined, this.userGetter, undefined, undefined);
 
   constructor(private userService: UserService, private postService :PostService
     ,private pictureService : PictureService) { }
@@ -97,7 +97,7 @@ export class TestComponent implements OnInit {
 
 
   ngOnInit() {
-    // this.getAllPost(); 
+    // this.getAllPost();
     // this.getAllUser();
     // this.getUserByEmail(this.userGetter);
     // this.getAllPicture();

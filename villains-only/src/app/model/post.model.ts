@@ -7,14 +7,17 @@ export class Post {
     contentsPic: Picture[];
     userId: User;
     likers: User[];
+    currDate: Date;
 
     showHide = false;
+    likedPost = false;
 
-    constructor(postId: number, contentsText: string, contentsPic: Picture[], userId: User, likers: User[]) {
+    constructor(postId: number, contentsText: string, contentsPic: Picture[], userId: User, currDate: Date, likers: User[]) {
         this.postId = postId;
         this.contentsText = contentsText;
         this.contentsPic = contentsPic;
         this.userId = userId;
         this.likers = likers;
+        this.currDate = currDate;
     }
 }
