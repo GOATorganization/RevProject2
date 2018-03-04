@@ -41,15 +41,19 @@ public class UserController {
 			return new ResponseEntity<>(new Message("FAILED TO REGISTER HERO"), HttpStatus.OK);
 	}
 
-	@GetMapping("/getAllUser.app")
-	public @ResponseBody ResponseEntity<List<User>> getAllUser() {
-		return new ResponseEntity<>(userService.getAllUser(), HttpStatus.OK);
-	}
-
+	/*
+	 * @GetMapping("/getAllUser.app") public @ResponseBody
+	 * ResponseEntity<List<User>> getAllUser() { return new
+	 * ResponseEntity<>(userService.getAllUser(), HttpStatus.OK); }
+	 */
 	// Add in httpsession at a later date
 	@PostMapping("/getUserByEmail.app")
-	public @ResponseBody ResponseEntity<User> findUserByEmail(@RequestBody User user) {
-		return new ResponseEntity<User>(userService.findUserByEmail(user), HttpStatus.OK);
+	public @ResponseBody ResponseEntity<User> findUserByEmail(HttpSession session, @RequestBody User user) {
+		if (session.getAttribute("id") != null) {
+			return new ResponseEntity<User>(userService.findUserByEmail(user), HttpStatus.OK);
+		} else
+			return new ResponseEntity<User>(HttpStatus.UNAUTHORIZED);
+
 	}
 
 	@PostMapping("/loginUser.app")
@@ -68,16 +72,16 @@ public class UserController {
 		} else
 			return new ResponseEntity<>(new Message("BAD CREDENTIALS"), HttpStatus.OK);
 	}
-	
-	@GetMapping("/test.app")
-	public @ResponseBody ResponseEntity<Message> test(HttpSession session) {
-		String email = (String)session.getAttribute("email");
-		Integer id = (Integer)session.getAttribute("id");
-		
-		System.out.println(email + " " + id);
-				
-		return new ResponseEntity<>(new Message("TEST COMPLETE"), HttpStatus.OK);
-	}
+
+	// @GetMapping("/test.app")
+	// public @ResponseBody ResponseEntity<Message> test(HttpSession session) {
+	// String email = (String)session.getAttribute("email");
+	// Integer id = (Integer)session.getAttribute("id");
+	//
+	// System.out.println(email + " " + id);
+	//
+	// return new ResponseEntity<>(new Message("TEST COMPLETE"), HttpStatus.OK);
+	// }
 
 	/**
 	 * Checks the currently logged in user based on the session.
@@ -87,11 +91,15 @@ public class UserController {
 	 */
 	@GetMapping("/loggedInUser.app")
 	public @ResponseBody ResponseEntity<User> getLoggedInUser(HttpSession session) {
-		String email = (String) session.getAttribute("email");
-		System.out.println("From UserController: getLoggedInUser(HttpSession session): email from session: " + session);
-		User user = userService.findUserByEmail(email);
-		System.out.println(user);
-		return new ResponseEntity<>(user, HttpStatus.OK);
+		if (session.getAttribute("id") != null) {
+			String email = (String) session.getAttribute("email");
+			System.out.println(
+					"From UserController: getLoggedInUser(HttpSession session): email from session: " + session);
+			User user = userService.findUserByEmail(email);
+			System.out.println(user);
+			return new ResponseEntity<>(user, HttpStatus.OK);
+		} else
+			return new ResponseEntity<User>(HttpStatus.UNAUTHORIZED);
 	}
 
 	@GetMapping("/resetPassword.app")
@@ -119,11 +127,14 @@ public class UserController {
 	 *         message
 	 */
 	@PostMapping("/updateUserProfile.app")
-	public @ResponseBody ResponseEntity<Message> updateUserProfile(@RequestBody User user) {
-		System.out.println(user);
-		System.out.println("getting to update profile");
-		userService.editUser(user);
-		return new ResponseEntity<>(new Message("Updated changes"), HttpStatus.OK);
+	public @ResponseBody ResponseEntity<Message> updateUserProfile(HttpSession session, @RequestBody User user) {
+		if (session.getAttribute("id") != null) {
+			System.out.println(user);
+			System.out.println("getting to update profile");
+			userService.editUser(user);
+			return new ResponseEntity<>(new Message("Updated changes"), HttpStatus.OK);
+		} else
+			return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
 	}
 
 	/**
@@ -135,8 +146,7 @@ public class UserController {
 	 * 
 	 */
 	@PostMapping("/requestPasswordReset.app")
-	public @ResponseBody ResponseEntity<Message> requestPasswordReset(HttpSession session, @RequestBody User user) {
-
+	public @ResponseBody ResponseEntity<Message> requestPasswordReset(@RequestBody User user) {
 		if (userService.processResetRequest(user))
 			return new ResponseEntity<>(new Message("SUCCESS"), HttpStatus.OK);
 		else
@@ -152,27 +162,30 @@ public class UserController {
 	 * 
 	 */
 	@PostMapping("/setNewPassword.app")
-	public @ResponseBody ResponseEntity<Message> setNewPassword(HttpSession session, @RequestBody PasswordResetVm vm) {
+	public @ResponseBody ResponseEntity<Message> setNewPassword(@RequestBody PasswordResetVm vm) {
 		boolean success = false;
 
 		if (vm.getPassword().equals(vm.getPasswordConfirm())) {
 			success = userService.setPassword(vm);
 			return new ResponseEntity<>(new Message(String.valueOf(success)), HttpStatus.OK);
-		}
-		else
+		} else
 			return new ResponseEntity<>(HttpStatus.FORBIDDEN);
 	}
-	
+
 	@PostMapping("/getUserLikes.app")
-	public @ResponseBody ResponseEntity<List<Post>> getUserLikes(@RequestBody User user) {
-		System.out.println("controller has been hit");
-		return new ResponseEntity<List<Post>>(userService.getUserLikes(user), HttpStatus.OK);
+	public @ResponseBody ResponseEntity<List<Post>> getUserLikes(HttpSession session, @RequestBody User user) {
+		if (session.getAttribute("id") != null) {
+			System.out.println("controller has been hit");
+			return new ResponseEntity<List<Post>>(userService.getUserLikes(user), HttpStatus.OK);
+		} else
+			return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
 	}
-	
+
 	@PostMapping("/addLike.app")
-	public @ResponseBody ResponseEntity<Message> addLike(HttpSession session, @RequestBody List<Post> post) {
+	public @ResponseBody ResponseEntity<Message> addLike(HttpSession session, @RequestBody List<Post> post) {	
+		if (session.getAttribute("id") != null) {
 		System.out.println(post);
-		
+
 		Enumeration attributeNames = session.getAttributeNames();
 		while (attributeNames.hasMoreElements()) {
 			System.out.println(attributeNames.nextElement());
@@ -183,7 +196,12 @@ public class UserController {
 		System.out.println(editUser);
 		editUser.setLikes(post);
 		userService.editUser(editUser);
-		return new ResponseEntity<>(new Message("Success"), HttpStatus.OK); //new ResponseEntity<List<Post>>(userService.getUserLikes(user), HttpStatus.OK);
+		return new ResponseEntity<>(new Message("Success"), HttpStatus.OK); // new
+																			// ResponseEntity<List<Post>>(userService.getUserLikes(user),
+																			// HttpStatus.OK);
+		}
+		else
+			return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
 	}
 
 }
