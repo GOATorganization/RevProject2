@@ -121,10 +121,12 @@ public class UserController {
 	 *         message
 	 */
 	@PostMapping("/updateUserProfile.app")
-	public @ResponseBody ResponseEntity<Message> updateUserProfile(@RequestBody User user) {
-		System.out.println(user);
-		System.out.println("getting to update profile");
+	public @ResponseBody ResponseEntity<Message> updateUserProfile(@RequestBody User user, HttpSession session) {
 		userService.editUserIgnorePass(user);
+		
+		// update session incase user makes changes to it and references are made to it server side
+		session.setAttribute("email", user.getEmail());
+		session.setAttribute("id", user.getUserId());
 		return new ResponseEntity<>(new Message("Updated changes"), HttpStatus.OK);
 	}
 
