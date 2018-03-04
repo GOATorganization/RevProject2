@@ -2,6 +2,7 @@ package com.villains.repository;
 
 import java.util.List;
 
+import org.hibernate.Query;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -60,6 +61,24 @@ public class UserRepositoryImpl implements UserRepository {
 	@Override
 	public void update(User user) {
 		sessionFactory.getCurrentSession().update(user);
+	}
+
+	@Override
+	public void updateIgnorePass(User user) {
+		String hql = "UPDATE User set USER_EMAIL = :email, F_NAME = :fname,"
+				+ " L_NAME = :lname, LAIR_CITY = :lairCity,"
+				+ "LAIR_COUNTRY = :lairCountry, PROFILEPIC = :profilePic "  + 
+	             "WHERE USER_ID = :villainId";
+		Query query = sessionFactory.getCurrentSession().createQuery(hql);
+		query.setParameter("email", user.getEmail());
+		query.setParameter("fname", user.getFirstName());
+		query.setParameter("lname", user.getLastName());
+		query.setParameter("lairCity", user.getLairCity());
+		query.setParameter("lairCountry", user.getLairCountry());
+		query.setParameter("profilePic", user.getProfilePic());
+		query.setParameter("villainId", user.getUserId());
+		int result = query.executeUpdate();
+		
 	}
 
 }
