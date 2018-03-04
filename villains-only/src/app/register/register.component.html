@@ -1,34 +1,7 @@
 
-<!-- 
-<div class="dropdown-menu dropdown-size light-back" aria-labelledby="dropdownMenuButton">
-  <div class= "dropdown-ele">
-    <div class="form-group ">
-      <input type="email" class="form-control" [(ngModel)]="user.email" placeholder="Email Address" (blur)="validateEmail($event.target.value)">
-    </div>
-    <div *ngIf="invalidEmail" class="alert alert-danger">
-        <strong>Not a valid email address</strong>
-      </div>
-    <div class="form-group">
-      <input type="password" class="form-control" [(ngModel)]="user.password" placeholder="Password">
-    </div>
-    <div *ngIf="invalidPassword" class="alert alert-danger">
-        <strong>Password must be greater than 8 and less than 64 characters.</strong>
-      </div>
-    <div class="form-group">
-      <input type="text" class="form-control" [(ngModel)]="user.firstName" placeholder="First Name">
-    </div>
-    <div class="form-group">
-      <input type="text" class="form-control" [(ngModel)]="user.lastName" placeholder="Last Name">
-    </div>
-
-    <button (click)="registerUser()" class="btn btn-primary">Get Started</button>
-  </div>
-</div> -->
-
-
 <div class="light-back">
       <div class="form-group ">
-        <input type="email" class="form-control" [(ngModel)]="user.email" placeholder="Email Address" (blur)="validateEmail($event.target.value)">
+        <input type="email" class="form-control" [(ngModel)]="user.email" placeholder="Email Address">
       </div>
       <div *ngIf="invalidEmail" class="alert alert-danger">
           <strong>Not a valid email address</strong>
@@ -37,7 +10,7 @@
         <input type="password" class="form-control" [(ngModel)]="user.password" placeholder="Password">
       </div>
       <div *ngIf="invalidPassword" class="alert alert-danger">
-          <strong>Password must be greater than 8 and less than 64 characters.</strong>
+          <strong>Password must be greater than 8 characters</strong>
       </div>
       <div class="form-group">
         <input type="text" class="form-control" [(ngModel)]="user.firstName" placeholder="First Name">
@@ -46,8 +19,9 @@
         <input type="text" class="form-control" [(ngModel)]="user.lastName" placeholder="Last Name">
       </div>
 
-      <div *ngIf="requiredFieldsMissing" class="alert alert-danger">
-        <strong>All fields are required</strong>
+
+      <div *ngIf="invalidEmail" class="alert alert-danger">
+        <strong>Not a valid email address</strong>
       </div>
       <div *ngIf="requiredFieldsMissing" class="alert alert-danger">
         <strong>All fields are required</strong>

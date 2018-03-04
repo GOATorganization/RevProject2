@@ -20,7 +20,8 @@ export class RegisterComponent implements OnInit {
   public requiredFieldsMissing: boolean = false;
 
   registerUser(): void {
-    if (this.validateRequiredInputs()) {
+    if (this.validateRequiredInputs() && this.validateEmail(this.user.email) 
+        && this.validatePassword(this.user.password)) {
       this.userService.registerUser(this.user).subscribe(
         message => this.message = message,
         error => this.message.text = 'Something went wrong.');
@@ -35,6 +36,8 @@ export class RegisterComponent implements OnInit {
       this.invalidEmail = true;
     else
       this.invalidEmail = false;
+
+    return !this.invalidEmail;
   }
 
   validatePassword(password: string) {
@@ -42,18 +45,19 @@ export class RegisterComponent implements OnInit {
       this.invalidPassword = true;
     else
       this.invalidPassword = false;
+
+    return !this.invalidPassword;
   }
 
   validateRequiredInputs(): boolean {
     if (this.user.email.length == 0 || this.user.password.length == 0 ||
       this.user.firstName.length == 0 || this.user.lastName.length == 0) {
       this.requiredFieldsMissing = true;
-      return false;
     }
-    else {
+    else
       this.requiredFieldsMissing = false;
-      return true;
-    }
+
+    return !this.requiredFieldsMissing;
   }
 
   ngOnInit() {

@@ -21,7 +21,7 @@ export class ForgotloginComponent implements OnInit {
   public emailNotFound: boolean = false;
   public emailSent: boolean = false;
   public response: Response;
-  public token: string;
+  public token: string = '';
 
   requestPasswordReset(): void {
     this.userService.requestPasswordReset(this.user).subscribe(
