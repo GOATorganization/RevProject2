@@ -96,6 +96,7 @@ export class PostviewComponent implements OnInit {
 
   ngOnInit() {
     this.currentUser = this.userService.getLoggedInUser();
+    console.log(this.currentUser);
     this.getUserLikes();
     this.charLeft = this.maxChar;
     
@@ -104,7 +105,7 @@ export class PostviewComponent implements OnInit {
   }
 
   likePost(post: Post) {
-    this.likepostService.likePost(post, this.userService.getLoggedInUser());
+    this.likepostService.likePost(post, this.currentUser);
     post.likedPost = !post.likedPost;
   }
 

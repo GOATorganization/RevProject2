@@ -131,7 +131,6 @@ export class UserService {
     }
 
     updateUserCookie(user: User): void {
-        console.log(user);
         document.cookie = `user=${JSON.stringify(user)}`;
     }
 
@@ -165,6 +164,7 @@ export class UserService {
 
     addLike(likedPost : Post[]) : Observable<Message>{
         const body = JSON.stringify(likedPost);
+        console.log(body);
         const headers = new Headers({ 'Content-Type': 'application/json' });
         const options: RequestOptions = new RequestOptions({ headers: headers });
         
