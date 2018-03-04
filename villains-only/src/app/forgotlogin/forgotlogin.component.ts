@@ -13,17 +13,38 @@ import { Router, RouterModule } from '@angular/router';
 export class ForgotloginComponent implements OnInit {
 
   constructor(private userService: UserService,
-            private router: Router) { }
+    private router: Router) { }
 
-  public user: User = new User(0,'','','','','','','', undefined);
+  public user: User = new User(0, '', '', '', '', '', '', '', undefined);
 
   public message: Message = new Message('');
+  public emailNotFound: boolean = false;
+  public emailSent: boolean = false;
+  public response: Response;
+  public token: string;
 
   requestPasswordReset(): void {
     this.userService.requestPasswordReset(this.user).subscribe(
-      response => response.status == 200 ? this.router.navigate(['homepage']) : this.router.navigate(['homepage']),
+      response => {
+        //this.response = response;
+        console.log(response);
+        console.log(response.text);
+
+        if (response.text.includes('FAILURE')) {
+          this.emailSent = false;
+          this.emailNotFound = true;
+          console.log(this.emailSent);
+        }
+        else {
+          this.emailSent = true;
+          this.emailNotFound = false;
+          //this.router.navigate(['/updatepassword']);
+        }
+      },
       error => this.message.text = 'Something went wrong.');
   }
+
+
 
   ngOnInit() {
   }

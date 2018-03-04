@@ -62,6 +62,7 @@ public class User {
 	@OneToMany(mappedBy = "postId" ,fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	private List<Post> posts;
 
+	@JsonIgnore
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name="password_reset_id", nullable = true)
 	private PasswordResetToken pwResetToken;

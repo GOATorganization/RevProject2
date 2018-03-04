@@ -10,24 +10,53 @@ import { Component, OnInit } from '@angular/core';
 })
 export class RegisterComponent implements OnInit {
 
-  
-
   constructor(private userService: UserService) { }
 
-  public user: User = new User(0,'','','','','','','',undefined);
+  public user: User = new User(0, '', '', '', '', '', '', '', undefined);
 
   public message: Message = new Message('');
+  public invalidEmail: boolean = false;
+  public invalidPassword: boolean = false;
+  public requiredFieldsMissing: boolean = false;
 
   registerUser(): void {
-    this.userService.registerUser(this.user).subscribe(
-      message => this.message = message,
-      error => this.message.text = 'Something went wrong.');
+    if (this.validateRequiredInputs()) {
+      this.userService.registerUser(this.user).subscribe(
+        message => this.message = message,
+        error => this.message.text = 'Something went wrong.');
+    }
   }
 
-  
+  // This email validation method was adapted from StackOverflow community wiki:
+  // https://stackoverflow.com/questions/46155/how-to-validate-an-email-address-in-javascript
+  validateEmail(email: string) {
+    var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    if (!re.test(String(email).toLowerCase()) && email != '')
+      this.invalidEmail = true;
+    else
+      this.invalidEmail = false;
+  }
+
+  validatePassword(password: string) {
+    if (password.length < 8 && password != '')
+      this.invalidPassword = true;
+    else
+      this.invalidPassword = false;
+  }
+
+  validateRequiredInputs(): boolean {
+    if (this.user.email.length == 0 || this.user.password.length == 0 ||
+      this.user.firstName.length == 0 || this.user.lastName.length == 0) {
+      this.requiredFieldsMissing = true;
+      return false;
+    }
+    else {
+      this.requiredFieldsMissing = false;
+      return true;
+    }
+  }
 
   ngOnInit() {
-    
   }
 
 }
