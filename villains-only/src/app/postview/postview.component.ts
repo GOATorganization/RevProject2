@@ -35,7 +35,7 @@ export class PostviewComponent implements OnInit {
   getAllPost(): void {
     this.postService.getAllPost().subscribe(
       postsIn => {
-        
+
         console.log(postsIn);
         for (let i = 0; i < postsIn.length; i++) {
           for (let p = 0; p < this.currentUser.likes.length; p++) {
@@ -53,11 +53,11 @@ export class PostviewComponent implements OnInit {
       error => this.message.text = 'something went wrong');
   }
 
-  getUserLikes(): void{
+  getUserLikes(): void {
     this.userService.getUserLikes(this.currentUser).subscribe(
       postLike => {
-        console.log(postLike);              
-          this.currentUser.likes = postLike;
+        console.log(postLike);
+        this.currentUser.likes = postLike;
       },
       error => this.message.text = 'something went wrong');
   }
@@ -91,7 +91,8 @@ export class PostviewComponent implements OnInit {
 
 
   getCharLeft() {
-    this.charLeft = this.maxChar - this.userPost.length;
+    if (this.userPost != undefined)
+      this.charLeft = this.maxChar - this.userPost.length;
   }
 
   ngOnInit() {
@@ -99,7 +100,7 @@ export class PostviewComponent implements OnInit {
     console.log(this.currentUser);
     this.getUserLikes();
     this.charLeft = this.maxChar;
-    
+
     console.log(this.currentUser);
     this.getAllPost();
   }
