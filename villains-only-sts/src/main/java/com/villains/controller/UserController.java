@@ -1,10 +1,8 @@
 package com.villains.controller;
 
-import java.util.EnumSet;
 import java.util.Enumeration;
 import java.util.List;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -50,10 +48,11 @@ public class UserController {
 	@PostMapping("/getUserByEmail.app")
 	public @ResponseBody ResponseEntity<User> findUserByEmail(HttpSession session, @RequestBody User user) {
 		if (session.getAttribute("id") != null) {
-			return new ResponseEntity<User>(userService.findUserByEmail(user), HttpStatus.OK);
+			User foundUser = userService.findUserByEmail(user);
+			foundUser.setPassword("");
+			return new ResponseEntity<User>(foundUser, HttpStatus.OK);
 		} else
 			return new ResponseEntity<User>(HttpStatus.UNAUTHORIZED);
-
 	}
 
 	@PostMapping("/loginUser.app")
@@ -129,9 +128,12 @@ public class UserController {
 	@PostMapping("/updateUserProfile.app")
 	public @ResponseBody ResponseEntity<Message> updateUserProfile(HttpSession session, @RequestBody User user) {
 		if (session.getAttribute("id") != null) {
-			System.out.println(user);
-			System.out.println("getting to update profile");
-			userService.editUser(user);
+			userService.editUserIgnorePass(user);
+
+			// update session incase user makes changes to it and references are made to it
+			// server side
+			session.setAttribute("email", user.getEmail());
+			session.setAttribute("id", user.getUserId());
 			return new ResponseEntity<>(new Message("Updated changes"), HttpStatus.OK);
 		} else
 			return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
@@ -182,25 +184,23 @@ public class UserController {
 	}
 
 	@PostMapping("/addLike.app")
-	public @ResponseBody ResponseEntity<Message> addLike(HttpSession session, @RequestBody List<Post> post) {	
+	public @ResponseBody ResponseEntity<Message> addLike(HttpSession session, @RequestBody List<Post> post) {
 		if (session.getAttribute("id") != null) {
-		System.out.println(post);
 
-		Enumeration attributeNames = session.getAttributeNames();
-		while (attributeNames.hasMoreElements()) {
-			System.out.println(attributeNames.nextElement());
-		}
-		User blankUser = new User();
-		blankUser.setEmail(session.getAttribute("email").toString());
-		User editUser = userService.findUserByEmail(blankUser);
-		System.out.println(editUser);
-		editUser.setLikes(post);
-		userService.editUser(editUser);
-		return new ResponseEntity<>(new Message("Success"), HttpStatus.OK); // new
-																			// ResponseEntity<List<Post>>(userService.getUserLikes(user),
-																			// HttpStatus.OK);
-		}
-		else
+			Enumeration attributeNames = session.getAttributeNames();
+			while (attributeNames.hasMoreElements()) {
+				System.out.println(attributeNames.nextElement());
+			}
+			User blankUser = new User();
+			blankUser.setEmail(session.getAttribute("email").toString());
+			User editUser = userService.findUserByEmail(blankUser);
+
+			editUser.setLikes(post);
+			userService.editUser(editUser);
+			return new ResponseEntity<>(new Message("Success"), HttpStatus.OK); // new
+																				// ResponseEntity<List<Post>>(userService.getUserLikes(user),
+																				// HttpStatus.OK);
+		} else
 			return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
 	}
 

@@ -9,15 +9,10 @@ import 'rxjs/Rx';
 import { User } from '../model/user.model';
 import { Message } from '../model/message.model';
 
-import { of } from 'rxjs/observable/of';
-import { tap, catchError } from 'rxjs/operators';
+import { of } from "rxjs/observable/of";
+import { tap, catchError } from "rxjs/operators";
 import { Router, RouterModule } from '@angular/router';
-
-const httpOptions = {
-    headers: new HttpHeaders({ 'Content-Type': 'application/json' })
-};
-
-
+import { AwsS3Service } from "./aws-s3.service";
 
 @Injectable()
 export class UserService {

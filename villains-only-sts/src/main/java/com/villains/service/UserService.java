@@ -15,6 +15,7 @@ public interface UserService {
 	User authenticateUser(User user);
 	User findUserByEmail(User user);
 	void editUser(User user);
+	void editUserIgnorePass(User user);
 	
 	/**
 	 * Finds a user by their email. This is in the interface.

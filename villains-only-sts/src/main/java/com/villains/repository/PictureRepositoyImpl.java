@@ -2,6 +2,8 @@ package com.villains.repository;
 
 import java.util.List;
 
+import org.hibernate.Query;
+import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,7 +12,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.villains.model.Picture;
 import com.villains.model.Post;
-import com.villains.model.User;
 
 @Repository("pictureRepositoryImpl")
 @Transactional
@@ -53,4 +54,20 @@ public class PictureRepositoyImpl implements PictureRepository {
 		sessionFactory.getCurrentSession().delete(picture);
 	}
 
+	/* (non-Javadoc)
+	 * @see com.villains.repository.PictureRepository#getPictureByUrl(java.lang.String)
+	 */
+	@Override
+	public Picture getPictureByUrl(String url) {
+		Session session = sessionFactory.getCurrentSession();
+		
+		String hql = "from Picture p where p.pictureUrl = :url";
+		Picture picture = (Picture)session.createQuery(hql)
+		.setParameter("url", url)
+		.uniqueResult();
+		
+		return picture;
+	}
+
+	
 }
