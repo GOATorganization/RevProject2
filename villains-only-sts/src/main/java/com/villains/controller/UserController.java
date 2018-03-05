@@ -202,5 +202,11 @@ public class UserController {
 		} else
 			return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
 	}
+	
+	@GetMapping("/clearSession.app")
+	public @ResponseBody ResponseEntity<Message> clearSession(HttpSession session) {
+		session.invalidate();
+		return new ResponseEntity<>(new Message("Success"), HttpStatus.OK);
+	}
 
 }
