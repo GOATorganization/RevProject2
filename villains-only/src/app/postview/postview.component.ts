@@ -7,6 +7,8 @@ import { Message } from './../model/message.model';
 import { PostService } from './../services/post.service';
 import { Post } from './../model/post.model';
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { DataService } from '../services/data.service';
 
 @Component({
   selector: 'app-postview',
@@ -30,7 +32,7 @@ export class PostviewComponent implements OnInit {
 
 
   constructor(private postService: PostService, private userService: UserService
-    , private pictureService: PictureService, private likepostService: LikepostService) { }
+    , private pictureService: PictureService, private likepostService: LikepostService, private router: Router, private dataService: DataService) { }
 
   getAllPost(): void {
     this.postService.getAllPost().subscribe(
@@ -99,6 +101,16 @@ export class PostviewComponent implements OnInit {
   likePost(post: Post) {
     this.likepostService.likePost(post, this.currentUser);
     post.likedPost = !post.likedPost;
+  }
+
+  public toSelectedUserPostView(user: User): void {
+    this.userService.getUserByEmail(user).subscribe(user => {
+      this.dataService.changeMessage(user);
+      this.router.navigate(['userhome']);
+
+    },
+      error => { console.log('something went wrong'); }
+    );
   }
 
 }

@@ -147,8 +147,7 @@ public class Post {
 		return	"Post [postId=" + postId + ", userId=" + userId.getUserId() + ", contentsText=" + contentsText + "]";
 			
 		}
-		return "Post [postId=" + postId + ", userId=" + userId.getUserId() + ", contentsText=" + contentsText + ", contentsPic="
-				+ contentsPic + "]";
+		return "Post [postId=" + postId + ", userId=" + userId.getUserId() + ", contentsText=" + contentsText + "]";
 	}
 
 	

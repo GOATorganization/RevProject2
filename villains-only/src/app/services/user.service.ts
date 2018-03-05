@@ -169,4 +169,13 @@ export class UserService {
             .catch(this.handleError);
     }
 
+    clearSession(): Observable<Message> {
+        return this.http
+        .get(`/VillainsOnly/clearSession.app`)
+        .map((response: Response) => {
+            return <Message>response.json();
+        })
+        .catch(this.handleError);
+    }
+
 }

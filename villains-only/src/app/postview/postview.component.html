@@ -31,7 +31,7 @@
                 <div *ngFor="let post of posts" class="card card-outline-info cardpad">
                     <div class="card-block cardtextpad">
                         <h4 class="card-title cardTitle">
-                            {{post.userId.firstName}} {{post.userId.lastName}}
+                            {{post.userId.firstName}} {{post.userId.lastName}} <button class='btn btn-link' (click)='toSelectedUserPostView(post.userId)'>{{post.userId.email}}</button>
                         </h4>
                         <div *ngIf="post.showHide">
                             <div [attr.id]="'pictureCarousel' + post.postId" class="carousel slide" data-ride="carousel">
