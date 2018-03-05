@@ -38,7 +38,6 @@ export class NavbarComponent implements OnInit {
   
 
   public getHero(): void {
-    console.log(this.user);
     this.userService.getUserByEmail(this.user).subscribe(user => {
       this.data.changeMessage(user);
       this.router.navigate(['userhome']);

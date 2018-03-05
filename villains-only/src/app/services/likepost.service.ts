@@ -15,11 +15,9 @@ export class LikepostService {
   public message: Message = new Message('');
   index: number;
 
-  
 
   likePost(post: Post, user: User) {
     if (!user.likes) {
-      console.log(user.likes);
       user.likes = [];
     }
     user.likes.forEach(element => {
@@ -37,7 +35,6 @@ export class LikepostService {
       user.likes.push(post);
       console.log(user.likes);
     }
-    console.log(post);
     this.userService.addLike(user.likes).subscribe(message => {
 
     },

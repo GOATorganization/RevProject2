@@ -56,7 +56,6 @@ public class PictureController {
 	@PostMapping("addPicture.app")
 	public @ResponseBody ResponseEntity<Message> addPicture(HttpSession session, @RequestBody Picture picture) {
 		if (session.getAttribute("id") != null) {
-			System.out.println(picture.getPostId().getPostId());
 			pictureService.addPicture(picture);
 			return new ResponseEntity<>(new Message("Picture Successfully Uploaded!"), HttpStatus.OK);
 		} else
@@ -66,6 +65,7 @@ public class PictureController {
 	@PostMapping("editPicture.app")
 	public @ResponseBody ResponseEntity<Message> editPicture(HttpSession session, @RequestBody Picture picture) {
 		if (session.getAttribute("id") != null) {
+			pictureService.editPicture(picture);
 			return new ResponseEntity<>(new Message("Picture Successfully Changed!"), HttpStatus.OK);
 		} else
 			return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
@@ -79,5 +79,12 @@ public class PictureController {
 		} else
 			return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
 	}
+
+	
+	@PostMapping("getPictureByUrl")
+	public @ResponseBody ResponseEntity<Picture> getPictureByUrl(@RequestBody String url) {
+		return new ResponseEntity<>(pictureService.getPictureByUrl(url), HttpStatus.OK);
+	}
+	
 
 }

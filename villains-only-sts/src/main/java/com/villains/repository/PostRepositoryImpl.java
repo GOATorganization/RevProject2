@@ -57,7 +57,6 @@ public class PostRepositoryImpl implements PostRepository {
 
 	@Override
 	public void editPost(Post post) {
-		System.out.println(post);
 		sessionFactory.getCurrentSession().update(post);
 		
 	}

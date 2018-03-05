@@ -25,7 +25,6 @@ export class HomepageComponent implements OnInit {
 
   showRegisterToggle(){
     this.showRegister = !this.showRegister;
-    console.log(this.showRegister);
   }
 
   getUserLikes(): void{
@@ -56,7 +55,6 @@ export class HomepageComponent implements OnInit {
               posts => user.likes = posts
             );
             this.user = user;
-            console.log(this.user);
             this.userService.updateUserCookie(user);
             this.router.navigate(['/postview']);
           });
@@ -66,6 +64,6 @@ export class HomepageComponent implements OnInit {
           this.loginFailure = true;
         }
   },
-  error => this.message.text = 'Something went wrong.');
+  error => {this.message.text = 'Something went wrong logging in.'; console.log(this.message.text)});
   }
 }
