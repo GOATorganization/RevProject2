@@ -185,10 +185,11 @@ public class UserController {
 
 	@PostMapping("/addLike.app")
 	public @ResponseBody ResponseEntity<Message> addLike(HttpSession session, @RequestBody List<Post> post) {
-		if (session.getAttribute("id") != null) {
+		if (session.getAttribute("email") != null) {
 
 			Enumeration attributeNames = session.getAttributeNames();
 			while (attributeNames.hasMoreElements()) {
+				System.out.println(attributeNames.nextElement());
 			}
 			User blankUser = new User();
 			blankUser.setEmail(session.getAttribute("email").toString());

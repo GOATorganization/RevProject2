@@ -35,6 +35,7 @@ export class PostviewComponent implements OnInit {
     , private pictureService: PictureService, private likepostService: LikepostService, private router: Router, private dataService: DataService) { }
 
   getAllPost(): void {
+    this.getUserLikes();
     this.postService.getAllPost().subscribe(
       postsIn => {
         for (let i = 0; i < postsIn.length; i++) {
@@ -43,7 +44,6 @@ export class PostviewComponent implements OnInit {
               postsIn[i].likedPost = true;
             }
           }
-
           if (postsIn[i].contentsPic.length !== 0) {
             postsIn[i].showHide = true;
           }
@@ -57,6 +57,7 @@ export class PostviewComponent implements OnInit {
     this.userService.getUserLikes(this.currentUser).subscribe(
       postLike => {
         this.currentUser.likes = postLike;
+        console.log(this.currentUser.likes);
       },
       error => this.message.text = 'something went wrong');
   }
@@ -81,6 +82,7 @@ export class PostviewComponent implements OnInit {
 
     (<HTMLInputElement>document.getElementById('postSubmit')).value = '';
     (<HTMLInputElement>document.getElementById('imgInput')).value = '';
+    this.getAllPost();
     window.location.reload();
   }
 
@@ -101,6 +103,8 @@ export class PostviewComponent implements OnInit {
   likePost(post: Post) {
     this.likepostService.likePost(post, this.currentUser);
     post.likedPost = !post.likedPost;
+    this.getUserLikes();
+
   }
 
   public toSelectedUserPostView(user: User): void {

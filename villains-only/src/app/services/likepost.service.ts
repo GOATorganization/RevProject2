@@ -27,13 +27,16 @@ export class LikepostService {
     });
     if (this.noMatch === true) {
       console.log('already liked,unliking');
-      this.index = user.likes.indexOf(post, 0);
-      user.likes.splice(this.index, 1);
-      this.noMatch = false;
+      for(let i = 0 ; i < user.likes.length; i++){
+        if(user.likes[i].postId == post.postId){
+          user.likes.splice(i, 1);
+          this.noMatch = false;
+        }
+      }
+      
     } else {
       console.log('not liked,liking');
       user.likes.push(post);
-      console.log(user.likes);
     }
     this.userService.addLike(user.likes).subscribe(message => {
 

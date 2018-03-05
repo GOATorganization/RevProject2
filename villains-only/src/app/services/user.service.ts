@@ -163,7 +163,7 @@ export class UserService {
         
         return this.http   
             .post(`/VillainsOnly/addLike.app`, body, options)
-            .map((response: Response) => {
+            .map((response: Response) => {              
                 return <Message>response.json();
             })
             .catch(this.handleError);
