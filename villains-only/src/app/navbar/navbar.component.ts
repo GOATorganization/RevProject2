@@ -13,7 +13,7 @@ export class NavbarComponent implements OnInit {
 
   constructor(private userService: UserService, private router: Router, private data: DataService) { 
 
-    // On page change, trigger an action. 
+    // On page change, trigger an action.
     router.events.filter(e => e instanceof RouterEvent).subscribe(e => {
       // console.log("page change");
       // this.nameChange();
@@ -38,8 +38,18 @@ export class NavbarComponent implements OnInit {
   
 
   public getHero(): void {
-    console.log(this.user);
     this.userService.getUserByEmail(this.user).subscribe(user => {
+      this.data.changeMessage(user);
+      this.router.navigate(['userhome']);
+
+    },
+      error => { console.log('something went wrong'); }
+    );
+  }
+
+  public toHomePostView(): void {
+    let loggedInUser = this.userService.getLoggedInUser();
+    this.userService.getUserByEmail(loggedInUser).subscribe(user => {
       this.data.changeMessage(user);
       this.router.navigate(['userhome']);
 
