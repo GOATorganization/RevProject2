@@ -112,7 +112,15 @@ public class UserServiceImpl implements UserService {
 
 		return null;
 	}
-
+	
+	/**
+	 * Emails the user a password reset token
+	 * 
+	 * @param user
+	 *            User object that contains the email address
+	 * @return True if email was found, false if not
+	 * 
+	 */
 	@Override
 	public boolean processResetRequest(User user) {
 		User userToCheck = userRepository.findByEmail(user.getEmail());
@@ -133,10 +141,6 @@ public class UserServiceImpl implements UserService {
 			userRepository.update(userToCheck);
 
 			String emailSubject = "Password Reset Request";
-
-//			String emailBody = "Click " + "<a href=\"http://localhost:4200/updatepassword?email="
-//					+ userToCheck.getEmail() + "&token=" + newTokenStr + "\">" + "here" + "</a>"
-//					+ " to reset your password.";
 			
 			String emailBody = "Your token is: " + newTokenStr;
 
@@ -149,6 +153,17 @@ public class UserServiceImpl implements UserService {
 
 	}
 
+	/**
+	 * Compares passed in email/token to persisted email/token
+	 * 
+	 * @param email
+	 *            email of user to reset
+	 * @param token
+	 *            token associated with user before email was sent
+	 *            
+	 * @return Returns the user that was updated if token was correct, null otherwise
+	 * 
+	 */
 	@Override
 	public User attemptPasswordReset(String email, String token) {
 		User userToCheck = userRepository.findByEmail(email);
