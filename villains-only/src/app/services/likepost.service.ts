@@ -15,7 +15,6 @@ export class LikepostService {
   public message: Message = new Message('');
   index: number;
 
-  
 
   likePost(post: Post, user: User) {
     if (!user.likes) {

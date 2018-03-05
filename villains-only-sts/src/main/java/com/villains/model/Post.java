@@ -143,6 +143,10 @@ public class Post {
 
 	@Override
 	public String toString() {
+		if(contentsPic.size()==0) {
+		return	"Post [postId=" + postId + ", userId=" + userId.getUserId() + ", contentsText=" + contentsText + "]";
+			
+		}
 		return "Post [postId=" + postId + ", userId=" + userId.getUserId() + ", contentsText=" + contentsText + ", contentsPic="
 				+ contentsPic + "]";
 	}

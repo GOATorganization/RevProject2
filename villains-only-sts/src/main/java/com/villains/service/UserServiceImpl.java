@@ -183,7 +183,6 @@ public class UserServiceImpl implements UserService {
 
 	public List<Post> getUserLikes(User user) {
 		List<Post> returner = userRepository.findByEmail(user.getEmail()).getLikes();
-		System.out.println(returner.size());
 		for(int i = 0; i < returner.size(); i++) {
 			
 			User rawUser = returner.get(i).getUserId();
