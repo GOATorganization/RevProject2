@@ -42,7 +42,6 @@ export class ProfileComponent implements OnInit {
       this.pictureService.addPicture(picture).subscribe(
         message => {
           console.log('from submit profile changes message:');
-          console.log(message);
           this.pictureService.getPictureByUrl(pictureFile.name).subscribe(
             resultPicture => { // get id for pic from db and build pic url with it
               picture = resultPicture;

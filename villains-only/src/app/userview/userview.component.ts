@@ -31,7 +31,6 @@ export class UserviewComponent implements OnInit {
   postDisplay() {
     this.postService.getAllPostByUser(this.user).subscribe(
       postsIn => {
-        console.log(postsIn);
         for (let i = 0; i < postsIn.length; i++) {
           
           for (let p = 0; p < this.currentUser.likes.length; p++) {
@@ -55,11 +54,9 @@ export class UserviewComponent implements OnInit {
   ngOnInit() {
     this.currentUser = this.userService.getLoggedInUser();
     this.getUserLikes();
-    console.log(this.currentUser);
     this.data.currentMessage.subscribe(user => {
       this.user = user;
       this.getUserLikes();
-      this.postDisplay();
     },
       error => console.log('Error in userview Component, onInit')
     );
@@ -68,9 +65,9 @@ export class UserviewComponent implements OnInit {
 
   getUserLikes(): void{
     this.userService.getUserLikes(this.currentUser).subscribe(
-      postLike => {
-        console.log(postLike);              
+      postLike => {             
           this.currentUser.likes = postLike;
+          this.postDisplay();
       },
       error => this.message.text = 'something went wrong');
   }

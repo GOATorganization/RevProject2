@@ -189,7 +189,6 @@ public class UserController {
 
 			Enumeration attributeNames = session.getAttributeNames();
 			while (attributeNames.hasMoreElements()) {
-				System.out.println(attributeNames.nextElement());
 			}
 			User blankUser = new User();
 			blankUser.setEmail(session.getAttribute("email").toString());
