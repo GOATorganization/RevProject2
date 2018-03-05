@@ -78,7 +78,6 @@ export class UserService {
         return this.http
             .get(`/VillainsOnly/test.app`)
             .map((response: Response) => {
-                console.log(response);
                 return response;
             })
             .catch(this.handleError);
@@ -159,7 +158,6 @@ export class UserService {
 
     addLike(likedPost : Post[]) : Observable<Message>{
         const body = JSON.stringify(likedPost);
-        console.log(body);
         const headers = new Headers({ 'Content-Type': 'application/json' });
         const options: RequestOptions = new RequestOptions({ headers: headers });
         

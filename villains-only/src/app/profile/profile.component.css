@@ -5,3 +5,16 @@ div *{
 #btn, #btnCancel {
     color: black;
 }
+
+#profilePic{
+    width: 100%;
+    margin-top: 45px;
+}
+
+.imgCol{
+    margin-left: 10px;
+}
+
+.formCol{
+    margin: 15px;
+}
