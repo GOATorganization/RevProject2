@@ -15,6 +15,7 @@ import { HttpModule } from '@angular/http';
 import { TestComponent } from './test/test.component';
 import { ProfileComponent } from './profile/profile.component';
 import { HttpClientModule } from '@angular/common/http';
+import { AwsS3Service } from './services/aws-s3.service';
 import { ForgotloginComponent } from './forgotlogin/forgotlogin.component';
 import { LikepostService } from './services/likepost.service';
 import { UpdatepasswordComponent } from './updatepassword/updatepassword.component';
@@ -42,7 +43,7 @@ import { ViewOtherProfileComponent } from './view-other-profile/view-other-profi
     HttpModule,
     FormsModule,
   ],
-  providers: [UserService, PostService, PictureService, DataService, LikepostService],
+  providers: [UserService, PostService, PictureService, DataService, LikepostService, AwsS3Service],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

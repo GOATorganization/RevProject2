@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.villains.model.PasswordResetToken;
+import com.villains.model.Post;
 import com.villains.model.User;
 import com.villains.pojo.PasswordResetVm;
 import com.villains.repository.PasswordResetTokenRepository;
@@ -91,7 +92,11 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public void editUser(User user) {
 		userRepository.update(user);
-
+	}
+	
+	@Override
+	public void editUserIgnorePass(User user) {
+		userRepository.updateIgnorePass(user);
 	}
 
 	@Override
@@ -100,6 +105,7 @@ public class UserServiceImpl implements UserService {
 
 		if (userToCheck != null) {
 			if (user.getPassword().equals(userToCheck.getPassword())) {
+				userToCheck.setPassword(null);
 				return userToCheck;
 			}
 		}
@@ -128,9 +134,11 @@ public class UserServiceImpl implements UserService {
 
 			String emailSubject = "Password Reset Request";
 
-			String emailBody = "Click " + "<a href=\"http://localhost:4200/updatepassword?email="
-					+ userToCheck.getEmail() + "&token=" + newTokenStr + "\">" + "here" + "</a>"
-					+ " to reset your password.";
+//			String emailBody = "Click " + "<a href=\"http://localhost:4200/updatepassword?email="
+//					+ userToCheck.getEmail() + "&token=" + newTokenStr + "\">" + "here" + "</a>"
+//					+ " to reset your password.";
+			
+			String emailBody = "Your token is: " + newTokenStr;
 
 			mailer.send("villains.only.do.not.reply@gmail.com", "p4ssw0rd123", user.getEmail(), emailSubject,
 					emailBody);
@@ -171,6 +179,19 @@ public class UserServiceImpl implements UserService {
 		}
 		else
 			return false;
+	}
+
+	public List<Post> getUserLikes(User user) {
+		List<Post> returner = userRepository.findByEmail(user.getEmail()).getLikes();
+		for(int i = 0; i < returner.size(); i++) {
+			
+			User rawUser = returner.get(i).getUserId();
+			rawUser.setPassword(null);
+			rawUser.setLikes(null);
+			rawUser.setPosts(null);
+			returner.get(i).setUserId(rawUser);
+		}
+		return returner;
 	}
 
 }

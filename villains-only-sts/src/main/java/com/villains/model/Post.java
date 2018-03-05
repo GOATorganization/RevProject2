@@ -1,5 +1,6 @@
 package com.villains.model;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -14,7 +15,10 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
+import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 
@@ -35,6 +39,11 @@ public class Post {
 	
 	@Column(name="contents_txt")
 	private String contentsText;
+	
+	@CreationTimestamp
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name = "post_date")
+	private Date postDate;
 		
 	
 	@Column(name="contents_pics")
@@ -42,8 +51,7 @@ public class Post {
 	private List<Picture> contentsPic;
 	
 	@JsonIgnore
-	@Fetch(FetchMode.SUBSELECT)
-	@ManyToMany(mappedBy="likes", fetch = FetchType.EAGER) 
+	@ManyToMany(mappedBy="likes", fetch = FetchType.LAZY) 
 	private List<User> likers;
 	
 	public Post() {
@@ -65,6 +73,17 @@ public class Post {
 		this.contentsPic = contentsPic;
 	}
 	
+	public Post(int postId, User userId, String contentsText, Date postDate, List<Picture> contentsPic,
+			List<User> likers) {
+		super();
+		this.postId = postId;
+		this.userId = userId;
+		this.contentsText = contentsText;
+		this.postDate = postDate;
+		this.contentsPic = contentsPic;
+		this.likers = likers;
+	}
+
 	public Post(int postId, User userId, String contentsText, List<Picture> contentsPic, List<User> likers) {
 		super();
 		this.postId = postId;
@@ -113,9 +132,21 @@ public class Post {
 	public void setLikers(List<User> likers) {
 		this.likers = likers;
 	}
+	
+	public Date getPostDate() {
+		return postDate;
+	}
+
+	public void setPostDate(Date postDate) {
+		this.postDate = postDate;
+	}
 
 	@Override
 	public String toString() {
+		if(contentsPic.size()==0) {
+		return	"Post [postId=" + postId + ", userId=" + userId.getUserId() + ", contentsText=" + contentsText + "]";
+			
+		}
 		return "Post [postId=" + postId + ", userId=" + userId.getUserId() + ", contentsText=" + contentsText + ", contentsPic="
 				+ contentsPic + "]";
 	}

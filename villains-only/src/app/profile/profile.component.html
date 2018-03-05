@@ -3,12 +3,12 @@
 
   <form>
     <div class="form-group">
-      <img src='{{user.profilePic}}' alt="No profile picture." />
+      <img #profilePic id='profilePic' src='{{user.profilePic}}' alt="No profile picture." />
     </div>
 
     <div *ngIf='isInEditMode' class="form-group">
       <label for='profilePicInput'>New profile pic:</label>
-      <input #profilePic id='profilePicInput' type="file" class="form-control-file">
+      <input #profilePicInput id='profilePicInput' type="file" accept="image/jpeg, image/png" class="form-control-file" (change)='changePic(profilePicInput, profilePic)'>
     </div>
 
     <div class="form-group">
@@ -36,11 +36,12 @@
     </div>
 
     <div class="form-group">
-      <label for="country">Lair Location:</label>
+      <label for="country">Lair Country:</label>
       <input id="country" [ngClass]="{'form-control': isInEditMode, 'form-control-plaintext': !isInEditMode}" [(ngModel)]='user.lairCountry'
         [readonly]='!isInEditMode' name='lairCountry'>
     </div>
 
     <button id='btn' type='button' class='btn' (click)='isInEditMode ? submitProfileChanges() : editProfile()'>{{isInEditMode ? 'Submit Changes': 'Edit Profile'}}</button>
+    <button *ngIf='isInEditMode' id='btnCancel' type='button' class='btn' (click)='cancelEditingProfile()'>Cancel Changes</button>
   </form>
 </div>

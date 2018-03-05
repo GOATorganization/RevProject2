@@ -7465,3 +7465,14 @@ body{
     background-color: #A239ca;
     border-color: #A239ca;
 }
+
+.btn-primary-liked{
+  border-color:  rgb(84, 29, 105);
+  background-color: rgb(80, 28, 100);
+  color: #e7dfdd;
+}
+
+.btn-primary-liked:hover{
+  background-color: rgb(57, 20, 71);
+  border-color: rgb(49, 17, 61);
+}

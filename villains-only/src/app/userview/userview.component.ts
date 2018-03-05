@@ -18,7 +18,8 @@ import { Observable } from 'rxjs/Observable';
 export class UserviewComponent implements OnInit {
 
   public message: Message = new Message('');
-  user: User = new User(0, '', '', '', '', '', '', '',undefined);
+  user: User = new User(0, '', '', '', '', '', '', '', undefined);
+  currentUser = new User(0, '', '', '', '', '', '', '', undefined);
   villainname = 'Villain';
   profileimage = '../app/images/villainprofile.png';
   private posts: Post[];
@@ -32,8 +33,18 @@ export class UserviewComponent implements OnInit {
       postsIn => {
         console.log(postsIn);
         for (let i = 0; i < postsIn.length; i++) {
+          
+          for (let p = 0; p < this.currentUser.likes.length; p++) {
+            if (postsIn[i].postId === this.currentUser.likes[p].postId) {
+              postsIn[i].likedPost = true;
+            }
+          }
+          // tslint:disable-next-line:triple-equals
           if (postsIn[i].contentsPic.length != 0) {
             postsIn[i].showHide = true;
+          }
+          else{
+            postsIn[i].showHide = false;
           }
         }
         this.posts = postsIn;
@@ -42,25 +53,31 @@ export class UserviewComponent implements OnInit {
   }
 
   ngOnInit() {
-    // console.log(this.user);
+    this.currentUser = this.userService.getLoggedInUser();
+    this.getUserLikes();
+    console.log(this.currentUser);
     this.data.currentMessage.subscribe(user => {
       this.user = user;
+      this.getUserLikes();
       this.postDisplay();
-
     },
       error => console.log('Error in userview Component, onInit')
-
     );
-    // console.log(this.user);
-
-
-
 
   }
 
-  likePost(post: Post) {
-    this.likepostService.likePost(post, this.userService.getLoggedInUser());
+  getUserLikes(): void{
+    this.userService.getUserLikes(this.currentUser).subscribe(
+      postLike => {
+        console.log(postLike);              
+          this.currentUser.likes = postLike;
+      },
+      error => this.message.text = 'something went wrong');
+  }
 
+  likePost(post: Post) {
+    this.likepostService.likePost(post, this.currentUser);
+    post.likedPost = !post.likedPost;
   }
 
 }

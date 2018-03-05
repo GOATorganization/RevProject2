@@ -1,22 +1,18 @@
-import { Injectable } from "@angular/core";
+import { Post } from './../model/post.model';
+import { Injectable } from '@angular/core';
 import { Http, Headers, RequestOptions, Response } from '@angular/http';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 // For Map
-import "rxjs/Rx";
+import 'rxjs/Rx';
 
 import { User } from '../model/user.model';
 import { Message } from '../model/message.model';
 
 import { of } from "rxjs/observable/of";
 import { tap, catchError } from "rxjs/operators";
-import { Router, RouterModule } from "@angular/router";
-
-const httpOptions = {
-    headers: new HttpHeaders({ 'Content-Type': 'application/json' })
-};
-
-
+import { Router, RouterModule } from '@angular/router';
+import { AwsS3Service } from "./aws-s3.service";
 
 @Injectable()
 export class UserService {
@@ -27,7 +23,7 @@ export class UserService {
 
     public setNewPassword(email: string, token: string, password: string, passwordConfirm: string): Observable<Response> {
         const body = JSON.stringify({ email: email, token: token, password: password, passwordConfirm: passwordConfirm });
-        console.log("body is " + body);
+        console.log('body is ' + body);
         const headers = new Headers({ 'Content-Type': 'application/json' });
         const options: RequestOptions = new RequestOptions({ headers: headers });
 
@@ -53,14 +49,14 @@ export class UserService {
             .catch(this.handleError);
     }
 
-    public requestPasswordReset(user: User): Observable<Response> {
+    public requestPasswordReset(user: User): Observable<Message> {
         const body = JSON.stringify(user);
         const headers = new Headers({ 'Content-Type': 'application/json' });
         const options: RequestOptions = new RequestOptions({ headers: headers });
         return this.http
             .post(`/VillainsOnly/requestPasswordReset.app`, body, options)
             .map((response: Response) => {
-                return response;
+                return <Message>response.json();
             })
             .catch(this.handleError);
     }
@@ -130,18 +126,49 @@ export class UserService {
     }
 
     updateUserCookie(user: User): void {
-        console.log(user);
         document.cookie = `user=${JSON.stringify(user)}`;
     }
 
+    clearUserCookie(): void {
+        document.cookie = `user=; max-age=0`;
+    }
+
     getLoggedInUser(): User {
-        let cookieName = "user";
+        let cookieName = 'user';
         let cookieValue = document.cookie.replace(/(?:(?:^|.*;\s*)user\s*\=\s*([^;]*).*$)|^.*$/, "$1")
         return <User>JSON.parse(cookieValue);
     }
 
     private handleError(error: Response) {
         return Observable.throw(error.statusText);
+    }
+
+    getUserLikes(user: User): Observable<Post[]> {
+        this.updateUserCookie(user);
+        const headers = new Headers({ 'Content-Type': 'application/json' });
+        const options: RequestOptions = new RequestOptions({ headers: headers });
+        const body = JSON.stringify(user);
+
+        return this.http
+            .post(`/VillainsOnly/getUserLikes.app`, body, options)
+            .map((response: Response) => {
+                return <Post[]>response.json();
+            })
+            .catch(this.handleError);
+    }
+
+    addLike(likedPost : Post[]) : Observable<Message>{
+        const body = JSON.stringify(likedPost);
+        console.log(body);
+        const headers = new Headers({ 'Content-Type': 'application/json' });
+        const options: RequestOptions = new RequestOptions({ headers: headers });
+        
+        return this.http   
+            .post(`/VillainsOnly/addLike.app`, body, options)
+            .map((response: Response) => {
+                return <Message>response.json();
+            })
+            .catch(this.handleError);
     }
 
 }

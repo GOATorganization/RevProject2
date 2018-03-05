@@ -40,12 +40,12 @@
                                         <img class="d-block img-fluid" src="{{picture.pictureUrl}}">
                                     </div>
                                 </div>
-                                <a class="carousel-control-prev" [attr.href]="'#pictureCarousel' + post.postId" role="button" data-slide="prev">
+                                <a *ngIf="post.contentsPic.length > 1" class="carousel-control-prev" [attr.href]="'#pictureCarousel' + post.postId" role="button" data-slide="prev">
                                     <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                                     <span class="sr-only">Previous</span>
                                 </a>
 
-                                <a class="carousel-control-next" [attr.href]="'#pictureCarousel' + post.postId" role="button" data-slide="next">
+                                <a *ngIf="post.contentsPic.length > 1" class="carousel-control-next" [attr.href]="'#pictureCarousel' + post.postId" role="button" data-slide="next">
                                     <span class="carousel-control-next-icon" aria-hidden="true"></span>
                                     <span class="sr-only">Next</span>
                                 </a>
@@ -57,9 +57,12 @@
                             {{post.contentsText}}
                         </p>
                     </div>
-                    <div class="card-block">
-                        <a class="btn btn-primary thumbsup " href="#">
-                            <img class="thumbs" src="assets/icons/thumbsdown.svg" alt="Thumbsup"> Proper Evil
+                    <div class="card-block" *ngIf="post.userId.userId != currentUser.userId">
+                        <a class="btn btn-primary thumbsup " (click)="likePost(post)" *ngIf="!post.likedPost">
+                            <img class="thumbs" src="assets/icons/thumbsup.svg" alt="Thumbsup">Evil
+                        </a>
+                        <a class="btn btn-primary-liked thumbsup " (click)="likePost(post)" *ngIf="post.likedPost">
+                            <img class="thumbs" src="assets/icons/thumbsup.svg" alt="Thumbsup">This is Evil
                         </a>
 
                     </div>

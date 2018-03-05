@@ -2,6 +2,6 @@ div *{
     color: #a5a5a5;
 }
 
-#btn {
+#btn, #btnCancel {
     color: black;
 }
