@@ -1,34 +1,37 @@
 <div id='profileView' *ngIf='user'>
   <h1>{{user.email}}'s Profile</h1>
 
-  <form>
-    <div class="form-group">
-      <img src='{{user.profilePic}}' alt="No profile picture." />
+  <div class="row">
+    <div class="col-lg-5 col-md-5 col-sm-5 imgCol">
+      <img id='profilePic' src='{{user.profilePic}}' alt="No profile picture." />
     </div>
 
-    <div class="form-group">
-      <label for="firstName">First Name:</label>
-      <span id="firstName">{{user.firstName}}</span>
-    </div>
+    <form class="col-lg-6 col-md-6 col-sm-6 formCol">
 
-    <div class="form-group">
-      <label for="lastName">Last Name:</label>
-      <span id="lastName">{{user.lastName}}</span>
-    </div>
+      <div class="form-group">
+        <label for="firstName">First Name:</label>
+        <span id="firstName">{{user.firstName}}</span>
+      </div>
 
-    <div class="form-group">
-      <label for="email">Email:</label>
-      <span id="email">{{user.email}}</span>
-    </div>
+      <div class="form-group">
+        <label for="lastName">Last Name:</label>
+        <span id="lastName">{{user.lastName}}</span>
+      </div>
 
-    <div class="form-group">
-      <label for="city">Lair City:</label>
-      <span id="city">{{user.lairCity}}</span>
-    </div>
+      <div class="form-group">
+        <label for="email">Email:</label>
+        <span id="email">{{user.email}}</span>
+      </div>
 
-    <div class="form-group">
-      <label for="country">Lair Country:</label>
-      <span id="country">{{user.lairCountry}}</span>
-    </div>
-  </form>
+      <div class="form-group">
+        <label for="city">Lair City:</label>
+        <span id="city">{{user.lairCity}}</span>
+      </div>
+
+      <div class="form-group">
+        <label for="country">Lair Country:</label>
+        <span id="country">{{user.lairCountry}}</span>
+      </div>
+    </form>
+  </div>
 </div>
