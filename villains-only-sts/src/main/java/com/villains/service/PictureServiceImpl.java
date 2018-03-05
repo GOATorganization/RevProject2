@@ -67,4 +67,13 @@ public class PictureServiceImpl implements PictureService {
 
 	}
 
+	/* (non-Javadoc)
+	 * @see com.villains.service.PictureService#getPictureByUrl(java.lang.String)
+	 */
+	@Override
+	public Picture getPictureByUrl(String url) {
+		return pictureRepository.getPictureByUrl(url);
+	}
+	
+	
 }

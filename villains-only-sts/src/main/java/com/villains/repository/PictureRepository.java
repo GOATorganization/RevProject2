@@ -41,5 +41,11 @@ public interface PictureRepository {
 	 * @param picture The picture that needs to be deleted.
 	 */
 	void deletePicture(Picture picture);
-
+	
+	/**
+	 * Gets picture by url
+	 * @param url the url to search for
+	 * @return the picture
+	 */
+	Picture getPictureByUrl(String url);
 }

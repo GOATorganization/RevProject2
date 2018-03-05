@@ -92,7 +92,11 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public void editUser(User user) {
 		userRepository.update(user);
-
+	}
+	
+	@Override
+	public void editUserIgnorePass(User user) {
+		userRepository.updateIgnorePass(user);
 	}
 
 	@Override
@@ -177,7 +181,6 @@ public class UserServiceImpl implements UserService {
 			return false;
 	}
 
-	@Override
 	public List<Post> getUserLikes(User user) {
 		List<Post> returner = userRepository.findByEmail(user.getEmail()).getLikes();
 		for(int i = 0; i < returner.size(); i++) {
