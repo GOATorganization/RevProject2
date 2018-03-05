@@ -38,13 +38,10 @@ export class ForgotloginComponent implements OnInit {
         else {
           this.emailSent = true;
           this.emailNotFound = false;
-          //this.router.navigate(['/updatepassword']);
         }
       },
       error => this.message.text = 'Something went wrong.');
   }
-
-
 
   ngOnInit() {
   }
