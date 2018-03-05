@@ -14,49 +14,55 @@ public class Log4Aspect {
 
     private static final Logger logger = LogManager.getLogger(Log4Aspect.class);
 	
+    /*
+    @AfterReturning("execution(* get*(..))")
+    public void test(JoinPoint jp) {
+    	System.out.println("Test works");
+    }
     
+    /*
 	@AfterReturning(value = "@target(org.springframework.stereotype.Repository) && !execution(* get*(..))", returning = "returnValue")
 	public void returnedFromRepository(JoinPoint jp, Object returnValue) {
-		logger.info(returnValue);
+		//logger.info(returnValue);
 	}
 
 	@AfterReturning(value = "@target(org.springframework.stereotype.Service) && !execution(* get*(..))", returning = "returnValue")
 	public void returnedFromService(JoinPoint jp, Object returnValue) {
-		logger.info(returnValue);
+//		logger.info(returnValue);
 	}
 	
 	@AfterReturning(value = "@target(org.springframework.stereotype.Controller) && !execution(* get*(..))", returning = "returnValue")
 	public void returnedFromController(JoinPoint jp, Object returnValue) {
-		logger.info(returnValue);
+//		logger.info(returnValue);
 	}
-	
-	@Before(value = "@target(org.springframework.stereotype.Controller && !execution(* *Picture(..)")
+	/*
+	@Before(value = "execution(* *Picture(..))")
 	public void givenToPictureController(JoinPoint jp) {
 		logger.info(jp.getArgs());
 	}
 	
-	@Before(value = "@target(org.springframework.stereotype.Controller && !execution(* *Post(..)")
+	@Before(value = "execution(* *Post(..))")
 	public void givenToPostController(JoinPoint jp) {
 		logger.info(jp.getArgs());
 	}
 	
-	@Before(value = "@target(org.springframework.stereotype.Controller && !execution(* *User(..)")
+	@Before(value = "execution(* *User(..))")
 	public void givenToUserController(JoinPoint jp) {
 		logger.info(jp.getArgs());
 	}
-	
-	@Before(value = "@target(org.springframework.stereotype.Service && !execution(* *Picture(..)")
+	/*
+	@Before(value = "@target(org.springframework.stereotype.Service && !execution(* *Picture(..))")
 	public void givenToPictureService(JoinPoint jp) {
 		logger.info(jp.getArgs());
 	}
 	
-	@Before(value = "@target(org.springframework.stereotype.Service && !execution(* *Post(..)")
+	@Before(value = "@target(org.springframework.stereotype.Service && !execution(* *Post(..))")
 	public void givenToPostService(JoinPoint jp) {
 		logger.info(jp.getArgs());
 	}
 	
-	@Before(value = "@target(org.springframework.stereotype.Service && !execution(* *User(..)")
+	@Before(value = "@target(org.springframework.stereotype.Service && !execution(* *User(..))")
 	public void givenToUserService(JoinPoint jp) {
 		logger.info(jp.getArgs());
-	}
+	}*/
 }

@@ -3,18 +3,23 @@ package com.villains.service;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.springframework.stereotype.Service;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-
+import org.springframework.stereotype.Service;
 
 import com.villains.model.Picture;
 import com.villains.model.Post;
 import com.villains.model.User;
 import com.villains.repository.PictureRepository;
 import com.villains.repository.PostRepository;
+import com.villains.util.Log4Aspect;
 
 @Service("pictureServiceImpl")
 public class PictureServiceImpl implements PictureService {
+	
+
+    private static final Logger logger = LogManager.getLogger(PictureService.class);
 	
 	@Autowired
 	private PictureRepository pictureRepository;
@@ -24,11 +29,13 @@ public class PictureServiceImpl implements PictureService {
 
 	@Override
 	public List<Picture> getAllPicture() {
+		logger.info(pictureRepository.getAllPicture());
 		return pictureRepository.getAllPicture();
 	}
 
 	@Override
 	public List<Picture> getPostPicture(Post post) {
+		logger.info(pictureRepository.getAllPictureByPost(post));
 		return pictureRepository.getAllPictureByPost(post);
 	}
 
