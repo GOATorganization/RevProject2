@@ -1,0 +1,19 @@
+<div class="form-inline">
+  <div class="input-group form-ele">
+    <input type="text" class="form-control" placeholder="Email" [(ngModel)]="user.email" aria-describedby="basic-addon1">
+  </div>
+  <button (click)="requestPasswordReset()" class="btn btn-primary" type="button">Change password</button>
+</div>
+
+<div class="form-inline">
+  <div *ngIf="emailNotFound" class="alert alert-danger">
+    <strong>Email not found</strong>
+  </div>
+  <div *ngIf="emailSent">
+    <div class="alert alert-success">
+      <strong>Password reset email sent</strong>
+    </div>
+
+    <app-updatepassword [email]="user.email"></app-updatepassword>
+  </div>
+</div>

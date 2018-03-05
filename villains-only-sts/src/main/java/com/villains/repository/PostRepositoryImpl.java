@@ -1,8 +1,12 @@
 package com.villains.repository;
 
+import java.util.Date;
 import java.util.List;
 
+import org.hibernate.Criteria;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Order;
+import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -25,7 +29,11 @@ public class PostRepositoryImpl implements PostRepository {
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Post> getAllPost() {
-		return sessionFactory.getCurrentSession().createCriteria(Post.class).list();
+		
+		return sessionFactory.getCurrentSession().createCriteria(Post.class)
+				.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY)
+				.addOrder( Order.desc("postDate") )
+				.list();
 	}
 
 	@SuppressWarnings("unchecked")
@@ -34,7 +42,8 @@ public class PostRepositoryImpl implements PostRepository {
 		try {
 		return (List<Post>) sessionFactory.getCurrentSession().createCriteria(Post.class)
 				.add(Restrictions.like("userId", user))
-						.list();
+				.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY)
+				.list();
 		} catch(IndexOutOfBoundsException e) {
 			return null;
 		}
@@ -51,5 +60,7 @@ public class PostRepositoryImpl implements PostRepository {
 		sessionFactory.getCurrentSession().update(post);
 		
 	}
+	
+	
 
 }

@@ -1,0 +1,8 @@
+com.villains.controller
+com.villains.controller.tests
+com.villains.model
+com.villains.pojo
+com.villains.repository
+com.villains.service
+com.villains.service.tests
+com.villains.util

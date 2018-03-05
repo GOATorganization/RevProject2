@@ -2,6 +2,8 @@ package com.villains.service;
 
 import java.util.List;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,6 +14,9 @@ import com.villains.repository.PostRepository;
 @Service("postServiceImpl")
 public class PostServiceImpl implements PostService {
 	
+
+    private static final Logger logger = LogManager.getLogger(PostService.class);
+	
 	@Autowired
 	private PostRepository postRepository;
 	
@@ -21,7 +26,16 @@ public class PostServiceImpl implements PostService {
 
 	@Override
 	public List<Post> getAllPost() {
-		return postRepository.getAllPost();
+		List<Post> returner = postRepository.getAllPost();
+		for(int i = 0; i < returner.size(); i++) {
+			User rawUser = returner.get(i).getUserId();
+			rawUser.setPassword(null);
+			rawUser.setLikes(null);
+			rawUser.setPosts(null);
+			returner.get(i).setUserId(rawUser);
+		}
+		logger.info(returner);
+		return returner;
 	}
 
 	@Override
@@ -36,7 +50,15 @@ public class PostServiceImpl implements PostService {
 
 	@Override
 	public List<Post> getAllPostByUser(User user) {
-		return postRepository.getAllPostByUser(user);
+		List<Post> returner = postRepository.getAllPostByUser(user);
+		for(int i = 0; i < returner.size(); i++) {
+			User rawUser = returner.get(i).getUserId();
+			rawUser.setPassword(null);
+			rawUser.setLikes(null);
+			rawUser.setPosts(null);
+			returner.get(i).setUserId(rawUser);
+		}
+		return returner;
 	}
 
 }

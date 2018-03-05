@@ -7,14 +7,16 @@ import { Http, Headers, RequestOptions, Response } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 // For Map
 import "rxjs/Rx";
+import { AwsS3Service } from './aws-s3.service';
+import * as S3 from 'aws-sdk/clients/s3';
 
 @Injectable()
 export class PictureService{
-    constructor(private http : Http){ }
+    constructor(private http : Http, private s3: AwsS3Service){ }
 
     public getAllPictures() : Observable<Picture[]>{
         return this.http
-            .get(`http://localhost:8090/VillainsOnly/getAllPictures.app`)
+            .get(`/VillainsOnly/getAllPictures.app`)
             .map((response : Response) =>{
                 return <Picture[]>response.json();
             })
@@ -27,7 +29,7 @@ export class PictureService{
         const options: RequestOptions = new RequestOptions({headers: headers});
 
         return this.http
-            .post(`http://localhost:8090/VillainsOnly/getAllPicturesByPost.app`, body, options)
+            .post(`/VillainsOnly/getAllPicturesByPost.app`, body, options)
             .map((response : Response) => {
                 return <Picture[]> response.json();
             })
@@ -40,7 +42,7 @@ export class PictureService{
         const options: RequestOptions = new RequestOptions({headers:headers});
 
         return this.http
-            .post('http://localhost:8090/VillainsOnly/getAllPicturesByUser.app',body,options)
+            .post('/VillainsOnly/getAllPicturesByUser.app',body,options)
             .map((response : Response) => {
                 return <Picture[]> response.json();
             })
@@ -49,15 +51,16 @@ export class PictureService{
 
     public addPicture( picture : Picture) : Observable<Message>{
         const body = JSON.stringify(picture);
+        console.log(body);
         const headers = new Headers({'Content-Type' : 'application/json'});
         const options: RequestOptions = new RequestOptions({headers:headers});
 
         return this.http
-            .post('http://localhost:8090/VillainsOnly/addPicture.app',body,options)
+            .post('/VillainsOnly/addPicture.app',body,options)
             .map((response : Response) => {
                 return <Message> response.json();
             })
-            .catch(this.handleError);
+            .catch(this.handleError)
     }
 
     public editPicture( picture : Picture) : Observable<Message>{
@@ -66,7 +69,7 @@ export class PictureService{
         const options: RequestOptions = new RequestOptions({headers:headers});
 
         return this.http
-            .post('http://localhost:8090/VillainsOnly/editPicture.app',body,options)
+            .post('/VillainsOnly/editPicture.app',body,options)
             .map((response : Response) => {
                 return <Message> response.json();
             })
@@ -79,13 +82,39 @@ export class PictureService{
         const options: RequestOptions = new RequestOptions({headers:headers});
 
         return this.http
-            .post('http://localhost:8090/VillainsOnly/deletePicture.app',body,options)
+            .post('/VillainsOnly/deletePicture.app',body,options)
             .map((response : Response) => {
                 return <Message> response.json();
             })
             .catch(this.handleError);
     }
 
+    getPictureByUrl(url: string): Observable<Picture> {
+        const body = url
+        const headers = new Headers({'Content-Type' : 'text/plain'});
+        const options: RequestOptions = new RequestOptions({headers:headers});
+
+        return this.http
+            .post('http://localhost:8090/VillainsOnly/getPictureByUrl.app', body, options)
+            .map((response : Response) => {
+                return <Picture> response.json();
+            })
+            .catch(this.handleError);
+    }
+
+    public addPictureToS3(file: File, callback:(err: Error, data: S3.ManagedUpload.SendData) => void) {
+        this.s3.uploadFile(file, callback);
+    }
+
+    public updateUserCookie(user: User): void {
+        document.cookie = `user=${JSON.stringify(user)}`;
+    }
+
+    public getLoggedInUser(): User {
+        let cookieName = "user";
+        let cookieValue = document.cookie.replace(/(?:(?:^|.*;\s*)user\s*\=\s*([^;]*).*$)|^.*$/, "$1")
+        return <User>JSON.parse(cookieValue);
+    }
 
     private handleError(error: Response) {
         return Observable.throw(error.statusText);

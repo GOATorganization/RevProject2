@@ -17,6 +17,11 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 /**
  * 
  * @author Chaos
@@ -53,14 +58,18 @@ public class User {
 	@Column
 	private String profilePic;
 
+	@JsonIgnore
 	@OneToMany(mappedBy = "postId" ,fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	private List<Post> posts;
 
+	@JsonIgnore
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name="password_reset_id", nullable = true)
 	private PasswordResetToken pwResetToken;
 
-	@ManyToMany(cascade = CascadeType.ALL)
+	@JsonIgnore
+	@Fetch(FetchMode.SUBSELECT)
+	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@JoinTable(name="likes", 
 	    joinColumns=@JoinColumn(name="user_id"), 
 	    inverseJoinColumns=@JoinColumn(name="post_id")) 
@@ -209,8 +218,11 @@ public class User {
 	@Override
 	public String toString() {
 		return "User [userId=" + userId + ", firstName=" + firstName + ", lastName=" + lastName + ", email=" + email
-				+ ", password=" + password + ", lairCity=" + lairCity + ", lairCountry=" + lairCountry +", profilePic=" + profilePic + "]";
+				+ ", password=" + password + ", lairCity=" + lairCity + ", lairCountry=" + lairCountry + ", profilePic="
+				+ profilePic + ", pwResetToken=" + pwResetToken + ", likes=" + likes + "]";
 	}
+
+	
 	
 	
 

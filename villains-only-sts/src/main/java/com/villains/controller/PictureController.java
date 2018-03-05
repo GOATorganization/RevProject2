@@ -2,6 +2,8 @@ package com.villains.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,42 +23,68 @@ import com.villains.service.PictureService;
 @Controller("pictureController")
 @CrossOrigin(origins = "http://localhost:4200")
 public class PictureController {
-	
+
 	@Autowired
 	private PictureService pictureService;
-	
-	
+
 	@GetMapping("getAllPictures.app")
-	public @ResponseBody ResponseEntity<List<Picture>> getAllPictures(){
-		return new ResponseEntity<>(pictureService.getAllPicture(), HttpStatus.OK);
+	public @ResponseBody ResponseEntity<List<Picture>> getAllPictures(HttpSession session) {
+		if (session.getAttribute("id") != null) {
+			return new ResponseEntity<>(pictureService.getAllPicture(), HttpStatus.OK);
+		} else
+			return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
 	}
-	
+
 	@PostMapping("getAllPicturesByPost.app")
-	public @ResponseBody ResponseEntity<List<Picture>> getAllPicturesByPost(@RequestBody Post post){
-		return new ResponseEntity<>(pictureService.getPostPicture(post), HttpStatus.OK);
+	public @ResponseBody ResponseEntity<List<Picture>> getAllPicturesByPost(HttpSession session,
+			@RequestBody Post post) {
+		if (session.getAttribute("id") != null) {
+			return new ResponseEntity<>(pictureService.getPostPicture(post), HttpStatus.OK);
+		} else
+			return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
 	}
-	
+
 	@PostMapping("getAllPicturesByUser.app")
-	public @ResponseBody ResponseEntity<List<Picture>> getAllPicturesByUser(@RequestBody User user){
-		return new ResponseEntity<>(pictureService.getUserPicture(user), HttpStatus.OK);
+	public @ResponseBody ResponseEntity<List<Picture>> getAllPicturesByUser(HttpSession session,
+			@RequestBody User user) {
+		if (session.getAttribute("id") != null) {
+			return new ResponseEntity<>(pictureService.getUserPicture(user), HttpStatus.OK);
+		} else
+			return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
 	}
-	
+
 	@PostMapping("addPicture.app")
-	public @ResponseBody ResponseEntity<Message> addPicture(@RequestBody Picture picture){
-		pictureService.addPicture(picture);
-		return new ResponseEntity<>(new Message("Picture Successfully Uploaded!"), HttpStatus.OK);
+	public @ResponseBody ResponseEntity<Message> addPicture(HttpSession session, @RequestBody Picture picture) {
+		if (session.getAttribute("id") != null) {
+			pictureService.addPicture(picture);
+			return new ResponseEntity<>(new Message("Picture Successfully Uploaded!"), HttpStatus.OK);
+		} else
+			return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
 	}
-	
+
 	@PostMapping("editPicture.app")
-	public @ResponseBody ResponseEntity<Message> editPicture(@RequestBody Picture picture){
-		pictureService.editPicture(picture);
-		return new ResponseEntity<>(new Message("Picture Successfully Changed!"), HttpStatus.OK);
+	public @ResponseBody ResponseEntity<Message> editPicture(HttpSession session, @RequestBody Picture picture) {
+		if (session.getAttribute("id") != null) {
+			pictureService.editPicture(picture);
+			return new ResponseEntity<>(new Message("Picture Successfully Changed!"), HttpStatus.OK);
+		} else
+			return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
 	}
-	
+
 	@PostMapping("deletePicture.app")
-	public @ResponseBody ResponseEntity<Message> deletePicture(@RequestBody Picture picture){
-		pictureService.removePicture(picture);
-		return new ResponseEntity<>(new Message("Picture Successfully Deleted!"), HttpStatus.OK);
+	public @ResponseBody ResponseEntity<Message> deletePicture(HttpSession session, @RequestBody Picture picture) {
+		if (session.getAttribute("id") != null) {
+			pictureService.removePicture(picture);
+			return new ResponseEntity<>(new Message("Picture Successfully Deleted!"), HttpStatus.OK);
+		} else
+			return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
+	}
+
+	
+	@PostMapping("getPictureByUrl")
+	public @ResponseBody ResponseEntity<Picture> getPictureByUrl(@RequestBody String url) {
+		return new ResponseEntity<>(pictureService.getPictureByUrl(url), HttpStatus.OK);
 	}
 	
+
 }

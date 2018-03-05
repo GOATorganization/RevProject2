@@ -13,12 +13,27 @@ export class HomepageComponent implements OnInit {
   imageSource = '../../assets/VillainsOnlyLogo.png';
   constructor(private userService: UserService, private router: Router) { }
 
-  public user: User = new User(0,'','','','','','','');
+  public user: User = new User(0,'','','','','','','', undefined);
 
   public message: Message = new Message('');
+  public loginFailure: boolean = false;
+  public showRegister: boolean = false;
 
   ngOnInit() {
     
+  }
+
+  showRegisterToggle(){
+    this.showRegister = !this.showRegister;
+  }
+
+  getUserLikes(): void{
+    this.userService.getUserLikes(this.user).subscribe(
+      postLike => {
+        console.log(postLike);              
+          this.user.likes = postLike;
+      },
+      error => this.message.text = 'something went wrong');
   }
 
   registerUser(): void {
@@ -34,17 +49,21 @@ export class HomepageComponent implements OnInit {
         let msg = message.text.toLowerCase();
         
         if (msg.includes('success')) {
-          console.log(message.text);
-          this.userService.getHeroByEmail(this.user).subscribe(user => {
+           console.log(message.text);
+          this.userService.getUserByEmail(this.user).subscribe(user => {
+            this.userService.getUserLikes(user).subscribe(
+              posts => user.likes = posts
+            );
             this.user = user;
             this.userService.updateUserCookie(user);
-            this.router.navigate(['/userhome']);
+            this.router.navigate(['/postview']);
           });
         }
         else {
           console.log(message.text);
+          this.loginFailure = true;
         }
   },
-  error => this.message.text = 'Something went wrong.');
+  error => {this.message.text = 'Something went wrong logging in.'; console.log(this.message.text)});
   }
 }
