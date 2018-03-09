@@ -25,9 +25,9 @@
 		<!-- Data Source -->
 	<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
 		<property name="driverClassName" value="oracle.jdbc.driver.OracleDriver" />
-		<property name="url" value="jdbc:oracle:thin:@usfdatabase.cjttz1oee0hs.us-east-1.rds.amazonaws.com:1521:orcl" />
-		<property name="username" value="villainhangout" />
-		<property name="password" value="p4ssw0rd" />
+		<property name="url" value="" />
+		<property name="username" value="" />
+		<property name="password" value="" />
 	</bean>
 	
 		<!-- Session Factory -->
